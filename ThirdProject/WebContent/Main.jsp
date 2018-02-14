@@ -65,12 +65,7 @@
 				class="nav-link" href="#">회원가입</a></li>
 
 		</ul>
-	</nav>
-
-
-	
-
-
+	</nav>	
 
 
 </body>

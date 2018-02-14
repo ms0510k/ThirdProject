@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>관리자 페이지</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=notice">공지사항</a>
+<h1>공지사항</h1>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=notice_insert">공지 등록</a>
+<table border="1" width="500">
+	<tr>
+		<th>글번호</th><th>제목</th><th>조회수</th><th>날짜</th>
+	</tr>
+</table>
 </body>
 </html>

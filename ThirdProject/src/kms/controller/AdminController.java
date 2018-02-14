@@ -48,28 +48,9 @@ public class AdminController extends HttpServlet{
 	}
 	private void notice_list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String spageNum=request.getParameter("pageNum");
-		int pageNum=1; 
-		if(spageNum!=null) {
-			pageNum=Integer.parseInt(spageNum);
-		}
-		int startRow=(pageNum-1)*5+1;
-		int endRow=startRow+4;
 		NoticeDao dao=new NoticeDao();
-		ArrayList<NoticeVo> list=dao.list(startRow, endRow);
-
-		int pageCount=(int)Math.ceil(dao.getCount()/5.0);
-
-		int startPage=((pageNum-1)/4*4)+1;
-		int endPage=startPage+3;
-		if(pageCount<endPage) {
-			endPage=pageCount;
-		}
+		ArrayList<NoticeVo> list=dao.list();
 		request.setAttribute("list", list);
-		request.setAttribute("pageCount",pageCount);
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("endPage",endPage);
-		request.setAttribute("pageNum", pageNum);
 		request.getRequestDispatcher("/kms_admin/notice_list.jsp").forward(request, response);
 	}
 	}

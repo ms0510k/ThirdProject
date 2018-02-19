@@ -20,7 +20,6 @@ public class DbcpBean {
 			System.out.println(ne.getMessage());
 		}
 	}
-
 	public static Connection getConn() throws SQLException {
 		Connection con = ds.getConnection();
 		return con;

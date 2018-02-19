@@ -20,13 +20,23 @@ public class AdminController extends HttpServlet{
 		String cmd=request.getParameter("cmd");
 		String context=request.getContextPath();
 		if(cmd.equals("notice")) {
-			//response.sendRedirect(context+"/kms_admin/notice_list.jsp");
 			notice_list(request,response);
 		}else if(cmd.equals("notice_insert")) {
 			response.sendRedirect(context+"/kms_admin/notice_insert.jsp");
 		}else if(cmd.equals("notice_insertOk")){
 			notice_insert(request,response);
+		}else if(cmd.equals("detail")){
+			notice_detail(request,response);
 		}
+	}
+	private void notice_detail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	int notnum=Integer.parseInt(request.getParameter("notnum"));
+	
+	NoticeDao dao=new NoticeDao();
+	NoticeVo vo=dao.getinfo(notnum);
+	request.setAttribute("vo", vo);
+	request.getRequestDispatcher("/kms_admin/detail.jsp").forward(request, response);
 	}
 	private void notice_insert(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,12 +49,11 @@ public class AdminController extends HttpServlet{
 	int n=dao.insert(nv);
 	
 	if(n>0) {
-		request.setAttribute("result","success");
+		RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice");
+		rd.forward(request, response);
 	}else {
 		request.setAttribute("result","fail");
 	}
-	RequestDispatcher rd=request.getRequestDispatcher("/kms_admin/notice_list.jsp");
-	rd.forward(request, response);
 	}
 	private void notice_list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

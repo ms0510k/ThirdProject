@@ -17,7 +17,7 @@
 	<c:forEach var="vo" items="${list }">
 	<tr>
 		<td>${vo.notnum }</td>
-		<td><a href="<%=request.getContextPath() %>/admin.do?cmd=sel&notnum=${vo.notnum}">${vo.nottitle }</a></td>
+		<td><a href="<%=request.getContextPath() %>/admin.do?cmd=detail&notnum=${vo.notnum}">${vo.nottitle }</a></td>
 		<td>${vo.nothit }</td>
 		<td>${vo.notdate }</td>
 	</tr>

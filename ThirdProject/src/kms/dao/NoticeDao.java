@@ -11,6 +11,46 @@ import kms.vo.NoticeVo;
 import test.dbcp.DbcpBean;
 
 public class NoticeDao {
+	public NoticeVo getinfo(int notnum) {
+		Connection con = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "select * from notice where num=?";
+			String sql2 = "update notice set hit=(hit+1) where num=?";
+			pstmt1 = con.prepareStatement(sql);
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt1.setInt(1, notnum);
+			pstmt2.setInt(1, notnum);
+			pstmt2.executeQuery();
+			rs = pstmt1.executeQuery();
+			if (rs.next()) {
+				String nottitle = rs.getString("nottitle");
+				String notcontent = rs.getString("notcontent");
+				int nothit = rs.getInt("nothit");
+				Date notdate = rs.getDate("notdate");
+				NoticeVo vo = new NoticeVo(notnum,nottitle,notcontent,nothit,notdate);
+				return vo;
+			} else {
+				return null;
+			}
+
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			try {
+				con.close();
+				pstmt1.close();
+				pstmt2.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public ArrayList<NoticeVo> list() {
 		String sql = "select * from notice";
 		PreparedStatement pstmt = null;

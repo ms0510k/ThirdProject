@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,18 @@ public class AdminController extends HttpServlet{
 			notice_insert(request,response);
 		}else if(cmd.equals("detail")){
 			notice_detail(request,response);
+		}else if(cmd.equals("delete")){
+			notice_delete(request,response);
 		}
+	}
+	private void notice_delete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	int notnum=Integer.parseInt(request.getParameter("notnum"));
+	
+	NoticeDao dao=new NoticeDao();
+	dao.delete(notnum);
+	RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice");
+	rd.forward(request, response);
 	}
 	private void notice_detail(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,7 +49,7 @@ public class AdminController extends HttpServlet{
 	NoticeDao dao=new NoticeDao();
 	NoticeVo vo=dao.getinfo(notnum);
 	request.setAttribute("vo", vo);
-	request.getRequestDispatcher("/kms_admin/detail.jsp").forward(request, response);
+	request.getRequestDispatcher("/kms_admin/notice_detail.jsp").forward(request, response);
 	}
 	private void notice_insert(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

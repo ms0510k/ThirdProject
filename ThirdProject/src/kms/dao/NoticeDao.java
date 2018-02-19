@@ -11,15 +11,36 @@ import kms.vo.NoticeVo;
 import test.dbcp.DbcpBean;
 
 public class NoticeDao {
+	public int delete(int notnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="delete from notice where notnum=?";
+		try {
+			con=DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, notnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public NoticeVo getinfo(int notnum) {
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
+		String sql = "select * from notice where notnum=?";
+		String sql2 = "update notice set nothit=(nothit+1) where notnum=?";
 		try {
 			con=DbcpBean.getConn();
-			String sql = "select * from notice where num=?";
-			String sql2 = "update notice set hit=(hit+1) where num=?";
 			pstmt1 = con.prepareStatement(sql);
 			pstmt2 = con.prepareStatement(sql2);
 			pstmt1.setInt(1, notnum);
@@ -36,7 +57,6 @@ public class NoticeDao {
 			} else {
 				return null;
 			}
-
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;

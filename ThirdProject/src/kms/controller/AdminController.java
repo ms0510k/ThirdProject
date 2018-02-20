@@ -45,9 +45,9 @@ public class AdminController extends HttpServlet{
 	String word=request.getParameter("word");
 	if(search.equals("nottitle")) {
 		NoticeDao dao=new NoticeDao();
-		NoticeVo vo=dao.nottitle(word);
-		request.setAttribute("vo", vo);
-		request.getRequestDispatcher("/kms_admin/notice_search.jsp").forward(request, response);
+		ArrayList<NoticeVo> list=dao.nottitle(word);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/kms_admin/notice_list.jsp").forward(request, response);
 	}else if(search.equals("notcontent")){
 		
 	}

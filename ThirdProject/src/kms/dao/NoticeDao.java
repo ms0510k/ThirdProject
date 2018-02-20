@@ -11,15 +11,22 @@ import kms.vo.NoticeVo;
 import test.dbcp.DbcpBean;
 
 public class NoticeDao {
-	public ArrayList<NoticeVo> nottitle(String word) {
+	public ArrayList<NoticeVo> noticesearch(String search, String word, int startRow, int endRow ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = null;
 		try {
 			con=DbcpBean.getConn();
-			String sql = "select * from notice where nottitle like '%'||?||'%'";
+			if(search.equals("nottitle")) {
+			sql = "select * from(select aa.*,rownum rnum from(select * from notice where nottitle like '%'||?||'%' order by notnum)aa)where rnum>=? and rnum<=?";
+			}else if(search.equals("notcontent")) {
+			sql = "select * from(select aa.*,rownum rnum from(select * from notice where notcontent like '%'||?||'%' order by notnum)aa)where rnum>=? and rnum<=?";
+			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, word);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 			ArrayList<NoticeVo> list = new ArrayList<>();
 			while (rs.next()) {
@@ -37,12 +44,43 @@ public class NoticeDao {
 			return null;
 		} finally {
 			try {
-			con.close();
-			pstmt.close();
 			rs.close();
+			pstmt.close();
+			con.close();	
 			}catch(SQLException se) {
 				System.out.println(se.getMessage());
 			}
+		}
+	}
+	public int getCounts(String search, String word) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql=null;
+		try {
+			con=DbcpBean.getConn();
+			if(search.equals("nottitle")) {
+				sql = "select NVL(count(notnum),0) cnt from notice where nottitle like '%'||?||'%'";
+			}else if(search.equals("notcontent")) {
+				sql = "select NVL(count(notnum),0) cnt from notice where notcontent like '%'||?||'%'";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, word);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt("cnt");
+			return cnt;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
 		}
 	}
 	public int getCount() {
@@ -154,7 +192,6 @@ public class NoticeDao {
 		}
 	}
 	public ArrayList<NoticeVo> list(int startRow, int endRow) {
-		//String sql = "select * from notice";
 		String sql = "select * from(select aa.*,rownum rnum from(select * from notice order by notnum)aa)where rnum>=? and rnum<=?";
 		PreparedStatement pstmt = null;
 		Connection con=null;

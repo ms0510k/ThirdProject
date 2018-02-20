@@ -43,23 +43,27 @@ public class AdminController extends HttpServlet{
 			throws ServletException, IOException {
 	String search=request.getParameter("search");
 	String word=request.getParameter("word");
-	if(search.equals("nottitle")) {
-		NoticeDao dao=new NoticeDao();
-		ArrayList<NoticeVo> list=dao.nottitle(word);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/kms_admin/notice_list.jsp").forward(request, response);
-	}else if(search.equals("notcontent")){
-		
+	String spageNum=request.getParameter("pageNum");
+	int pageNum=1;
+	if(spageNum!=null) {
+		pageNum=Integer.parseInt(spageNum);
 	}
-	/*NoticeVo vo=new NoticeVo(notnum, nottitle, notcontent, 0, null);
+	int startRow=(pageNum-1)*5+1;
+	int endRow=startRow+4;
 	NoticeDao dao=new NoticeDao();
-	int n=dao.updateOk(vo);
-	if(n>0) {
-		RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice");
-		rd.forward(request, response);
-	}else {
-		request.setAttribute("result","fail");
-	}*/
+		ArrayList<NoticeVo> list=dao.noticesearch(search,word,startRow,endRow);
+		int pageCount=(int)Math.ceil(dao.getCounts(search,word)/5.0);
+		int startPage=((pageNum-1)/4*4)+1;
+		int endPage=startPage+3;
+		if(pageCount<endPage) {
+			endPage=pageCount;
+		}
+		request.setAttribute("list", list);
+		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageNum", pageNum);
+		request.getRequestDispatcher("/kms_admin/notice_searchlist.jsp?search="+search+"&word="+word).forward(request, response);
 	}
 	private void notice_updateOk(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

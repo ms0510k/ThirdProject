@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kms.dao.CompDao;
 import kms.dao.NoticeDao;
+import kms.vo.CompVo;
 import kms.vo.NoticeVo;
 @WebServlet("/admin.do")
 public class AdminController extends HttpServlet{
@@ -37,11 +39,38 @@ public class AdminController extends HttpServlet{
 			notice_updateOk(request,response);
 		}else if(cmd.equals("search")) {
 			notice_search(request,response);
-		}else if(cmd.equals("fnq")) {
-			fnq_list(request,response);
+		}else if(cmd.equals("comp")) {
+			comp_list(request,response);
+		}else if(cmd.equals("comp_detail")) {
+			comp_detail(request,response);
+		}else if(cmd.equals("comp_result")) {
+			comp_result(request,response);
 		}
 	}
-	private void fnq_list(HttpServletRequest request, HttpServletResponse response)
+	private void comp_result(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	int comnum=Integer.parseInt(request.getParameter("comnum"));
+	String result=request.getParameter("result");
+	CompVo vo=new CompVo(comnum,0,null,null,null,result,0,null);
+	CompDao dao=new CompDao();
+	int n=dao.update_result(vo);
+	if(n>0) {
+		RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=comp");
+		rd.forward(request, response);
+	}else {
+		request.setAttribute("result","fail");
+	}
+	}
+	private void comp_detail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	int comnum=Integer.parseInt(request.getParameter("comnum"));
+	
+	CompDao dao=new CompDao();
+	CompVo vo=dao.getinfo(comnum);
+	request.setAttribute("vo", vo);
+	request.getRequestDispatcher("/kms_admin/comp_detail.jsp").forward(request, response);
+	}
+	private void comp_list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;
@@ -50,8 +79,8 @@ public class AdminController extends HttpServlet{
 		}
 		int startRow=(pageNum-1)*5+1;
 		int endRow=startRow+4;
-		NoticeDao dao=new NoticeDao();
-		ArrayList<NoticeVo> list=dao.list(startRow, endRow);
+		CompDao dao=new CompDao();
+		ArrayList<CompVo> list=dao.list(startRow, endRow);
 		int pageCount=(int)Math.ceil(dao.getCount()/5.0);
 		int startPage=((pageNum-1)/4*4)+1;
 		int endPage=startPage+3;
@@ -63,7 +92,7 @@ public class AdminController extends HttpServlet{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageNum", pageNum);
-		request.getRequestDispatcher("/kms_admin/notice_list.jsp").forward(request, response);
+		request.getRequestDispatcher("/kms_admin/comp_list.jsp").forward(request, response);
 	}
 	private void notice_search(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -37,7 +37,33 @@ public class AdminController extends HttpServlet{
 			notice_updateOk(request,response);
 		}else if(cmd.equals("search")) {
 			notice_search(request,response);
+		}else if(cmd.equals("fnq")) {
+			fnq_list(request,response);
 		}
+	}
+	private void fnq_list(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String spageNum=request.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*5+1;
+		int endRow=startRow+4;
+		NoticeDao dao=new NoticeDao();
+		ArrayList<NoticeVo> list=dao.list(startRow, endRow);
+		int pageCount=(int)Math.ceil(dao.getCount()/5.0);
+		int startPage=((pageNum-1)/4*4)+1;
+		int endPage=startPage+3;
+		if(pageCount<endPage) {
+			endPage=pageCount;
+		}
+		request.setAttribute("list", list);
+		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageNum", pageNum);
+		request.getRequestDispatcher("/kms_admin/notice_list.jsp").forward(request, response);
 	}
 	private void notice_search(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

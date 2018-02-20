@@ -16,7 +16,7 @@
 </tr>
 <tr>
 	<td>공지내용</td>
-	<td><textarea rows="5" cols="50">${vo.notcontent }</textarea></td>
+	<td><textarea rows="5" cols="50" readonly="readonly">${vo.notcontent }</textarea></td>
 </tr>
 <tr>
 	<td>조회수</td>

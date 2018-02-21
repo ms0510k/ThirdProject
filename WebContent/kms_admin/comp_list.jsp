@@ -8,18 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>공지사항</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=notice_insert">공지 등록</a>
+<h1>답변 대기중인 문의 목록</h1>
 <table border="1" width="500">
    <tr>
-      <th>글번호</th><th>제목</th><th>조회수</th><th>날짜</th>
+      <th>글번호</th><th>제목</th><th>날짜</th>
    </tr>
    <c:forEach var="vo" items="${list }">
    <tr>
-      <td>${vo.notnum }</td>
-      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=detail&notnum=${vo.notnum}">${vo.nottitle }</a></td>
-      <td>${vo.nothit }</td>
-      <td>${vo.notdate }</td>
+      <td>${vo.comnum }</td>
+      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=comp_detail&comnum=${vo.comnum}">${vo.comtitle }</a></td>
+      <td>${vo.comdate }</td>
    </tr>
    </c:forEach>
 </table>
@@ -27,7 +25,7 @@
 
 <c:choose>
    <c:when test="${startPage>4 }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=notice&pageNum=${startPage-1 }">이전</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=comp&pageNum=${startPage-1 }">이전</a>
    </c:when>
    <c:otherwise>
       이전
@@ -36,12 +34,12 @@
    <c:forEach var="i" begin="${startPage }"  end="${endPage }">
       <c:choose>
          <c:when test="${pageNum==i }">
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=notice&pageNum=${i}">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=comp&pageNum=${i}">
             <span style="color:blue">[${i }]</span>
             </a>
          </c:when>
          <c:otherwise>
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=notice&pageNum=${i}">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=comp&pageNum=${i}">
             <span style="color:gray">[${i }]</span>
             </a>
          </c:otherwise>
@@ -50,22 +48,12 @@
    
    <c:choose>
    <c:when test="${endPage<pageCount }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=notice&pageNum=${endPage+1 }">다음</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=comp&pageNum=${endPage+1 }">다음</a>
    </c:when>
    <c:otherwise>
       다음
    </c:otherwise>
 </c:choose>
-</div>
-<div>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=search">
-   <select name="search" id="search" size="1">
-   <option value="nottitle">제목</option>
-   <option value="notcontent">내용</option>
-   </select>
-<input type="text" name="word">
-<input type="submit" value="검색">
-</form>
 </div>
 </body>
 </html>

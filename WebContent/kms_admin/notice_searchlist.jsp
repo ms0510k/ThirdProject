@@ -27,7 +27,7 @@
 
 <c:choose>
    <c:when test="${startPage>4 }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=notice&pageNum=${startPage-1 }">이전</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=search&pageNum=${startPage-1 }&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">이전</a>
    </c:when>
    <c:otherwise>
       이전
@@ -36,12 +36,12 @@
    <c:forEach var="i" begin="${startPage }"  end="${endPage }">
       <c:choose>
          <c:when test="${pageNum==i }">
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=notice&pageNum=${i}">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=search&pageNum=${i}&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">
             <span style="color:blue">[${i }]</span>
             </a>
          </c:when>
          <c:otherwise>
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=notice&pageNum=${i}">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=search&pageNum=${i}&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">
             <span style="color:gray">[${i }]</span>
             </a>
          </c:otherwise>
@@ -50,7 +50,7 @@
    
    <c:choose>
    <c:when test="${endPage<pageCount }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=notice&pageNum=${endPage+1 }">다음</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=search&pageNum=${endPage+1 }&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">다음</a>
    </c:when>
    <c:otherwise>
       다음

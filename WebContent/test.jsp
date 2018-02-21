@@ -28,10 +28,23 @@
 			<li class="nav-item"
 				style="padding-right: 100px; padding-left: 100px;"><a
 				class="nav-link" href="#">거래하기</a></li>
-			<li class="nav-item"
+			<!-- <li class="nav-item  dropdown"
 				style="padding-right: 100px; padding-left: 100px;"><a
-				class="nav-link" href="#">입금/출금</a></li>
+				class="nav-link dropdown-toggle" href="#" id="navbardrop"
+				data-toggle="dropdown"> 마이페이지 </a></li>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">1</a> <a class="dropdown-item"
+						href="#">2</a> 
+				</div></li> -->
 			<!-- Dropdown -->
+			<li class="nav-item  dropdown"
+				style="padding-right: 220px; padding-left: 50px;"><a
+				class="nav-link  dropdown-toggle" href="#" id="navbardrop"
+				data-toggle="dropdown"> 마이페이지 </a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">입금/출금</a> <a class="dropdown-item"
+						href="#">회원탈퇴</a> 
+				</div></li>
 			<li class="nav-item  dropdown"
 				style="padding-right: 220px; padding-left: 50px;"><a
 				class="nav-link  dropdown-toggle" href="#" id="navbardrop"

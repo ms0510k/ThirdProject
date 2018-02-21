@@ -23,9 +23,7 @@
 		class="navbar  navbar-expand-sm  bg-primary  navbar-dark fixed-top">
 
 		<!-- Brand/logo -->
-		<a class="navbar-brand" href="#">DownBit</a>
-
-
+		<a class="navbar-brand" href="#">4JO Exchange</a>
 
 		<!-- Links -->
 		<ul class="navbar-nav">
@@ -65,11 +63,21 @@
 				class="nav-link" href="#">회원가입</a></li>
 
 		</ul>
-	</nav>	
+	</nav>
+	<div id="left" style="float: left;">
+	left
 	</div>
-	<div id="body1" style="margin-top: 10px; ">
-	<h1>f</h1>
-	<h1>f</h1>
+	</div>
+	<div id="body1" style="margin-top: 10px;" align="center">
+	<h1>관리자 페이지</h1>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=notice">공지사항</a><br>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=comp">문의답변</a><br>
+<a href="">출금 신청 대기자</a><br>
+<a href="">탈퇴 신청 대기자</a><br>
+<a href="">정산</a><br>
+	</div>
+	<div id="left" style="float: right;">
+	right
 	</div>
 </body>
 </html>

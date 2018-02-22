@@ -11,6 +11,44 @@ import kms.vo.CompVo;
 import test.dbcp.DbcpBean;
 
 public class CompDao {
+	public ArrayList<CompVo> mypage_comp_list(int startRow, int endRow) {
+		String sql = "select * from(select aa.*,rownum rnum from(select * from complaine where comresult='답변대기중' order by comnum)aa)where rnum>=? and rnum<=?";
+		PreparedStatement pstmt = null;
+		Connection con=null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			ArrayList<CompVo> list = new ArrayList<>();
+			while (rs.next()) {
+				int comnum = rs.getInt("comnum");
+				int memnum = rs.getInt("memnum");
+				String comtitle = rs.getString("comtitle");
+				String email = rs.getString("email");
+				String comcontent = rs.getString("comcontent");
+				String comresult = rs.getString("comresult");
+				int comhit = rs.getInt("comhit");
+				Date comdate = rs.getDate("comdate");
+				CompVo vo = new CompVo(comnum,memnum,comtitle,email,comcontent,comresult,comhit,comdate);
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			try {
+			con.close();
+			pstmt.close();
+			rs.close();
+			}catch(SQLException se) {
+				System.out.println(se.getMessage());
+			}
+		}
+	}
 	public int update_result(CompVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

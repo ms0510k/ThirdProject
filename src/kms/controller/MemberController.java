@@ -1,6 +1,7 @@
 package kms.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kms.dao.CompDao;
 import kms.dao.MemberDao;
+import kms.dao.NoticeDao;
+import kms.vo.CompVo;
 import kms.vo.MemberVo;
+import kms.vo.NoticeVo;
 
 @WebServlet("/member.do")
 public class MemberController extends HttpServlet {
@@ -25,8 +30,34 @@ public class MemberController extends HttpServlet {
 	    	  member_login(request,response);
 	      }else if(cmd.equals("member_logout")) {
 	    	  member_logout(request,response);
+	      }else if(cmd.equals("mypage_comp")) {
+	    	  mypage_comp(request,response);
 	      }
 	}
+	private void mypage_comp(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	      String spageNum=request.getParameter("pageNum");
+	      int pageNum=1;
+	      if(spageNum!=null) {
+	         pageNum=Integer.parseInt(spageNum);
+	      }
+	      int startRow=(pageNum-1)*5+1;
+	      int endRow=startRow+4;
+	      CompDao dao=new CompDao();
+	      ArrayList<CompVo> list=dao.mypage_comp_list(startRow, endRow);
+	      int pageCount=(int)Math.ceil(dao.getCount()/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_mypage/mypage_comp_list.jsp").forward(request, response);
+	   }
 	protected void member_logout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session=request.getSession();

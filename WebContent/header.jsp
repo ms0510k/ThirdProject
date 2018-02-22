@@ -8,7 +8,7 @@
 </head>
 
 <link rel="stylesheet"
-	href="css/header.css">
+	href="<%=request.getContextPath() %>/css/header.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <!-- 코드작업부분 -->
@@ -49,7 +49,7 @@ function gogo() {
         <li><a href="#">비트코인골드</a></li>
         <li><a href="#">퀀텀</a></li>
         <li><a href="#">민수코인</a></li>
-         <li><a href="#">민승코인</a></li>
+         <li><a href="#">프링코인</a></li>
      	 </ul>
     </li>
 
@@ -72,21 +72,25 @@ function gogo() {
       </ul>
     </li> 
 
-    <!-- 로그인부분 -->
-    <li><a href="#" style="padding-left: 200px; padding-right: 50px;">로그인</a></li> 
-
-    <!-- 회원가입부분 -->
-    <li><a href="#" style="padding-left: 50px; padding-right: 50px;">회원가입</a></li> 
-
+	 <%String email = (String) session.getAttribute("email");
+         if (email != null) {
+      %>
+		<li><a href="<%=request.getContextPath() %>/member.do?cmd=member_logout" style="padding-left: 200px; padding-right: 50px;">로그아웃</a></li>           
+		<li><a href="#" style="padding-left: 50px; padding-right: 50px;"><%=email %></a></li>
+      <%
+         } else {
+      %>
+      <!-- 로그인부분 -->
+		<li><a href="<%=request.getContextPath()%>/kms_member/member_login.jsp" style="padding-left: 200px; padding-right: 50px;">로그인</a></li>
+     <!-- 회원가입부분 -->
+		<li><a href="<%=request.getContextPath()%>/kms_member/member_insert.jsp" style="padding-left: 50px; padding-right: 50px;">회원가입</a></li>
+      <%
+         }
+      %>
     <!-- 만약 로그인이 된 상태라면 이용할 로그아웃 부분 로그인이 되 있으면 로그인 부분 회원가입부분이랑 분기로 처리 -->
     <!-- <li><a href="#">로그아웃</a></li>  -->
-
   </ul>
 </div>
-
-<div id="body1" style="margin-top: 10px;" align="center">
-	<h1>body</h1>
-	</div>
 
 </body>
 </html>

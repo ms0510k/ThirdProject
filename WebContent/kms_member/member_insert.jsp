@@ -31,6 +31,10 @@ function callback(){
 </script>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>회원가입</h1>
 <form method="post" action="<%=request.getContextPath() %>/member.do?cmd=member_insert">
 	<table border="1" width="600">
@@ -66,5 +70,6 @@ function callback(){
 </table>
 	<input type="submit" value="가입하기">
 </form>
+</div>
 </body>
 </html>

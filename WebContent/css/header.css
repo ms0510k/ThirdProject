@@ -1,0 +1,39 @@
+@charset "UTF-8";
+body { margin: 0; }
+.zeta-menu-bar {
+  background: #FF8000;
+  display: inline-block;
+  width: 100%;
+  height: 45px;
+  margin: auto;
+}
+.zeta-menu { margin: 0; padding: 0; }
+.zeta-menu li {
+  float: left;
+  list-style:none;
+  position: relative;
+}
+.zeta-menu li:hover { background: #FF8000; }
+.zeta-menu li:hover>a { color: white; }
+.zeta-menu a {
+  color: white;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+.zeta-menu ul {
+  background: #FAAC58;
+  border: 1px solid silver;
+  display: none;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 180px;
+}
+.zeta-menu ul li { float: none; }
+.zeta-menu ul li:hover { background: #FF8000; }
+.zeta-menu ul li:hover a { color: white; }
+.zeta-menu ul a { color: white; }
+.zeta-menu ul ul { left: 100%; top: 0; }
+.zeta-menu ul ul li {float:left; margin-right:10px;}

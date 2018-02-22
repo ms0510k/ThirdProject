@@ -28,24 +28,29 @@
 		<!-- Links -->
 		<ul class="navbar-nav">
 			<li class="nav-item"
-				style="padding-right: 100px; padding-left: 100px;"><a
+				style="padding-right: 80px; padding-left: 80px;"><a
 				class="nav-link" href="#">현재시세차트</a></li>
+		
+		
+		
+		
 			<li class="nav-item"
-				style="padding-right: 100px; padding-left: 100px;"><a
+				style="padding-right: 80px; padding-left: 80px;"><a
 				class="nav-link" href="#">거래하기</a></li>
 
 			<li class="nav-item"
-				style="padding-right: 100px; padding-left: 100px;"><a
+				style="padding-right: 80px; padding-left: 80px;"><a
 				class="nav-link" href="#">입금/출금</a></li>
 
 			<!-- Dropdown -->
+			
 			<li class="nav-item  dropdown"
-				style="padding-right: 220px; padding-left: 50px;"><a
+				style="padding-right: 110px; padding-left: 50px;"><a
 				class="nav-link  dropdown-toggle" href="#" id="navbardrop"
 				data-toggle="dropdown"> 고객센터 </a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">자주묻는질문</a> <a class="dropdown-item"
-						href="#">1:1문의</a> 
+					<a class="dropdown-item"  href="#">자주묻는질문</a>
+					 <a class="dropdown-item" href="#">1:1문의</a> 
 				</div></li>
 
 			<form class="form-inline" action="#">

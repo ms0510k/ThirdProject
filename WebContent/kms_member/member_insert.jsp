@@ -1,3 +1,4 @@
+<%@page import="kms.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -5,6 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+var xhr=null;
+function idcheck(){
+	var email=document.getElementsByName("email")[0].value;
+	if(id==""){
+		var span=document.getElementById("idcheck");
+		span.innerHTML="";
+		return;
+	}
+	xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=callback;
+	xhr.open('get','kms_member/member_idcheck.jsp?email='+email,true);
+	xhr.send();
+}
+function callback(){
+	alert("test2");
+	if(xhr.readyState==4 && xhr.status==200){
+		alert("success");
+	}else{
+		alert("no");
+	}
+}
+</script>
 </head>
 <body>
 <h1>회원가입</h1>
@@ -16,7 +40,8 @@
 </tr>
 <tr>
    <td>아이디(이메일)</td>
-   <td><input type="text" name="email"></td>
+   <td><input type="text" name="email" onkeyup="idcheck()">
+   <span id="idcheck" style="font-size: 12px; color: red"></span></td>
 </tr>
 <tr>
    <td>비밀번호</td>

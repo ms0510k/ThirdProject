@@ -50,8 +50,8 @@ public class HeaderController extends HttpServlet{
 	private void trade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("¿©±â·Î¿È?");
-		request.setAttribute("page","buysell.jsp");
-		request.getRequestDispatcher("/Main.jsp").forward(request, response);
+		request.setAttribute("page","pys_current/buysell.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
 }

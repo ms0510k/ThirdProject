@@ -69,7 +69,7 @@
 				if (email != null) {
 			%>
 			<!-- 거래하기부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
+			<li><a href="<%=request.getContextPath()%>/header.do?cmd=trade" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
 			<!-- 마이페이지 부분 -->
 			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
@@ -107,6 +107,7 @@
 				href="<%=request.getContextPath()%>/member.do?cmd=member_logout"
 				style="padding-left: 200px; padding-right: 50px;">로그아웃</a></li>
 			<li><a href="#" style="padding-left: 50px; padding-right: 50px;"><%=email%></a></li>
+			
 			<%
 				} else {
 			%>

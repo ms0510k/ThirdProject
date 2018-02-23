@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>답변 대기중인 문의 목록</h1>
 <table border="1" width="500">
    <tr>
@@ -53,6 +57,7 @@
       다음
    </c:otherwise>
 </c:choose>
+</div>
 </div>
 </body>
 </html>

@@ -42,7 +42,7 @@
 	<!-- 일반 사용자 부분입니다 -->
 
 	<%
-		if (!(email.equals("admin")) || email == null) {
+		if (!("admin".equals(email))) {
 	%>
 
 	<div class='zeta-menu-bar' style="margin-bottom: 50px;">
@@ -124,12 +124,12 @@
 					Exchange</a></li>
 
 			<!-- 공지사항부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">공지사항</a>
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice" style="padding-left: 50px; padding-right: 70px;">공지사항</a>
 
 			</li>
 
 			<!-- 문의답변부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">문의답변</a>
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=comp" style="padding-left: 50px; padding-right: 70px;">문의답변</a>
 
 			</li>
 			<!-- 출금신청대기자부분 -->
@@ -149,6 +149,9 @@
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">관리자님 환영합니다</a>
 
 			</li>
+			<li><a href="<%=request.getContextPath()%>/member.do?cmd=member_logout"
+				style="padding-left: 50px; padding-right: 70px;">로그아웃</a></li>
+			
 		</ul>
 	</div>
 

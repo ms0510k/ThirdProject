@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>공지사항</h1>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=notice_insert">공지 등록</a>
 <table border="1" width="500">
@@ -66,6 +70,7 @@
 <input type="text" name="word">
 <input type="submit" value="검색">
 </form>
+</div>
 </div>
 </body>
 </html>

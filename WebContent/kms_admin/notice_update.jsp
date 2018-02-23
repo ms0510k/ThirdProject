@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>수정하기</h1>
 <form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=updateOk">
    공지번호<br>
@@ -17,5 +21,6 @@
    <textarea rows="5" cols="50" name="notcontent">${vo.notcontent }</textarea><br>
    <input type="submit" value="수정">
 </form>
+</div>
 </body>
 </html>

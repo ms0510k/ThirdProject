@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>답변 대기중인 문의 목록</h1>
+<h1>문의 목록</h1>
 <table border="1" width="500">
    <tr>
       <th>글번호</th><th>제목</th><th>날짜</th>

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>${vo.nottitle }</h1>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=notice">공지목록</a>
 <table border="1" width="600">
@@ -29,5 +33,6 @@
 </table>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=delete&notnum=${vo.notnum}">삭제</a>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=update&notnum=${vo.notnum}">수정</a>
+</div>
 </body>
 </html>

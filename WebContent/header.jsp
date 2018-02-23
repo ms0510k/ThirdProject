@@ -100,7 +100,6 @@
 					<li><a href="#">자주묻는질문</a></li>
 					<li><a href="#">1:1문의</a></li>
 				</ul></li>
-
 			<%
 				if (email != null) {
 			%>

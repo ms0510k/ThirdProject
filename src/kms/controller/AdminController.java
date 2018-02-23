@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kms.dao.CompDao;
+import kms.dao.FnqDao;
 import kms.dao.NoticeDao;
 import kms.vo.CompVo;
+import kms.vo.FnqVo;
 import kms.vo.NoticeVo;
 @WebServlet("/admin.do")
 public class AdminController extends HttpServlet{
@@ -45,8 +47,85 @@ public class AdminController extends HttpServlet{
          comp_detail(request,response);
       }else if(cmd.equals("comp_result")) {
          comp_result(request,response);
+      }else if(cmd.equals("fnq_list")) {
+    	  fnq_list(request,response);
+      }else if(cmd.equals("fnq_detail")) {
+    	  fnq_detail(request,response);
+      }else if(cmd.equals("fnq_delete")) {
+    	  fnq_delete(request,response);
+      }else if(cmd.equals("fnq_update")) {
+    	  fnq_update(request,response);
+      }else if(cmd.equals("fnq_updateOk")) {
+    	  fnq_updateOk(request,response);
       }
    }
+   private void fnq_updateOk(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	   int fnqnum=Integer.parseInt(request.getParameter("fnqnum"));
+	   String fnqtitle=request.getParameter("fnqtitle");
+	   String fnqcontent=request.getParameter("fnqcontent");
+	   String fnqresult=request.getParameter("fnqresult");
+	   FnqVo vo=new FnqVo(fnqnum,fnqtitle,fnqcontent,fnqresult);
+	   FnqDao dao=new FnqDao();
+	   int n=dao.updateOk(vo);
+	   if(n>0) {
+	      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=fnq_list");
+	      rd.forward(request, response);
+	   }else {
+	      request.setAttribute("result","fail");
+	   }
+	   }
+   private void fnq_update(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	   int fnqnum=Integer.parseInt(request.getParameter("fnqnum"));
+	   
+	   FnqDao dao=new FnqDao();
+	   FnqVo vo=dao.getinfo(fnqnum);
+	   request.setAttribute("vo", vo);
+	   request.getRequestDispatcher("/kms_admin/fnq_update.jsp").forward(request, response);
+	   }
+   private void fnq_delete(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	   int fnqnum=Integer.parseInt(request.getParameter("fnqnum"));
+	   
+	   FnqDao dao=new FnqDao();
+	   dao.delete(fnqnum);
+	   RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=fnq_list");
+	   rd.forward(request, response);
+	   }
+   private void fnq_detail(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	   int fnqnum=Integer.parseInt(request.getParameter("fnqnum"));
+	   
+	   FnqDao dao=new FnqDao();
+	   FnqVo vo=dao.getinfo(fnqnum);
+	   request.setAttribute("vo", vo);
+	   request.getRequestDispatcher("/kms_admin/fnq_detail.jsp").forward(request, response);
+	   }
+   private void fnq_list(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	      String spageNum=request.getParameter("pageNum");
+	      int pageNum=1;
+	      if(spageNum!=null) {
+	         pageNum=Integer.parseInt(spageNum);
+	      }
+	      int startRow=(pageNum-1)*5+1;
+	      int endRow=startRow+4;
+	      FnqDao dao=new FnqDao();
+	      ArrayList<FnqVo> list=dao.list(startRow, endRow);
+	      int pageCount=(int)Math.ceil(dao.getCount()/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_admin/fnq_list.jsp").forward(request, response);
+	   }
    private void comp_result(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
    int comnum=Integer.parseInt(request.getParameter("comnum"));

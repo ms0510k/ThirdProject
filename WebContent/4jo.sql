@@ -54,7 +54,7 @@ CREATE TABLE fnq
 (
 	fnqnum number NOT NULL,
 	fnqtitle varchar2(15),
-	fnqconten varchar2(15),
+	fnqcontent varchar2(15),
 	fnqresult varchar2(20),
 	PRIMARY KEY (fnqnum)
 );

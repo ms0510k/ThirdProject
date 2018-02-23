@@ -75,8 +75,10 @@
 			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
-					<li><a href="#">2-A 메뉴</a></li>
-					<li><a href="#">2-B 메뉴</a></li>
+					<li><a href="javascript:gogo()">익금/출금</a></li>
+					<li><a href="javascript:gogo()">문의내역</a></li>
+					<li><a href="javascript:gogo()">회원정보 수정</a></li>
+					<li><a href="javascript:gogo()">회원 탈퇴</a></li>
 				</ul></li>
 			<%
 				} else {
@@ -88,8 +90,10 @@
 			<li><a href="javascript:gogo()"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
-					<li><a href="javascript:gogo()">2-A 메뉴</a></li>
-					<li><a href="javascript:gogo()">2-B 메뉴</a></li>
+					<li><a href="javascript:gogo()">익금/출금</a></li>
+					<li><a href="javascript:gogo()">문의내역</a></li>
+					<li><a href="javascript:gogo()">회원정보 수정</a></li>
+					<li><a href="javascript:gogo()">회원 탈퇴</a></li>
 				</ul></li>
 			<%
 				}
@@ -106,7 +110,7 @@
 			<li><a
 				href="<%=request.getContextPath()%>/member.do?cmd=member_logout"
 				style="padding-left: 200px; padding-right: 50px;">로그아웃</a></li>
-			<li><a href="#" style="padding-left: 50px; padding-right: 50px;"><%=email%></a></li>
+			<li><a style="padding-left: 50px; padding-right: 50px;"><%=email%>님 환영합니다.</a></li>
 			
 			<%
 				} else {

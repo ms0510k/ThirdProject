@@ -8,15 +8,13 @@
 </head>
 <body>
 <%
-
 	String id = (String)session.getAttribute("id");
 	//보여질 페이지를 파라미터로 얻어오기
 	String spage = (String)request.getAttribute("page");
 	 System.out.println(spage);
 	 if(spage == null){
 		spage="first.jsp";
-	} 
-
+	}
 %>
 
 <div id="wrap">

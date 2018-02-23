@@ -57,8 +57,58 @@ public class AdminController extends HttpServlet{
     	  fnq_update(request,response);
       }else if(cmd.equals("fnq_updateOk")) {
     	  fnq_updateOk(request,response);
+      }else if(cmd.equals("fnq_insert")) {
+    	  response.sendRedirect(context+"/kms_admin/fnq_insert.jsp");
+      }else if(cmd.equals("fnq_insertOk")) {
+    	  fnq_insert(request,response);
+      }else if(cmd.equals("fnq_search")) {
+    	  fnq_search(request,response);
       }
    }
+   private void fnq_search(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	   String search=request.getParameter("search");
+	   String word=request.getParameter("word");
+	   String spageNum=request.getParameter("pageNum");
+	   int pageNum=1;
+	   if(spageNum!=null) {
+	      pageNum=Integer.parseInt(spageNum);
+	   }
+	   int startRow=(pageNum-1)*5+1;
+	   int endRow=startRow+4;
+	   FnqDao dao=new FnqDao();
+	      ArrayList<FnqVo> list=dao.fnqsearch(search,word,startRow,endRow);
+	      int pageCount=(int)Math.ceil(dao.getCounts(search,word)/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_admin/fnq_searchlist.jsp?search="+search+"&word="+word).forward(request, response);
+	   }
+   private void fnq_insert(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+
+	   String fnqtitle=request.getParameter("fnqtitle");
+	   String fnqcontent=request.getParameter("fnqcontent");
+	   String fnqresult=request.getParameter("fnqresult"); 
+
+	   FnqVo vo=new FnqVo(0, fnqtitle, fnqcontent, fnqresult);
+	   FnqDao dao=new FnqDao();
+	   int n=dao.insert(vo);
+	   
+	   if(n>0) {
+	      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=fnq_list");
+	      rd.forward(request, response);
+	   }else {
+	      request.setAttribute("result","fail");
+	   }
+	   }
    private void fnq_updateOk(HttpServletRequest request, HttpServletResponse response)
 	         throws ServletException, IOException {
 	   int fnqnum=Integer.parseInt(request.getParameter("fnqnum"));

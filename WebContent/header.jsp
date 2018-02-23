@@ -164,7 +164,7 @@
 
 
 				<!-- 정산부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">관리자님 환영합니다</a>
+			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">관리자님 환영합니다1</a>
 
 			</li>
 			<li><a href="<%=request.getContextPath()%>/member.do?cmd=member_logout"

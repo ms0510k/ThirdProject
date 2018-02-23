@@ -66,7 +66,7 @@
 				</ul></li>
 
 			<!-- 거래하기부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
+			<li><a href="<%=request.getContextPath()%>/header.do?cmd=trade" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
 			<!-- 마이페이지 부분 -->
 			<li><a href="javascript:gogo()"

@@ -168,4 +168,118 @@
 .bb-chart-arc .bb-gauge-value {
   fill: #000; }
 
+
+.g_table_list {
+	width: 100%
+}
+
+.g_table_list tr th {
+	background-color: #f7f7f7;
+	text-align: center;
+	border: 1px solid #d5d5d5
+}
+
+.g_table_list tr td {
+	border: 1px solid #d5d5d5;
+	text-align: center
+}
+
+.g_table_list tr .gray {
+	background-color: #e3e5e7
+}
+
+.g_table_list tr .org {
+	background-color: #fbf1e2
+}
+
+.g_table_list tr .fisrt {
+	border-left: 1px solid #666876
+}
+
+.g_table_list tr .top {
+	border-top: 1px solid #666876;
+	border-bottom: 1px solid #666876
+}
+
+.g_table_list tr .end {
+	border-right: 1px solid #666876
+}
+
+.g_table_list tr .gend {
+	border-bottom: 1px solid #666876
+}
+
+.g_table_list tr .left {
+	padding-left: 15px;
+	text-align: left
+}
+
+.g_table_list tr .left02 {
+	padding-left: 7px;
+	text-align: left
+}
+
+.g_table_list tr .right {
+	padding-right: 15px;
+	text-align: right
+}
+
+.g_table_list tr .center {
+	padding: 0;
+	text-align: center
+}
+
+.g_table_list tr .group_end {
+	border-bottom: 2px solid #d5d5d5
+}
+
+.g_table_list .sell td {
+	color: #0e7019
+}
+
+.g_table_list .buying td {
+	color: #f6742d
+}
+
+.g_table {
+	width: 100%;
+	border-top: 1px solid #111d2c
+}
+
+.g_table tr th {
+	background-color: #f7f7f7;
+	text-align: left;
+	padding: 4px 20px;
+	border-bottom: 1px solid #cbcbcb;
+	line-height: 30px
+}
+
+.g_table tr th.right {
+	padding-right: 15px;
+	text-align: right
+}
+
+.g_table tr td {
+	padding: 4px 20px;
+	border-bottom: 1px solid #cbcbcb;
+	line-height: 30px
+}
+
+.g_table .left {
+	padding-left: 15px;
+	text-align: left
+}
+
+.g_table .right {
+	padding-right: 15px;
+	text-align: right
+}
+
+.g_table .center {
+	padding-left: 0;
+	padding-right: 0;
+	text-align: center
+}
+
+
 /*# sourceMappingURL=billboard.css.map*/

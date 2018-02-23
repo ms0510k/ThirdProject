@@ -19,9 +19,10 @@ public class HeaderController extends HttpServlet{
 		String cmd=request.getParameter("cmd");
 		String context=request.getContextPath();//컨텍스트명 얻어오기
 		//System.out.println("context:" + context);
+		System.out.println(cmd);
 		if(cmd.equals("main")) {
 			main(request,response);
-		}else if(cmd.equals("now")) {
+		}else if(cmd.equals("chart")) {
 			now(request,response);
 		}else if(cmd.equals("trade")) {
 			trade(request,response);
@@ -34,16 +35,15 @@ public class HeaderController extends HttpServlet{
 	private void main(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("page","first.jsp");
-		request.getRequestDispatcher("/Main.jsp").forward(request, response);
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
 	
 	
 	private void now(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("여기로옴?");
-		request.setAttribute("page","chart.jsp");
-		request.getRequestDispatcher("/Main.jsp").forward(request, response);
+		request.setAttribute("page","pys_current/chart.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
 	

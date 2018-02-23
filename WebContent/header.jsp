@@ -27,7 +27,8 @@
 	});
 
 	function gogo() {
-		alert("아");
+		alert("로그인이 필요합니다.");
+		location.href="/ThirdProject/kms_member/member_login.jsp";
 	}
 </script>
 
@@ -64,18 +65,35 @@
 					<li><a href="#">민수코인</a></li>
 					<li><a href="#">프링코인</a></li>
 				</ul></li>
-
+			<%
+				if (email != null) {
+			%>
 			<!-- 거래하기부분 -->
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
 			<!-- 마이페이지 부분 -->
-			<li><a href="javascript:gogo()"
+			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
 					<li><a href="#">2-A 메뉴</a></li>
 					<li><a href="#">2-B 메뉴</a></li>
 				</ul></li>
+			<%
+				} else {
+			%>
+			<!-- 거래하기부분 -->
+			<li><a href="javascript:gogo()" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
+			<!-- 마이페이지 부분 -->
+			<li><a href="javascript:gogo()"
+				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
+				<ul>
+					<li><a href="javascript:gogo()">2-A 메뉴</a></li>
+					<li><a href="javascript:gogo()">2-B 메뉴</a></li>
+				</ul></li>
+			<%
+				}
+			%>
 			<!-- 고객센터부분 -->
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">고객센터</a>
 				<ul>

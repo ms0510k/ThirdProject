@@ -17,7 +17,7 @@ public class HeaderController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
-		String context=request.getContextPath();//ÄÁÅØ½ºÆ®¸í ¾ò¾î¿À±â
+		String context=request.getContextPath();//ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//System.out.println("context:" + context);
 		System.out.println(cmd);
 		if(cmd.equals("main")) {
@@ -49,7 +49,7 @@ public class HeaderController extends HttpServlet{
 	
 	private void trade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("¿©±â·Î¿È?");
+	
 		request.setAttribute("page","pys_current/buysell.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}

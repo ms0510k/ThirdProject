@@ -50,12 +50,12 @@
 		<ul class="zeta-menu">
 
 			<!-- 로고부분 -->
-			<li><a href="#"
+			<li><a href="<%=request.getContextPath()%>/header.do?cmd=main"
 				style="font-weight: bold; padding-left: 70px; padding-right: 100px;">4JO
 					Exchange</a></li>
 
 			<!-- 현재시세차트부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">현재시세차트</a>
+			<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart" style="padding-left: 50px; padding-right: 70px;">현재시세차트</a>
 				<ul>
 					<li><a href="#">비트코인</a></li>
 					<li><a href="#">이더리움</a></li>

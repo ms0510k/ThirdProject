@@ -90,6 +90,7 @@
 				href="<%=request.getContextPath()%>/member.do?cmd=member_logout"
 				style="padding-left: 200px; padding-right: 50px;">로그아웃</a></li>
 			<li><a href="#" style="padding-left: 50px; padding-right: 50px;"><%=email%></a></li>
+			
 			<%
 				} else {
 			%>

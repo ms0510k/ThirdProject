@@ -37,9 +37,8 @@ public class MemberDao {
 	}
 	
 	
-	//ex°Å·¡³»¿ª ±âº»°ª Ãß°¡
+	//exï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ ï¿½ß°ï¿½
 	public int exInsert(int memnum) {
-		System.out.println(memnum+"°í°´ ex Ãß°¡ÇÏ±â");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -48,7 +47,7 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);
-			pstmt.setString(2, "°³¼³");
+			pstmt.setString(2, "ê°œì„¤");
 			pstmt.setString(3, "krw");
 			pstmt.setInt(4, 0);
 			pstmt.setInt(5, 0);
@@ -66,9 +65,8 @@ public class MemberDao {
 		}
 	}
 	
-	//trade°Å·¡³»¿ª ±âº»°ª Ãß°¡
+	//tradeï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ ï¿½ß°ï¿½
 	public int tInsert(int memnum) {
-		System.out.println(memnum+"°í°´ trade Ãß°¡ÇÏ±â");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -78,7 +76,7 @@ public class MemberDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "krw");
 			pstmt.setInt(2, 0);
-			pstmt.setString(3, "°³¼³");
+			pstmt.setString(3, "ê°œì„¤");
 			pstmt.setInt(4, 0);
 			pstmt.setInt(5, memnum);
 			return pstmt.executeUpdate();

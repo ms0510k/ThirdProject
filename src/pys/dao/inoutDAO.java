@@ -42,9 +42,9 @@ public class inoutDAO {
 	
 	
 	
-	//ex°Å·¡³»¿ª ±âº»°ª Ãß°¡
+	//exï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ ï¿½ß°ï¿½
 		public int exInsert(int memnum) {
-			System.out.println(memnum+"°í°´ ex Ãß°¡ÇÏ±â");
+			System.out.println(memnum+"ï¿½ï¿½ ex ï¿½ß°ï¿½ï¿½Ï±ï¿½");
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
@@ -53,7 +53,7 @@ public class inoutDAO {
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, memnum);
-				pstmt.setString(2, "°³¼³");
+				pstmt.setString(2, "ê°œì„¤");
 				pstmt.setString(3, "krw");
 				pstmt.setInt(4, 0);
 				pstmt.setInt(5, 0);
@@ -71,9 +71,9 @@ public class inoutDAO {
 			}
 		}
 		
-		//money Å×ÀÌºí¿¡ Ãâ±Ý ½ÅÃ» º¸³»±â
+		//money ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public int out(moneyVO vo) {
-			System.out.println("out¿¡¼­ vo Âï¾îº¸±â : "+vo.toString());
+			System.out.println("outï¿½ï¿½ï¿½ï¿½ vo ï¿½ï¿½îº¸ï¿½ï¿½ : "+vo.toString());
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {

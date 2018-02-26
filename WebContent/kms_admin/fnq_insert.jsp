@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 	<h1>자주묻는 질문 등록</h1>
 <form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_insertOk">
 	제목<br>
@@ -17,5 +21,6 @@
 	<textarea rows="5" cols="50" name="fnqresult"></textarea><br>
 	<input type="submit" value="등록">
 </form>
+</div>
 </body>
 </html>

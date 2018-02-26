@@ -148,23 +148,27 @@
 					Exchange</a></li>
 
 			<!-- 공지사항부분 -->
-			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice" style="padding-left: 50px; padding-right: 70px;">공지사항</a>
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice" style="padding-left: 30px; padding-right: 50px;">공지사항</a>
 
 			</li>
 
 			<!-- 문의답변부분 -->
-			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=comp" style="padding-left: 50px; padding-right: 70px;">문의답변</a>
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=comp" style="padding-left: 30px; padding-right: 50px;">문의답변</a>
+
+			</li>
+			<!-- 자주묻는질문부분 -->
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list" style="padding-left: 30px; padding-right: 50px;">자주묻는질문 관리</a>
 
 			</li>
 			<!-- 출금신청대기자부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">출금
+			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">출금
 					신청 대기자</a></li>
 			<!-- 탈퇴신청대기자부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">탈퇴신청대기자</a>
+			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">탈퇴신청대기자</a>
 
 			</li>
 			<!-- 정산부분 -->
-			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">정산</a>
+			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">정산</a>
 
 			</li>
 

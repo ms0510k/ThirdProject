@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>${vo.fnqtitle }</h1>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list">자주묻는 질문 목록</a>
 <table border="1" width="600">
@@ -25,5 +29,6 @@
 </table>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_delete&fnqnum=${vo.fnqnum}">삭제</a>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_update&fnqnum=${vo.fnqnum}">수정</a>
+</div>
 </body>
 </html>

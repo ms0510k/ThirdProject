@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
 <h1>자주 묻는 질문</h1>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_insert">자주묻는 질문 등록</a>
 <br>
@@ -67,6 +71,7 @@
 <input type="text" name="word">
 <input type="submit" value="검색">
 </form>
+</div>
 </div>
 </body>
 </html>

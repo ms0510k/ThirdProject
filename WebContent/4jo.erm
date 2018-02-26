@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path>C:\Users\YoonSoo\Desktop\4jo.sql</output_path>
+				<output_path>C:\Users\MinSung\Desktop\4jo.sql</output_path>
 				<encoding>UTF-8</encoding>
 				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2018-02-07 19:58:54</creation_date>
-			<updated_date>2018-02-26 11:32:01</updated_date>
+			<updated_date>2018-02-26 19:33:28</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -1054,7 +1054,7 @@
 			<connections>
 				<relation>
 					<id>2</id>
-					<source>0</source>
+					<source>6</source>
 					<target>1</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1076,7 +1076,7 @@
 				</relation>
 				<relation>
 					<id>3</id>
-					<source>6</source>
+					<source>0</source>
 					<target>1</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1140,7 +1140,7 @@
 				<normal_column>
 					<id>6</id>
 					<referenced_column>35</referenced_column>
-					<relation>3</relation>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1174,7 +1174,7 @@
 				<normal_column>
 					<id>7</id>
 					<referenced_column>0</referenced_column>
-					<relation>2</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1392,7 +1392,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>15</word_id>
+					<word_id>14</word_id>
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1654,7 +1654,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>14</word_id>
+					<word_id>15</word_id>
 					<id>19</id>
 					<description></description>
 					<unique_key_name></unique_key_name>

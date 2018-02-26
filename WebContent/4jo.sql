@@ -6,6 +6,7 @@ DROP TABLE fees CASCADE CONSTRAINTS;
 DROP TABLE money CASCADE CONSTRAINTS;
 DROP TABLE exchange CASCADE CONSTRAINTS;
 DROP TABLE fnq CASCADE CONSTRAINTS;
+DROP TABLE thistory CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
 DROP TABLE notice CASCADE CONSTRAINTS;
 
@@ -35,11 +36,9 @@ CREATE TABLE exchange
 	buysell varchar2(10),
 	excoin varchar2(15),
 	exmoney number,
-	examount number(8),
 	exdate date,
 	PRIMARY KEY (exnum)
 );
-
 
 CREATE TABLE fees
 (
@@ -97,54 +96,61 @@ CREATE TABLE notice
 );
 
 
+CREATE TABLE thistory
+(
+	tdate date,
+	coin varchar2(10),
+	coinamount number(7,0),
+	tradetype varchar2(10),
+	tprice  number(10,0),
+	memnum number NOT NULL
+);
+
+
 
 /* Create Foreign Keys */
 
 ALTER TABLE fees
 	ADD FOREIGN KEY (exnum)
-	REFERENCES exchange (exnum)
+	REFERENCES exchange (exnum) on delete cascade
 ;
 
 
 ALTER TABLE money
 	ADD FOREIGN KEY (exnum)
-	REFERENCES exchange (exnum)
+	REFERENCES exchange (exnum) on delete cascade
 ;
 
 
 ALTER TABLE complaine
 	ADD FOREIGN KEY (memnum)
-	REFERENCES member (memnum)
+	REFERENCES member (memnum) on delete cascade
 ;
+
 
 
 ALTER TABLE exchange
 	ADD FOREIGN KEY (memnum)
-	REFERENCES member (memnum)
+	REFERENCES member (memnum) on delete cascade
 ;
 
 
 ALTER TABLE money
 	ADD FOREIGN KEY (memnum)
-	REFERENCES member (memnum)
+	REFERENCES member (memnum) on delete cascade
+;
+
+
+ALTER TABLE thistory
+	ADD FOREIGN KEY (memnum)
+	REFERENCES member (memnum) on delete cascade
 ;
 
 
 ALTER TABLE fees
 	ADD FOREIGN KEY (connum)
-	REFERENCES money (connum)
+	REFERENCES money (connum) on delete cascade
 ;
 
-CREATE SEQUENCE complaine_seq;
 
-CREATE SEQUENCE exchange_seq;
 
-CREATE SEQUENCE fees_seq;
-
-CREATE SEQUENCE fnq_seq;
-
-CREATE SEQUENCE member_seq;
-
-CREATE SEQUENCE money_seq;
-
-CREATE SEQUENCE notice_seq;

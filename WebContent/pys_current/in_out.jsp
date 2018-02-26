@@ -1,3 +1,6 @@
+<%@page import="pys.vo.tradeVO"%>
+<%@page import="pys.vo.exVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -91,9 +94,16 @@ ul.tabs li.current {
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <%
-String coin = (String)request.getAttribute("coin");
-System.out.println(coin);
-
+ArrayList<exVO>  eList= (ArrayList<exVO>)request.getAttribute("eList");
+ArrayList<tradeVO>  tList= (ArrayList<tradeVO>)request.getAttribute("tList");
+int kor = 0;
+exVO vo = null;
+for(int i = 0; i<eList.size(); i++){
+	if(eList.get(i).getExcoin().equals("krw")){
+		kor = eList.get(i).getExmoney();
+		vo = new exVO(eList.get(i).getExnum(),eList.get(i).getMemnum(),eList.get(i).getBuysell(),eList.get(i).getExcoin(),eList.get(i).getExmoney(),eList.get(i).getExdate());
+	}
+}
 %>
 
 
@@ -119,11 +129,11 @@ System.out.println(coin);
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>나의 추정자산</td>
-							<td><label id="myasset"></label>KRW</td>
+							<td><label id="in_myasset"></label><small>KRW</small></td>
 						</tr>
 						<tr>
 							<td>보유금액</td>
-							<td><label id="mykrw"></label>KRW</td>
+							<td><label id="in_mykrw"><%=kor %></label><small>KRW</small></td>
 						</tr>
 						<tr>
 							<td>충전금액</td>
@@ -151,16 +161,18 @@ System.out.println(coin);
 
 			<!-- 출금 탭 설정하기 -->
 			<div id="tab-2" class="tab-content">
-
-				<form>
+				
+				<form method="post" action="<%=request.getContextPath() %>/inout.do?cmd=out" name="fr" onsubmit="return check()">
+				<input type="hidden" name="exnum" value="<%=vo.getExnum() %>">
+				<input type="hidden" name="memnum" value="<%=vo.getMemnum() %>">
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>나의 추정자산</td>
-							<td><label id="myasset"></label>KRW</td>
+							<td><label name="out_myasset"></label><small>KRW</small></td>
 						</tr>
 						<tr>
 							<td>보유금액</td>
-							<td><label id="mykrw"></label>KRW</td>
+							<td><label name="out_mykrw"><%=kor %></label><small>KRW</small></td>
 						</tr>
 						<tr>
 							<td>출금하기</td>
@@ -190,7 +202,7 @@ System.out.println(coin);
 			<div id="tab-3" class="tab-content">
 
 				<select id="tradeList" style="width: 100px; height: 50px;">
-					<option value="all">전체</option>
+					<option value="all" >전체</option>
 					<option value="input">입금</option>
 					<option value="output">출금</option>
 
@@ -281,4 +293,39 @@ System.out.println(coin);
 	function numberWithCommas(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
+	
+	
+	
+	
+
+	function check() {
+
+	  if(fr.output_price.value == "") {
+
+	    alert("값을 입력해 주세요.");
+
+	    fr.output_price.focus();
+
+	    return false;
+
+	  }
+
+	  else if(fr.output_price.value > <%=kor%>) {
+
+	    alert("보유중인 원화를 한도로 입력해 주세요..");
+
+	    fr.output_price.focus();
+
+	    return false;
+
+	  }else {
+	  alert("출금신청이 완료되었습니다.");
+	  return true;}
+
+	}
+
+	
+	
+	
+	
 </script>

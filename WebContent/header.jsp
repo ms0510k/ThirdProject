@@ -75,7 +75,7 @@
 			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
-					<li><a href="<%=request.getContextPath()%>/header.do?cmd=inout">입금/출금</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=inout&email=<%=email%>">입금/출금</a></li>
 					<li><a href="javascript:gogo()">문의내역</a></li>
 					<li><a href="javascript:gogo()">회원정보 수정</a></li>
 					<li><a href="javascript:gogo()">회원 탈퇴</a></li>

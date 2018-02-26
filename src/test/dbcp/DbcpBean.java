@@ -1,7 +1,9 @@
 package test.dbcp;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,4 +27,25 @@ public class DbcpBean {
 		Connection con = ds.getConnection();
 		return con;
 	}
+	
+	public static void closeconn(Connection con) {
+		try {
+			if (con != null)
+				con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void closeconn(Connection con, Statement st, ResultSet rs) {
+			try {
+			if (rs != null)
+				rs.close();
+				if(st!=null)st.close();
+				if(con!=null)con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	
 }

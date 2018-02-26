@@ -25,7 +25,7 @@
 		<jsp:include page="<%=spage %>"/>
 	</div>
 	<div id="footer">
-		<%-- <jsp:include page="footer.jsp"/> --%>
+		<jsp:include page="footer.jsp"/>
 	</div>
 
 

@@ -90,6 +90,12 @@ ul.tabs li.current {
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
+<%
+String coin = (String)request.getAttribute("coin");
+System.out.println(coin);
+
+%>
+
 
 <div id="content1">
 

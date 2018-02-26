@@ -11,6 +11,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import pys.dao.inoutDAO;
+import pys.vo.exVO;
 
 @WebServlet("/header.do")
 public class HeaderController extends HttpServlet{
@@ -62,11 +66,13 @@ public class HeaderController extends HttpServlet{
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
+	//입금 출금하기
 	private void inout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//1.DB에서 전체 회원목록 얻어오기
-		
-		
+		//1.DB에서 거래내역 양쪽 가져오기
+		String email = (String)request.getParameter("email");
+		System.out.println("입출금 이메일 : "+email);
+		inoutDAO dao = new inoutDAO();
 		//2.회원목록을 스코프에 담기
 		//request.setAttribute("mlist",mlist);
 		//3.결과를 보여줄 뷰페이지로 이동

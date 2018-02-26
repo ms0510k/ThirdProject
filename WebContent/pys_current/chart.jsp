@@ -20,166 +20,205 @@
  */
 /*-- Chart --*/
 .bb svg {
-  font: 10px sans-serif;
-  -webkit-tap-highlight-color: transparent; }
+	font: 10px sans-serif;
+	-webkit-tap-highlight-color: transparent;
+}
 
 .bb path, .bb line {
-  fill: none;
-  stroke: #000; }
+	fill: none;
+	stroke: #000;
+}
 
 .bb text {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none; }
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
 
-.bb-legend-item-tile,
-.bb-xgrid-focus,
-.bb-ygrid,
-.bb-event-rect,
-.bb-bars path {
-  shape-rendering: crispEdges; }
+.bb-legend-item-tile, .bb-xgrid-focus, .bb-ygrid, .bb-event-rect,
+	.bb-bars path {
+	shape-rendering: crispEdges;
+}
 
 .bb-chart-arc path {
-  stroke: #fff; }
+	stroke: #fff;
+}
 
 .bb-chart-arc text {
-  fill: #fff;
-  font-size: 13px; }
+	fill: #fff;
+	font-size: 13px;
+}
 
 /*-- Axis --*/
 /*-- Grid --*/
 .bb-grid line {
-  stroke: #aaa; }
+	stroke: #aaa;
+}
 
 .bb-grid text {
-  fill: #aaa; }
+	fill: #aaa;
+}
 
 .bb-xgrid, .bb-ygrid {
-  stroke-dasharray: 3 3; }
+	stroke-dasharray: 3 3;
+}
 
 /*-- Text on Chart --*/
 .bb-text.bb-empty {
-  fill: #808080;
-  font-size: 2em; }
+	fill: #808080;
+	font-size: 2em;
+}
 
 /*-- Line --*/
 .bb-line {
-  stroke-width: 1px; }
+	stroke-width: 1px;
+}
 
 /*-- Point --*/
 .bb-circle._expanded_ {
-  stroke-width: 1px;
-  stroke: white; }
+	stroke-width: 1px;
+	stroke: white;
+}
 
 .bb-selected-circle {
-  fill: white;
-  stroke-width: 2px; }
+	fill: white;
+	stroke-width: 2px;
+}
 
 /*-- Bar --*/
 .bb-bar {
-  stroke-width: 0; }
-  .bb-bar._expanded_ {
-    fill-opacity: 0.75; }
+	stroke-width: 0;
+}
+
+.bb-bar._expanded_ {
+	fill-opacity: 0.75;
+}
 
 /*-- Focus --*/
 .bb-target.bb-focused {
-  opacity: 1; }
+	opacity: 1;
+}
 
 .bb-target.bb-focused path.bb-line, .bb-target.bb-focused path.bb-step {
-  stroke-width: 2px; }
+	stroke-width: 2px;
+}
 
 .bb-target.bb-defocused {
-  opacity: 0.3 !important; }
+	opacity: 0.3 !important;
+}
 
 /*-- Region --*/
 .bb-region {
-  fill: steelblue;
-  fill-opacity: .1; }
+	fill: steelblue;
+	fill-opacity: .1;
+}
 
 /*-- Brush --*/
 .bb-brush .extent {
-  fill-opacity: .1; }
+	fill-opacity: .1;
+}
 
 /*-- Select - Drag --*/
 /*-- Legend --*/
 .bb-legend-item {
-  font-size: 12px; }
+	font-size: 12px;
+}
 
 .bb-legend-item-hidden {
-  opacity: 0.15; }
+	opacity: 0.15;
+}
 
 .bb-legend-background {
-  opacity: 0.75;
-  fill: white;
-  stroke: lightgray;
-  stroke-width: 1; }
+	opacity: 0.75;
+	fill: white;
+	stroke: lightgray;
+	stroke-width: 1;
+}
 
 /*-- Title --*/
 .bb-title {
-  font: 14px sans-serif; }
+	font: 14px sans-serif;
+}
 
 /*-- Tooltip --*/
 .bb-tooltip-container {
-  z-index: 10; }
+	z-index: 10;
+}
 
 .bb-tooltip {
-  border-collapse: collapse;
-  border-spacing: 0;
-  background-color: #fff;
-  empty-cells: show;
-  opacity: 0.9;
-  -webkit-box-shadow: 7px 7px 12px -9px #777777;
-  -moz-box-shadow: 7px 7px 12px -9px #777777;
-  box-shadow: 7px 7px 12px -9px #777777; }
-  .bb-tooltip tr {
-    border: 1px solid #CCC; }
-  .bb-tooltip th {
-    background-color: #aaa;
-    font-size: 14px;
-    padding: 2px 5px;
-    text-align: left;
-    color: #FFF; }
-  .bb-tooltip td {
-    font-size: 13px;
-    padding: 3px 6px;
-    background-color: #fff;
-    border-left: 1px dotted #999; }
-    .bb-tooltip td > span, .bb-tooltip td > svg {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-right: 6px; }
-    .bb-tooltip td.value {
-      text-align: right; }
+	border-collapse: collapse;
+	border-spacing: 0;
+	background-color: #fff;
+	empty-cells: show;
+	opacity: 0.9;
+	-webkit-box-shadow: 7px 7px 12px -9px #777777;
+	-moz-box-shadow: 7px 7px 12px -9px #777777;
+	box-shadow: 7px 7px 12px -9px #777777;
+}
+
+.bb-tooltip tr {
+	border: 1px solid #CCC;
+}
+
+.bb-tooltip th {
+	background-color: #aaa;
+	font-size: 14px;
+	padding: 2px 5px;
+	text-align: left;
+	color: #FFF;
+}
+
+.bb-tooltip td {
+	font-size: 13px;
+	padding: 3px 6px;
+	background-color: #fff;
+	border-left: 1px dotted #999;
+}
+
+.bb-tooltip td>span, .bb-tooltip td>svg {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 6px;
+}
+
+.bb-tooltip td.value {
+	text-align: right;
+}
 
 /*-- Area --*/
 .bb-area {
-  stroke-width: 0;
-  opacity: 0.2; }
+	stroke-width: 0;
+	opacity: 0.2;
+}
 
 /*-- Arc --*/
 .bb-chart-arcs-title {
-  dominant-baseline: middle;
-  font-size: 1.3em; }
+	dominant-baseline: middle;
+	font-size: 1.3em;
+}
 
 .bb-chart-arcs .bb-chart-arcs-background {
-  fill: #e0e0e0;
-  stroke: none; }
+	fill: #e0e0e0;
+	stroke: none;
+}
 
 .bb-chart-arcs .bb-chart-arcs-gauge-unit {
-  fill: #000;
-  font-size: 16px; }
+	fill: #000;
+	font-size: 16px;
+}
 
 .bb-chart-arcs .bb-chart-arcs-gauge-max {
-  fill: #777; }
+	fill: #777;
+}
 
 .bb-chart-arcs .bb-chart-arcs-gauge-min {
-  fill: #777; }
+	fill: #777;
+}
 
 .bb-chart-arc .bb-gauge-value {
-  fill: #000; }
-
-
+	fill: #000;
+}
 
 .g_table_list {
 	width: 100%
@@ -294,7 +333,6 @@
 }
 
 /*# sourceMappingURL=billboard.css.map*/
-
 </style>
 
 
@@ -302,146 +340,145 @@
 
 
 
-	<input type="hidden" id="coin_kind">
-	<div id="main" style="width: 1000px;">
-		<h3 id="lastupdate"></h3>
-		<table class="g_table" id="tableAsset">
+<input type="hidden" id="coin_kind">
+<div id="main" style="width: 1000px;">
+	<h3 id="lastupdate"></h3>
+	<table class="g_table" id="tableAsset">
 
-			<thead>
-				<tr>
-					<th class="center">코인</th>
-					<th><span class="sorting" >실시간 시세</span></th>
-					<th><span class="sorting" >변동률
-							(%)</span></th>
-					<th><span class="sorting" >거래금액</span></th>
-					<th>구매 / 판매</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-coin="btc" title="비트코인 (BTC) 정보를 확인하시려면 클릭하세요">
-					<td class="click left_l"><img src="img/비트코인.jpg"
-						onclick="gogo1('btc')"><a onclick="gogo1('btc')">비트코인</a></td>
-					<td><strong id="btc_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="btc_change"></strong>
-					<td><strong id="btc_amount" class="sort_change"
-						data-sorting="0"></strong></td>
-
-
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="BTC"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="BTC"> 판매</a></td>
-				</tr>
-				<tr data-coin="eth" title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
-					<td><img src="img/이더리움.jpg" onclick="gogo1('eth')"><a
-						onclick="gogo1('eth')">이더리움</a></td>
-					<td><strong id="eth_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="eth_change"></strong>
-					<td><strong id="eth_amount" class="sort_change"
-						data-sorting="0"></strong></td>
+		<thead>
+			<tr>
+				<th class="center">코인</th>
+				<th><span class="sorting">실시간 시세</span></th>
+				<th><span class="sorting">변동률 (%)</span></th>
+				<th><span class="sorting">거래금액</span></th>
+				<th>구매 / 판매</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-coin="btc" title="비트코인 (BTC) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/비트코인.jpg"
+					onclick="gogo1('btc')"><a onclick="gogo1('btc')">비트코인</a></td>
+				<td><strong id="btc_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="btc_change"></strong>
+				<td><strong id="btc_amount" class="sort_change"
+					data-sorting="0"></strong></td>
 
 
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="ETH"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="ETH"> 판매</a></td>
-				</tr>
-
-				<tr data-coin="xrp" title="리플 (XRP) 정보를 확인하시려면 클릭하세요">
-					<td><img src="img/리플.jpg" onclick="gogo1('xrp')"><a
-						onclick="gogo1('xrp')">리플</a></td>
-					<td><strong id="xrp_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="xrp_change"></strong>
-					<td><strong id="xrp_amount" class="sort_change"
-						data-sorting="0"></strong></td>
-
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="XRP"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="XRP"> 판매</a></td>
-				</tr>
-				<tr data-coin="bch" title="비트코인 골드 (BTG) 정보를 확인하시려면 클릭하세요">
-					<td class="click left_l"><img src="img/비트코인캐쉬.jpg"
-						onclick="gogo1('bch')"><a onclick="gogo1('bch')">비트코인골드</a></td>
-					<td><strong id="bch_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="bch_change"></strong>
-					<td><strong id="bch_amount" class="sort_change"
-						data-sorting="0"></strong></td>
-
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="BCH"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="BCH"> 판매</a></td>
-				</tr>
-
-				<tr data-coin="qtum" title="퀀텀 (QTUM) 정보를 확인하시려면 클릭하세요">
-					<td class="click left_l"><img src="img/퀀텀.jpg"
-						onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">퀀텀</a></td>
-					<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="qtum_change"></strong>
-					<td><strong id="qtum_amount" class="sort_change"
-						data-sorting="0"></strong></td>
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="BTC"> 판매</a></td>
+			</tr>
+			<tr data-coin="eth" title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
+				<td><img src="img/이더리움.jpg" onclick="gogo1('eth')"><a
+					onclick="gogo1('eth')">이더리움</a></td>
+				<td><strong id="eth_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="eth_change"></strong>
+				<td><strong id="eth_amount" class="sort_change"
+					data-sorting="0"></strong></td>
 
 
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-				</tr>
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="ETH"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="ETH"> 판매</a></td>
+			</tr>
 
-				
-				
-				
-				<tr data-coin="msc" title="민수코인 (msc) 정보를 확인하시려면 클릭하세요">
-					<td class="click left_l"><img src="img/민수코인.jpg"
-						onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민수코인</a></td>
-					<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="qtum_change"></strong>
-					<td><strong id="qtum_amount" class="sort_change"
-						data-sorting="0"></strong></td>
+			<tr data-coin="xrp" title="리플 (XRP) 정보를 확인하시려면 클릭하세요">
+				<td><img src="img/리플.jpg" onclick="gogo1('xrp')"><a
+					onclick="gogo1('xrp')">리플</a></td>
+				<td><strong id="xrp_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="xrp_change"></strong>
+				<td><strong id="xrp_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="XRP"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="XRP"> 판매</a></td>
+			</tr>
+			<tr data-coin="bch" title="비트코인 골드 (BTG) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/비트코인캐쉬.jpg"
+					onclick="gogo1('bch')"><a onclick="gogo1('bch')">비트코인골드</a></td>
+				<td><strong id="bch_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="bch_change"></strong>
+				<td><strong id="bch_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="BCH"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="BCH"> 판매</a></td>
+			</tr>
+
+			<tr data-coin="qtum" title="퀀텀 (QTUM) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/퀀텀.jpg"
+					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">퀀텀</a></td>
+				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="qtum_change"></strong>
+				<td><strong id="qtum_amount" class="sort_change"
+					data-sorting="0"></strong></td>
 
 
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-				</tr>
-				
-				
-				<tr data-coin="sunc" title="민승코인 (sunc) 정보를 확인하시려면 클릭하세요">
-					<td class="click left_l"><img src="img/민승코인.jpg"
-						onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민승코인</a></td>
-					<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-					<td><strong id="qtum_change"></strong>
-					<td><strong id="qtum_amount" class="sort_change"
-						data-sorting="0"></strong></td>
-
-
-					<td><a href="javascript:;" class="btn btn_coin_buy"
-						data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
-						class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-				</tr>
-				
-			</tbody>
-		</table>
-
-	</div>
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
+			</tr>
 
 
 
 
-	<br>
-	<br>
-	<h1 id="titleCoin" style="color: red;"></h1>
-	<div id="buttonP">
-		<select id="timeLine" style="visibility: hidden">
-			<option value="minutes/1">==시간대==</option>
-			<option value="minutes/1">1분</option>
-			<option value="minutes/3">3분</option>
-			<option value="minutes/5">5분</option>
-			<option value="minutes/10">10분</option>
-			<option value="minutes/15">15분</option>
-			<option value="minutes/30">30분</option>
-			<option value="minutes/60">1시간</option>
-			<option value="minutes/240">4시간</option>
-			<option value="days">1일</option>
-		</select>
-	</div>
-	<div id="chart" style="width: 1500px;"></div>
+			<tr data-coin="msc" title="민수코인 (msc) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/민수코인.jpg"
+					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민수코인</a></td>
+				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="qtum_change"></strong>
+				<td><strong id="qtum_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
+			</tr>
+
+
+			<tr data-coin="sunc" title="민승코인 (sunc) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/민승코인.jpg"
+					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민승코인</a></td>
+				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="qtum_change"></strong>
+				<td><strong id="qtum_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:;" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
+					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
+
+
+
+
+<br>
+<br>
+<h1 id="titleCoin" style="color: red;"></h1>
+<div id="buttonP">
+	<select id="timeLine" style="visibility: hidden">
+		<option value="minutes/1">==시간대==</option>
+		<option value="minutes/1">1분</option>
+		<option value="minutes/3">3분</option>
+		<option value="minutes/5">5분</option>
+		<option value="minutes/10">10분</option>
+		<option value="minutes/15">15분</option>
+		<option value="minutes/30">30분</option>
+		<option value="minutes/60">1시간</option>
+		<option value="minutes/240">4시간</option>
+		<option value="days">1일</option>
+	</select>
+</div>
+<div id="chart" style="width: 1500px;"></div>
 
 
 
@@ -465,9 +502,23 @@
 
 
 
+	 function callFunction()
+
+	 {
+	proc();
+	 <%String coin = request.getParameter("coin");
+		if (coin != null) {%>
+	 gogo1('<%=coin%>');
+	 <%}%>
+	
+	
+	 }
+	 
+	 
 
 
-window.onload = proc;
+
+ window.onload = callFunction(); 
 
 	function proc() {
 		try {

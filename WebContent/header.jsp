@@ -57,11 +57,11 @@
 			<!-- 현재시세차트부분 -->
 			<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart" style="padding-left: 50px; padding-right: 70px;">현재시세차트</a>
 				<ul>
-					<li><a href="#">비트코인</a></li>
-					<li><a href="#">이더리움</a></li>
-					<li><a href="#">리플</a></li>
-					<li><a href="#">비트코인골드</a></li>
-					<li><a href="#">퀀텀</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart&coin=btc">비트코인</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart&coin=eth">이더리움</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart&coin=xrp">리플</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart&coin=bch">비트코인골드</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=chart&coin=qtum">퀀텀</a></li>
 					<li><a href="#">민수코인</a></li>
 					<li><a href="#">프링코인</a></li>
 				</ul></li>
@@ -75,7 +75,7 @@
 			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
-					<li><a href="javascript:gogo()">익금/출금</a></li>
+					<li><a href="<%=request.getContextPath()%>/header.do?cmd=inout">입금/출금</a></li>
 					<li><a href="javascript:gogo()">문의내역</a></li>
 					<li><a href="javascript:gogo()">회원정보 수정</a></li>
 					<li><a href="javascript:gogo()">회원 탈퇴</a></li>

@@ -1,32 +1,29 @@
 package pys.controller;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import pys.dao.inoutDAO;
 import pys.vo.exVO;
+import pys.vo.moneyVO;
 import pys.vo.tradeVO;
 
-@WebServlet("/header.do")
-public class HeaderController extends HttpServlet{
+@WebServlet("/inout.do")
+public class inoutController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
 		String context=request.getContextPath();//ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		System.out.println(cmd);
-		if(cmd.equals("main")) {
-			main(request,response);
+		if(cmd.equals("out")) {
+			out(request,response);
 		}else if(cmd.equals("chart")) {
 			now(request,response);
 		}else if(cmd.equals("trade")) {
@@ -39,10 +36,27 @@ public class HeaderController extends HttpServlet{
 	
 	
 	
-	private void main(HttpServletRequest request, HttpServletResponse response)
+	private void out(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int exnum = Integer.parseInt(request.getParameter("exnum"));
+		int memnum = Integer.parseInt(request.getParameter("memnum"));
+		moneyVO vo = new moneyVO(exnum, memnum, "¹Ì½ÂÀÎ");
+		inoutDAO dao = new inoutDAO();
+		
+		int row = dao.out(vo);
+		
+	if(row>0){
 		request.setAttribute("page","first.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}else {
+		request.setAttribute("errMsg", "Á¤»óÀûÀ¸·Î ½ÂÀÎÃ³¸®°¡ µÇÁö ¾Ê¾Ò½À´Ï´Ù");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+		
+		
+		
+		/*request.setAttribute("page","first.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);*/
 	}
 	
 	

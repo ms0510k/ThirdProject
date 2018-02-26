@@ -9,10 +9,100 @@ import java.util.Date;
 
 import kms.vo.CompVo;
 import pys.vo.exVO;
+import pys.vo.moneyVO;
 import pys.vo.tradeVO;
 import test.dbcp.DbcpBean;
 
 public class inoutDAO {
+	
+	public int fintNum(String email) {
+		String sql = "select memnum from member where email = ?";
+		PreparedStatement ps = null;
+		Connection con=null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}else {
+				return -1;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+		DbcpBean.closeconn(con, ps, rs);
+		}
+	}
+	
+	
+	
+	
+	
+	//ex거래내역 기본값 추가
+		public int exInsert(int memnum) {
+			System.out.println(memnum+"고객 ex 추가하기");
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con=DbcpBean.getConn();
+				String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,?,sysdate)";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, memnum);
+				pstmt.setString(2, "개설");
+				pstmt.setString(3, "krw");
+				pstmt.setInt(4, 0);
+				pstmt.setInt(5, 0);
+				return pstmt.executeUpdate();
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return -1;
+			} finally {
+				try {
+					con.close();
+					pstmt.close();
+					}catch(SQLException se) {
+						System.out.println(se.getMessage());
+					}
+			}
+		}
+		
+		//money 테이블에 출금 신청 보내기
+		public int out(moneyVO vo) {
+			System.out.println("out에서 vo 찍어보기 : "+vo.toString());
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con=DbcpBean.getConn();
+				
+				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, vo.getExnum());
+				pstmt.setInt(2, vo.getMemnum());
+				pstmt.setString(3, vo.getConfirm());
+				return pstmt.executeUpdate();
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return -1;
+			} finally {
+				try {
+					con.close();
+					pstmt.close();
+					}catch(SQLException se) {
+						System.out.println(se.getMessage());
+					}
+			}
+		}
+		
+	
+	
+	
+	
+	
 	
 	
 	public ArrayList<exVO> exlist(int memnum) {
@@ -75,6 +165,9 @@ public class inoutDAO {
 		DbcpBean.closeconn(con, ps, rs);
 		}
 	}
+	
+	
+	
 	
 	
 	

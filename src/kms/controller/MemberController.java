@@ -1,5 +1,6 @@
 package kms.controller;
 
+import java.awt.im.spi.InputMethodDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import kms.dao.NoticeDao;
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
 import kms.vo.NoticeVo;
+import pys.dao.inoutDAO;
 
 @WebServlet("/member.do")
 public class MemberController extends HttpServlet {
@@ -78,10 +80,10 @@ public class MemberController extends HttpServlet {
 			session.setAttribute("email", email);
 			response.sendRedirect(request.getContextPath()+"/header.jsp");
 		}else if(n==0){
-			request.setAttribute("errMsg", "아이디 또는 비밀번호가 틀립니다.");
+			request.setAttribute("errMsg", "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� ��由쎈땲�떎.");
 			request.getRequestDispatcher("/kms_member/member_login.jsp").forward(request, response);
 		}else {
-			request.setAttribute("errMsg", "오류로 인해 로그인실패");
+			request.setAttribute("errMsg", "�삤瑜섎줈 �씤�빐 濡쒓렇�씤�떎�뙣");
 			request.getRequestDispatcher("/kms_member/member_login.jsp").forward(request, response);
 		}
 	}
@@ -94,9 +96,14 @@ public class MemberController extends HttpServlet {
 	      String bank=request.getParameter("bank");
 	      int account=Integer.parseInt(request.getParameter("account"));
 	      MemberDao dao=new MemberDao();
+	      inoutDAO indao = new inoutDAO();
 	      MemberVo vo=new MemberVo(0, name, email, pwd, phone, bank, account, null);
+	      
 	      int n=dao.insert(vo);
 	      if(n>0) {
+	    	  int memnum = indao.fintNum(email);
+	    	  dao.exInsert(memnum);
+	    	  dao.tInsert(memnum);
 	    	  response.sendRedirect(request.getContextPath()+"/kms_member/member_login.jsp");
 	       }else {
 	          request.setAttribute("result","fail");

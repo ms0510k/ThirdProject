@@ -117,6 +117,7 @@
 			<%
 				} else {
 			%>
+			
 			<!-- 로그인부분 -->
 			<li><a
 				href="<%=request.getContextPath()%>/kms_member/member_login.jsp"

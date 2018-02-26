@@ -30,9 +30,7 @@ function fsubmit() {
     	alert("휴대전화 번호를  확인해 주세요")
     	document.getElementById("phone").focus();
     	return false; 
-    }
-   
-    
+    }   
 }
 function  checkpasswd(){
 	var pw1 =document.getElementById("fpwd");
@@ -50,10 +48,7 @@ function  checkpasswd(){
 		//pwcheck1.innerHTML="비밀번호가 서로 다릅니다. "
 		pwcheck2.innerHTML="비밀번호가 서로 다릅니다. "
 		return false;
-	}
-	
-	
-	
+	}	
 }
 
 var xhr=null;
@@ -72,9 +67,7 @@ function idcheck(){
 		span.innerHTML = "" ;
 		checkEmail = true;
 		return true;
-	}
-	
-	
+	}	
 }
 // 중복 확인 
 function Dcheck(value){

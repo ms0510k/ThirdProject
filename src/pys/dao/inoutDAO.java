@@ -14,6 +14,40 @@ import test.dbcp.DbcpBean;
 
 public class inoutDAO {
 	
+	public int fintNum(String email) {
+		String sql = "select memnum from member where email = ?";
+		PreparedStatement ps = null;
+		Connection con=null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}else {
+				return -1;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+		DbcpBean.closeconn(con, ps, rs);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public ArrayList<exVO> exlist(int memnum) {
 		String sql = "select * from exchange where memnum = ?";

@@ -43,13 +43,30 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		try {
 			con=DbcpBean.getConn();
-			String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";
+			/*String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";*/
+			
+			String sql = "INSERT ALL "+ 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'krw',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'btc',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'eth',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'xrp',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'btg',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'qtum',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'msc',0)" + 
+					"      INTO exchange VALUES (exchange_seq.nextval,?,'sunc',0)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);
-			pstmt.setString(2, "개설");
-			pstmt.setString(3, "krw");
-			pstmt.setInt(4, 0);
+			pstmt.setInt(2, memnum);
+			pstmt.setInt(3, memnum);
+			pstmt.setInt(4, memnum);
+			pstmt.setInt(5, memnum);
+			pstmt.setInt(6, memnum);
+			pstmt.setInt(7, memnum);
+			pstmt.setInt(8, memnum);
+	
+			
+			
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());

@@ -6,21 +6,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>아이디찾기</title>
+<title>비밀번호찾기</title>
 </head>
+<body>
+
 <% request.setCharacterEncoding("euc-kr"); %>
 
 <%
-	String name = request.getParameter("name");
-	String phone = request.getParameter("phone");
-		
-	LogonDBBean manager = LogonDBBean.getInstance();
-	LogonDataBean c = manager.searchId(name,phone); 
+
+		String id = request.getParameter("id");
+		String phone = request.getParameter("phone");
+			
+		LogonDBBean manager = LogonDBBean.getInstance();
+		LogonDataBean c = manager.searchId(id,phone); 
 	
 	try
 	{
 %>
-
 <body >
 <center>
 <form method = "post" action = "login_member.jsp">
@@ -28,16 +30,16 @@
 		if(c != null)
 		{
 %>
-			<%= name %>님에 아이디는 <b><%= c.getId() %></b> 입니다.<p>
+			<%= id %>님에 비밀번호는 <b><%= c.getPasswd() %></b> 입니다.<p>
 			<input type = "submit" value = "메인으로..">
 <%
 		}
 		else
 		{
 %>
-			이름 또는 전화번호가 틀렸습니다.<p>
+			아이디 또는 전화번호가 틀렸습니다.<p>
 			<input type = "button" value = "다시 입력하기" onclick = 
-				"javascript:window.location='search_idForm.jsp'">
+				"javascript:window.location='searchPwForm.jsp'">
 <%
 		}
 %>
@@ -47,4 +49,6 @@
 <%
 		}catch(Exception e) {}
 %>
+</html>
+</body>
 </html>

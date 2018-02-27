@@ -25,7 +25,7 @@ public class MarketPriceController extends HttpServlet{
 		if(cmd.equals("buy")) {
 			buy(request,response);
 		}else if(cmd.equals("sell")) {
-			insert(request,response);
+			sell(request,response);
 		}else if(cmd.equals("xrp")) {
 			list(request,response);
 		}else if(cmd.equals("btg")) {
@@ -36,6 +36,33 @@ public class MarketPriceController extends HttpServlet{
 			//updateOk(request,response);
 		}
 	}
+	private void sell(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String coin=request.getParameter("coin");
+		String email = (String) request.getSession().getAttribute("email");
+
+		System.out.println("차트에서 클릭시 넘어오는 이멜 : "+email);
+		
+		//먼저 이메일주소로 고객번호 찾기
+		inoutDAO dao = new inoutDAO();
+		int memnum = dao.fintNum(email);
+		System.out.println("고객번호는 " +memnum);
+		//해당 고객의 거래내역 같이 뿌려주기
+		ArrayList<exVO> eList = dao.exlist(memnum);
+		
+		
+		
+		//받은 고객번호와 코인정보를 buysell.jsp 로 보내기!
+		request.setAttribute("type","sell");
+		request.setAttribute("coin",coin);
+		request.setAttribute("memnum", memnum);
+		request.setAttribute("eList", eList);
+		request.setAttribute("page","pys_current/buysell.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	
+	
 	private void buy(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String coin=request.getParameter("coin");
@@ -52,13 +79,13 @@ public class MarketPriceController extends HttpServlet{
 		
 		
 		//받은 고객번호와 코인정보를 buysell.jsp 로 보내기!
+		request.setAttribute("type","buy");
 		request.setAttribute("coin",coin);
 		request.setAttribute("memnum", memnum);
 		request.setAttribute("eList", eList);
 		request.setAttribute("page","pys_current/buysell.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
-	
 	
 	
 	

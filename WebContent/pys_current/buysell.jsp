@@ -85,11 +85,34 @@ ul.tabs li.current {
 
 <%
 String coin = (String)request.getAttribute("coin");
+String type = (String)request.getAttribute("type");
 if(coin == null){
 	coin = "BTC";
 }else{
 	coin = coin.toUpperCase();
 }
+
+String coin_name = "";
+switch (coin) {
+case "BTC":
+	coin_name = "비트코인";
+	break;
+case "ETH":
+	coin_name = "이더리움";
+	break;
+case "XRP":
+	coin_name = "리플";
+	break;
+case "BTG":
+	coin_name = "비트코인골드";
+	break;
+case "QTUM":
+	coin_name = "퀀텀";
+	break;
+default:
+	break;
+}
+
 int memnum = (Integer)request.getAttribute("memnum");
 ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
 System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
@@ -107,8 +130,17 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 
 			<!-- 탭나눠주는 부분 -->
 			<ul class="tabs">
+			<%
+			if(type.equals("buy")){
+			%>
 				<li class="tab-link current" data-tab="tab-1">매수하기</li>
 				<li class="tab-link" data-tab="tab-2">매도하기</li>
+				<% }else{%>
+				
+				<li class="tab-link" data-tab="tab-1">매수하기</li>
+				<li class="tab-link current" data-tab="tab-2">매도하기</li>
+				
+				<%} %>
 			</ul>
 
 
@@ -225,7 +257,7 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 
 	<!-- 시장현황 -->
 	<div class="right_content" id="content_right">
-		<h2 style="color: #FF8000;">시장현황</h2>
+		<h2 style="color: #FF8000;">시장현황(<%=coin_name %>)</h2>
 		<h3 id="now_price"></h3>
 		<br>
 		<table id="rTable">

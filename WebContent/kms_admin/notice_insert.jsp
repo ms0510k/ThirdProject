@@ -7,12 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+		String email = request.getParameter("email");
+%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 	<h1>공지사항 등록</h1>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=notice_insertOk">
+<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=notice_insertOk&email=<%=email%>">
 	제목<br>
 	<input type="text" name="nottitle"><br>
 	내용<br>

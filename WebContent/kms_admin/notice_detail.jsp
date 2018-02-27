@@ -7,12 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+		String email = request.getParameter("email");
+%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>${vo.nottitle }</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=notice">공지목록</a>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=notice&email=<%=email%>">공지목록</a>
 <table border="1" width="600">
 <tr>
    <td>공지번호</td>
@@ -31,8 +34,12 @@
    <td>${vo.notdate }</td>
 </tr>
 </table>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=delete&notnum=${vo.notnum}">삭제</a>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=update&notnum=${vo.notnum}">수정</a>
+<%
+		if ("admin".equals(email)) {
+%>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=delete&notnum=${vo.notnum}&email=<%=email%>">삭제</a>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=update&notnum=${vo.notnum}&email=<%=email%>">수정</a>
+<%} %>
 </div>
 </body>
 </html>

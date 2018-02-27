@@ -26,7 +26,7 @@ public class MemberController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 	      String cmd=request.getParameter("cmd");
-	      if(cmd.equals("member_insert")) {
+	      if(cmd.equals("insert_member")) {
 	         member_insert(request,response);
 	      }else if(cmd.equals("member_login")) {
 	    	  member_login(request,response);
@@ -105,7 +105,7 @@ public class MemberController extends HttpServlet {
 	    	  int memnum = indao.fintNum(email);
 	    	  dao.exInsert(memnum);
 	    	  dao.tInsert(memnum);
-	    	  response.sendRedirect(request.getContextPath()+"/kms_member/member_login.jsp");
+	    	  response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
 	       }else {
 	          request.setAttribute("result","fail");
 	       }

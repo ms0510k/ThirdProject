@@ -7,12 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+		String email = request.getParameter("email");
+%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>수정하기</h1>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=updateOk">
+<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=updateOk&email=<%=email%>">
    공지번호<br>
    <input type="text" name="notnum" readonly="readonly" value="${vo.notnum }"><br>
    제목<br>

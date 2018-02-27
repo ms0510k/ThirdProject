@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+		String email = request.getParameter("email");
+%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>
@@ -21,7 +24,7 @@
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.notnum }</td>
-      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=detail&notnum=${vo.notnum}">${vo.nottitle }</a></td>
+      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=detail&notnum=${vo.notnum}&email=<%=email%>">${vo.nottitle }</a></td>
       <td>${vo.nothit }</td>
       <td>${vo.notdate }</td>
    </tr>
@@ -31,7 +34,7 @@
 
 <c:choose>
    <c:when test="${startPage>4 }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=search&pageNum=${startPage-1 }&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">이전</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=search&pageNum=${startPage-1 }&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>&email=<%=email%>">이전</a>
    </c:when>
    <c:otherwise>
       이전
@@ -40,12 +43,12 @@
    <c:forEach var="i" begin="${startPage }"  end="${endPage }">
       <c:choose>
          <c:when test="${pageNum==i }">
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=search&pageNum=${i}&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=search&pageNum=${i}&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>&email=<%=email%>">
             <span style="color:blue">[${i }]</span>
             </a>
          </c:when>
          <c:otherwise>
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=search&pageNum=${i}&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=search&pageNum=${i}&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>&email=<%=email%>">
             <span style="color:gray">[${i }]</span>
             </a>
          </c:otherwise>
@@ -54,7 +57,7 @@
    
    <c:choose>
    <c:when test="${endPage<pageCount }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=search&pageNum=${endPage+1 }&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>">다음</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=search&pageNum=${endPage+1 }&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>&email=<%=email%>">다음</a>
    </c:when>
    <c:otherwise>
       다음
@@ -62,7 +65,7 @@
 </c:choose>
 </div>
 <div>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=search">
+<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=search&email=<%=email%>">
    <select name="search" id="search" size="1">
    <option value="nottitle">제목</option>
    <option value="notcontent">내용</option>

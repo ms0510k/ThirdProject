@@ -22,7 +22,7 @@ public class ConfDao {
 		int memnum=0;
 		String sql1="select memnum from money where connum=?";
 		String sql2="insert into thistory values(sysdate,'krw',0,'출금',?,?)";
-		String sql3="update exchange set exmoney=(exmoney-?) where memnum=?";
+		String sql3="update exchange set exmoney=(exmoney-?) where memnum=? and excoin='krw'";
 		String sql4="update money set confirm='승인' where connum=?";
 		try {
 			con=DbcpBean.getConn();

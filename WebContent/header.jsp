@@ -102,8 +102,19 @@
 			<!-- 고객센터부분 -->
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">고객센터</a>
 				<ul>
+					<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice">공지사항</a></li>
 					<li><a href="#">자주묻는질문</a></li>
-					<li><a href="#">1:1문의</a></li>
+			<%
+				if (email != null) {
+			%>
+					<li><a href="<%=request.getContextPath()%>/admin.do?cmd=comp">1:1문의</a></li>
+					<%
+				} else {
+			%>
+					<li><a href="javascript:gogo()">1:1문의</a></li>
+			<%
+				}
+			%>
 				</ul></li>
 			<%
 				if (email != null) {
@@ -149,7 +160,7 @@
 					Exchange</a></li>
 
 			<!-- 공지사항부분 -->
-			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice" style="padding-left: 30px; padding-right: 50px;">공지사항</a>
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice&email=<%=email %>" style="padding-left: 30px; padding-right: 50px;">공지사항</a>
 
 			</li>
 

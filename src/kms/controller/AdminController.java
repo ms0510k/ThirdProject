@@ -30,7 +30,8 @@ public class AdminController extends HttpServlet{
       if(cmd.equals("notice")) {
          notice_list(request,response);
       }else if(cmd.equals("notice_insert")) {
-         response.sendRedirect(context+"/kms_admin/notice_insert.jsp");
+    	  String email=request.getParameter("email");
+         response.sendRedirect(context+"/kms_admin/notice_insert.jsp?email="+email);
       }else if(cmd.equals("notice_insertOk")){
          notice_insert(request,response);
       }else if(cmd.equals("detail")){
@@ -268,6 +269,7 @@ public class AdminController extends HttpServlet{
    }
    private void notice_search(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
+	   String email=request.getParameter("email");
    String search=request.getParameter("search");
    String word=request.getParameter("word");
    String spageNum=request.getParameter("pageNum");
@@ -290,10 +292,11 @@ public class AdminController extends HttpServlet{
       request.setAttribute("startPage", startPage);
       request.setAttribute("endPage", endPage);
       request.setAttribute("pageNum", pageNum);
-      request.getRequestDispatcher("/kms_admin/notice_searchlist.jsp?search="+search+"&word="+word).forward(request, response);
+      request.getRequestDispatcher("/kms_admin/notice_searchlist.jsp?search="+search+"&word="+word+"&email="+email).forward(request, response);
    }
    private void notice_updateOk(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
+	   String email=request.getParameter("email");
    int notnum=Integer.parseInt(request.getParameter("notnum"));
    String nottitle=request.getParameter("nottitle");
    String notcontent=request.getParameter("notcontent");
@@ -301,7 +304,7 @@ public class AdminController extends HttpServlet{
    NoticeDao dao=new NoticeDao();
    int n=dao.updateOk(vo);
    if(n>0) {
-      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice");
+      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice&email="+email);
       rd.forward(request, response);
    }else {
       request.setAttribute("result","fail");
@@ -309,43 +312,43 @@ public class AdminController extends HttpServlet{
    }
    private void notice_update(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
+	   String email=request.getParameter("email");
    int notnum=Integer.parseInt(request.getParameter("notnum"));
-   
    NoticeDao dao=new NoticeDao();
    NoticeVo vo=dao.getinfo(notnum);
    request.setAttribute("vo", vo);
-   request.getRequestDispatcher("/kms_admin/notice_update.jsp").forward(request, response);
+   request.getRequestDispatcher("/kms_admin/notice_update.jsp?email="+email).forward(request, response);
    }
    private void notice_delete(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
+	   String email=request.getParameter("email");
    int notnum=Integer.parseInt(request.getParameter("notnum"));
    
    NoticeDao dao=new NoticeDao();
    dao.delete(notnum);
-   RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice");
+   RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice&email="+email);
    rd.forward(request, response);
    }
    private void notice_detail(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
+	   String email=request.getParameter("email");
    int notnum=Integer.parseInt(request.getParameter("notnum"));
-   
    NoticeDao dao=new NoticeDao();
    NoticeVo vo=dao.getinfo(notnum);
    request.setAttribute("vo", vo);
-   request.getRequestDispatcher("/kms_admin/notice_detail.jsp").forward(request, response);
+   request.getRequestDispatcher("/kms_admin/notice_detail.jsp?email="+email).forward(request, response);
    }
    private void notice_insert(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
-
+	   String email=request.getParameter("email");
    String nottitle=request.getParameter("nottitle");
-   String notcontent=request.getParameter("notcontent");   
-
+   String notcontent=request.getParameter("notcontent");
    NoticeVo nv=new NoticeVo(0, nottitle, notcontent, 0, null);
    NoticeDao dao=new NoticeDao();
    int n=dao.insert(nv);
    
    if(n>0) {
-      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice");
+      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=notice&email="+email);
       rd.forward(request, response);
    }else {
       request.setAttribute("result","fail");
@@ -353,6 +356,7 @@ public class AdminController extends HttpServlet{
    }
    private void notice_list(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
+	  String email=request.getParameter("email");
       String spageNum=request.getParameter("pageNum");
       int pageNum=1;
       if(spageNum!=null) {
@@ -373,6 +377,6 @@ public class AdminController extends HttpServlet{
       request.setAttribute("startPage", startPage);
       request.setAttribute("endPage", endPage);
       request.setAttribute("pageNum", pageNum);
-      request.getRequestDispatcher("/kms_admin/notice_list.jsp").forward(request, response);
+      request.getRequestDispatcher("/kms_admin/notice_list.jsp?email="+email).forward(request, response);
    }
    }

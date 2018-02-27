@@ -15,15 +15,16 @@
 <h1>승인 대기 목록</h1>
 <table border="1" width="500">
    <tr>
-      <th>승인대기번호</th><th>아이디(이메일)</th><th>상태</th><th>날짜</th><th>승인</th>
+      <th>승인대기번호</th><th>아이디(이메일)</th><th>출금 금액</th><th>상태</th><th>날짜</th><th>승인</th>
    </tr>
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.connum }</td>
       <td>${vo.email }</td>
+      <td>${vo.outmoney }</td>
       <td>${vo.confirm }</td>
       <td>${vo.condate }</td>
-      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=conf_ok&connum=${vo.connum}">승인</a></td>
+      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=conf_ok&connum=${vo.connum}&outmoney=${vo.outmoney}">승인</a></td>
    </tr>
    </c:forEach>
 </table>

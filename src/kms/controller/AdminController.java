@@ -67,7 +67,22 @@ public class AdminController extends HttpServlet{
     	  fnq_search(request,response);
       }else if(cmd.equals("conf_list")) {
     	  conf_list(request,response);
+      }else if(cmd.equals("conf_ok")) {
+    	  conf_ok(request,response);
       }
+   }
+   private void conf_ok(HttpServletRequest request, HttpServletResponse response)
+   			throws ServletException, IOException {
+	   int connum=Integer.parseInt(request.getParameter("connum"));
+	   int outmoney=Integer.parseInt(request.getParameter("outmoney"));
+	   ConfDao dao=new ConfDao();
+	   int n=dao.confirm(connum, outmoney);
+	   if(n>0) {
+	      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=conf_list");
+	      rd.forward(request, response);
+	   }else {
+	      request.setAttribute("result","fail");
+	   }
    }
    private void conf_list(HttpServletRequest request, HttpServletResponse response)
 	         throws ServletException, IOException {

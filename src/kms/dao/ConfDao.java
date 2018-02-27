@@ -8,9 +8,49 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import kms.vo.ConfVo;
+import kms.vo.NoticeVo;
 import test.dbcp.DbcpBean;
 
 public class ConfDao {
+	public int confirm(int connum, int outmoney) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt1=null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
+		int memnum=0;
+		String sql="select memnum from money where connum=?";
+		String sql2="insert into thistory values(sysdate,'krw',0,'출금',?,?)";
+		String sql3="update exchange set exmoney=(exmoney-?) where memnum=?";
+		try {
+			con=DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt1=con.prepareStatement(sql2);
+			pstmt2=con.prepareStatement(sql3);
+			pstmt.setInt(1, connum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				memnum=rs.getInt("memnum");
+			}
+			pstmt1.setInt(1, outmoney);
+			pstmt1.setInt(2, memnum);
+			pstmt2.setInt(1, outmoney);
+			pstmt2.setInt(2, memnum);
+			pstmt1.executeQuery();
+			pstmt2.executeQuery();
+			return 1;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+			}
+		}
+	}
 	public int getCount() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -51,9 +91,10 @@ public class ConfDao {
 			while (rs.next()) {
 				int connum = rs.getInt("connum");
 				String email = rs.getString("email");
+				int outmoney = rs.getInt("outmoney");
 				String confirm = rs.getString("confirm");
 				Date condate = rs.getDate("condate");
-				ConfVo vo = new ConfVo(connum,email,confirm,condate);
+				ConfVo vo = new ConfVo(connum,email,outmoney,confirm,condate);
 				list.add(vo);
 			}
 			return list;

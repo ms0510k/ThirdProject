@@ -75,6 +75,7 @@ public class MemberController extends HttpServlet {
 		map.put("pwd", pwd);
 		kms.dao.LoginDao dao=kms.dao.LoginDao.getInstance();
 		int n=dao.isMember(map);
+		System.out.println("로그인 결과는 :"+n);
 		if(n==1) {
 			HttpSession session=request.getSession();
 			session.setAttribute("email", email);
@@ -82,10 +83,10 @@ public class MemberController extends HttpServlet {
 			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}else if(n==0){
 			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
-			request.getRequestDispatcher("/kms_member/member_login.jsp").forward(request, response);
+			request.getRequestDispatcher("/lyj_member/login_member.jsp").forward(request, response);
 		}else {
 			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
-			request.getRequestDispatcher("/kms_member/member_login.jsp").forward(request, response);
+			request.getRequestDispatcher("/lyj_member/login_member.jsp").forward(request, response);
 		}
 	}
 	private void member_insert(HttpServletRequest request, HttpServletResponse response)

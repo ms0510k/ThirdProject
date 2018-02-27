@@ -85,6 +85,7 @@ ul.tabs li.current {
 
 <%
 String coin = (String)request.getAttribute("coin");
+int coin_amount = 0;
 String type = (String)request.getAttribute("type");
 if(coin == null){
 	coin = "BTC";
@@ -115,13 +116,18 @@ default:
 
 int memnum = (Integer)request.getAttribute("memnum");
 int kor = 0;
+
+
 ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
 for(int i = 0; i<eList.size(); i++){
 	if(eList.get(i).getExcoin().equals("krw")){
 		kor = eList.get(i).getExmoney();
 	}
+	if(eList.get(i).getExcoin().equals(coin_name)){
+		coin_amount = eList.get(i).getExmoney();
+	}
 }
-System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
+System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+memnum+", 수량 : "+coin_amount);
 
 %>
 
@@ -217,23 +223,23 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 						</tr>
 						<tr>
 							<td>주문수량</td>
-							<td><input type="text" placeholder="매도 수량을 입력하세요"> <input
-								type="button" value="최대"></td>
+							<td><input type="text" placeholder="매도 수량을 입력하세요" id="sell_max"> <input
+								type="button" value="최대" onclick="order_sell()"></td>
 						</tr>
 						<tr>
 							<td>주문가격</td>
-							<td><input type="text" name="input_price"></td>
+							<td><input type="text" id="sell_input_price"></td>
 						</tr>
 
 
 						<tr>
 							<td>수수료 (약 1%)</td>
-							<td><label id="order_commission">0</label><small
+							<td><label id="sell_order_commission"></label><small
 								style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td>총 매도금액 (약)</td>
-							<td><label id="order_amount">0</label><small
+							<td><label id="sell_order_amount"></label><small
 								style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
@@ -345,7 +351,9 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 	function gogo(id) {
 
 		var textMove = document.getElementById("buy_input_price");
+		var textMove1 = document.getElementById("sell_input_price");
 		textMove.value = id.outerText;
+		textMove1.value = id.outerText;
 
 	}
 
@@ -433,6 +441,11 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 	function showData_left(){
 		var buy1 = document.getElementById("buy_max");//수량
 		var buy2 = document.getElementById("buy_input_price");//개당가격
+		
+		var sell1 = document.getElementById("sell_max");//수량
+		var sell2 = document.getElementById("sell_input_price");//개당가격
+		
+		
 		if(buy1.value.length != 0 && buy2.value.length != 0){
 			var buysum = buy1.value * removeComma(buy2.value);
 			var buy3 = document.getElementById("buy_order_price");//주문금액
@@ -442,7 +455,13 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 			buy4.outerText = (buy1.value*0.01).toFixed(5);
 			buy5.outerText = (buy1.value-(buy1.value*0.01)).toFixed(5);
 		}
-		
+		if(sell1.value.length != 0 && sell2.value.length != 0){
+			var sellsum = sell1.value * removeComma(sell2.value);
+			var buy4 = document.getElementById("buy_order_commission");//수수료
+			var buy5 = document.getElementById("buy_order_amount");//총매도액
+			buy4.outerText = (sellsum*0.01).toFixed(0);
+			buy5.outerText = (sellsum-(sellsum*0.01)).toFixed(0);
+		}
 		
 		
 		
@@ -457,6 +476,25 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 		
 		//가격 가져오기
 		var amount = document.getElementById("buy_input_price");
+			if(amount.value.length == 0){
+				alert("먼저 가격을 입력해 주세요");
+				amount.focus();
+			}else{
+				var cal = <%=kor %>/removeComma(amount.value);
+				cal = cal.toFixed(5);
+				alert(cal);
+				order1.value = cal;
+				
+				
+			}
+	}
+	
+	function order_sell() {
+		//채워야 되는위치
+		var order1 = document.getElementById("sell_max");
+		
+		//가격 가져오기
+		var amount = document.getElementById("sell_input_price");
 			if(amount.value.length == 0){
 				alert("먼저 가격을 입력해 주세요");
 				amount.focus();

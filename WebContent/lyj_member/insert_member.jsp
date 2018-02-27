@@ -170,6 +170,7 @@ function fn_press_han(obj)
 </tr>
 </table>
 	<input type="submit" value="가입하기">
+	<input type = "button" value = "취소" onclick ="javascript:window.location='login_member.jsp'">
 </form>
 </div>
 </body>

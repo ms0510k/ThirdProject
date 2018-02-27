@@ -19,7 +19,7 @@
 	<input type="submit" value="로그인" >
 	<input type="button" value="회원가입"onclick ="javascript:window.location='insert_member.jsp'">
 	<input type="button" value="ID찾기" onclick ="javascript:window.location='search_idForm.jsp'">
-	<input type="button" value="PW찾기"onclick ="javascript:window.location='search_id.jsp'">
+	<input type="button" value="PW찾기"onclick ="javascript:window.location='search_pwForm.jsp'">
 </form>
 </div>
 </body>

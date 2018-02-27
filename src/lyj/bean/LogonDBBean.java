@@ -31,17 +31,15 @@ public class LogonDBBean
 		{
 			conn = getConnection();
 			pstmt = conn.prepareStatement
-			("insert into MEMBERS values(?,?,?,?,?,?,?,?,?,?)");
-			pstmt.setString(1, member.getId());
-			pstmt.setString(2, member.getPasswd());
-			pstmt.setString(3, member.getName());
-			pstmt.setString(4, member.getJumin1());
-			pstmt.setString(5, member.getJumin2());
-			pstmt.setString(6, member.getEmail());
-			pstmt.setString(7, member.getBlog());
+			("insert into MEMBERS values(?,?,?,?,?,?,?)");
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getId());
+			pstmt.setString(3, member.getPasswd());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getBank());
+			pstmt.setInt(6, member.getAccount());			
 			pstmt.setTimestamp(8, member.getReg_date());
-			pstmt.setString(9, member.getZipcode());
-			pstmt.setString(10, member.getAddress());
+			
 			pstmt.executeUpdate();
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -90,34 +88,7 @@ public class LogonDBBean
 	}
 	
 	// 회원가입시 ID를 체크할 때 호출
-	public int confirmId(String id) throws Exception
-	{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		int x = -1;
-		
-		try
-		{
-			conn = getConnection();
-			pstmt = conn.prepareStatement("select id from MEMBERS where id = ?");
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next())
-				x = 1; // 해당 아이디 있음
-			else
-				x = -1; // 해당 아이디 없음
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}finally{
-			if(rs != null) try { rs.close(); } catch(SQLException ex) {}
-			if(pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-			if(conn != null) try { conn.close(); } catch(SQLException ex) {}
-		}
-		return x;
-	}
+	
 	
 	// 업데이트시 입력된 데이터를 보여줄 때 사용
 	public LogonDataBean getMember(String id) throws Exception
@@ -137,16 +108,14 @@ public class LogonDBBean
 			if(rs.next())
 			{
 				member = new LogonDataBean();
+				member.setName(rs.getString("name"));
 				member.setId(rs.getString("id"));
 				member.setPasswd(rs.getString("passwd"));
-				member.setName(rs.getString("name"));
-				member.setJumin1(rs.getString("jumin1"));
-				member.setJumin2(rs.getString("jumin2"));
-				member.setEmail(rs.getString("email"));
-				member.setBlog(rs.getString("blog"));
+				member.setPhone(rs.getString("phone"));
+				member.setBank(rs.getString("bank"));
+				member.setAccount(rs.getInt("account"));				
 				member.setReg_date(rs.getTimestamp("reg_date"));
-				member.setZipcode(rs.getString("zipcode"));
-				member.setAddress(rs.getString("address"));
+			
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -169,13 +138,10 @@ public class LogonDBBean
 			conn = getConnection();
 			pstmt = conn.prepareStatement
 				("update MEMBERS set passwd = ?, name = ?, " +
-						"email = ?, blog = ?, zipcode = ?, address = ? where id = ?");
+						"phone = ? where id = ?");
 			pstmt.setString(1, member.getPasswd());
 			pstmt.setString(2, member.getName());
-			pstmt.setString(3, member.getEmail());
-			pstmt.setString(4, member.getBlog());
-			pstmt.setString(5, member.getZipcode());
-			pstmt.setString(6, member.getAddress());
+			pstmt.setString(3, member.getPhone());
 			pstmt.setString(7, member.getId());
 			pstmt.executeUpdate();
 		}catch(Exception ex){
@@ -228,8 +194,9 @@ public class LogonDBBean
 		return x;
 	}
 	
+	
 	// 아이디 찾기
-	public LogonDataBean searchId(String name, String jumin1, String jumin2) throws Exception
+	public LogonDataBean searchId(String name, String phone) throws Exception
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -240,10 +207,9 @@ public class LogonDBBean
 		{
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select id from MEMBERS where name = ? " +
-					"and jumin1 =? and jumin2 = ?");
+					"and phone =? ");
 			pstmt.setString(1, name);
-			pstmt.setString(2, jumin1);
-			pstmt.setString(3, jumin2);
+			pstmt.setString(2, phone);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -262,7 +228,7 @@ public class LogonDBBean
 	}
 	
 	// 비밀번호 찾기
-	public LogonDataBean searchPw(String id, String jumin1, String jumin2) throws Exception
+	public LogonDataBean searchPw(String id, String phone) throws Exception
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -273,10 +239,9 @@ public class LogonDBBean
 		{
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select passwd from MEMBERS where id = ? " +
-					"and jumin1 =? and jumin2 = ?");
+					"and phone = ?");
 			pstmt.setString(1, id);
-			pstmt.setString(2, jumin1);
-			pstmt.setString(3, jumin2);
+			pstmt.setString(2, phone);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next())

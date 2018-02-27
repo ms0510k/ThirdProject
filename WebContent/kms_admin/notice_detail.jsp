@@ -14,23 +14,23 @@
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
-<h1>${vo.nottitle }</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=notice&email=<%=email%>">공지목록</a>
-<table border="1" width="600">
+<h1 style="margin-right: 430px;">${vo.nottitle }</h1>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=notice&email=<%=email%>" style="margin-right: 430px;">공지목록</a><br>
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 <tr>
-   <td>공지번호</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">공지번호</td>
    <td>${vo.notnum }</td>
 </tr>
 <tr>
-   <td>공지내용</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">공지내용</td>
    <td><textarea rows="5" cols="50" readonly="readonly">${vo.notcontent }</textarea></td>
 </tr>
 <tr>
-   <td>조회수</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">조회수</td>
    <td>${vo.nothit }</td>
 </tr>
 <tr>
-   <td>작성일</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">작성일</td>
    <td>${vo.notdate }</td>
 </tr>
 </table>

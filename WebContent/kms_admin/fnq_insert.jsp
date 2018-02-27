@@ -14,11 +14,11 @@
 	<h1>자주묻는 질문 등록</h1>
 <form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_insertOk">
 	제목<br>
-	<input type="text" name="fnqtitle"><br>
+	<input type="text" name="fnqtitle"><br><br>
 	질문<br>
-	<textarea rows="5" cols="50" name="fnqcontent"></textarea><br>
+	<textarea rows="5" cols="50" name="fnqcontent"></textarea><br><br>
 	답변<br>
-	<textarea rows="5" cols="50" name="fnqresult"></textarea><br>
+	<textarea rows="5" cols="50" name="fnqresult"></textarea><br><br>
 	<input type="submit" value="등록">
 </form>
 </div>

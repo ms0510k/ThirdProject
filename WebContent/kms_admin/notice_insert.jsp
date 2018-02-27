@@ -17,7 +17,7 @@
 	<h1>공지사항 등록</h1>
 <form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=notice_insertOk&email=<%=email%>">
 	제목<br>
-	<input type="text" name="nottitle"><br>
+	<input type="text" name="nottitle"><br><br>
 	내용<br>
 	<textarea rows="5" cols="50" name="notcontent"></textarea><br>
 	<input type="submit" value="등록">

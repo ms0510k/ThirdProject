@@ -122,36 +122,36 @@ function fn_press_han(obj)
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>회원가입</h1>
 <form method="post" action="<%=request.getContextPath() %>/member.do?cmd=insert_member" onsubmit="return fsubmit();">
-	<table border="1" width="600">
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 <tr>
-   <td>이름</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">이름</td>
    <td><input id="name" type="text" name="name"></td>
 </tr>
 <tr>
-   <td>아이디(이메일)</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">아이디(이메일)</td>
    <td><input type="text" name="email" onkeyup="idcheck()" onfocusout="Dcheck(value)" >
    <span id="idcheck" style="font-size: 12px; color: red"></span>
    </td>
 </tr>
 <tr>
-   <td>비밀번호</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">비밀번호</td>
    <td><input id="fpwd" type="password" name="pwd">
    	<span id="pwcheck1" style="font-size: 12px; color: red"></span>
    </td>
 </tr>
 <tr>
-   <td>비밀번호 확인</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">비밀번호 확인</td>
    <td><input id="lpwd" type="password" name="pwd" onfocusout="checkpasswd()">
    	<span id="pwcheck2" style="font-size: 12px; color: red"></span>
    </td>
    
 </tr>
 <tr>
-   <td>연락처</td> 
+   <td style="background-color:#FF8000 ; font-weight: bold;">연락처</td> 
    <td><input id="phone"  type="text" name="phone" placeholder="숫자만 입력해주세요" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);"></td>
 </tr>
 <tr>
-   <td>은행명</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">은행명</td>
    <td>
    		<select id="bank" name="bank">
 				  <option value="KB국민은행">KB국민은행</option>
@@ -165,10 +165,10 @@ function fn_press_han(obj)
    
 </tr>
 <tr>
-   <td>계좌번호(숫자만)</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">계좌번호(숫자만)</td>
    <td><input  id="account" type="text" name="account" placeholder="숫자만 입력해주세요"  onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);"></td>
 </tr>
-</table>
+</table><br>
 	<input type="submit" value="가입하기">
 	<input type = "button" value = "취소" onclick ="javascript:window.location='login_member.jsp'">
 </form>

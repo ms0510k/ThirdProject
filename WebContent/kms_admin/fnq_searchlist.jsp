@@ -14,10 +14,12 @@
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>자주묻는 질문</h1>
 <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_insert">자주묻는 질문 등록</a>
-<table border="1" width="500">
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
+<thead style="background-color:#FF8000 ;">
    <tr>
       <th>글번호</th><th>제목</th>
    </tr>
+   </thead>
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.fnqnum }</td>

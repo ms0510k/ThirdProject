@@ -17,11 +17,11 @@
 <h1>수정하기</h1>
 <form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=updateOk&email=<%=email%>">
    공지번호<br>
-   <input type="text" name="notnum" readonly="readonly" value="${vo.notnum }"><br>
+   <input type="text" name="notnum" readonly="readonly" value="${vo.notnum }"><br><br>
    제목<br>
-   <input type="text" name="nottitle" value="${vo.nottitle }"><br>
+   <input type="text" name="nottitle" value="${vo.nottitle }"><br><br>
    내용<br>
-   <textarea rows="5" cols="50" name="notcontent">${vo.notcontent }</textarea><br>
+   <textarea rows="5" cols="50" name="notcontent">${vo.notcontent }</textarea><br><br>
    <input type="submit" value="수정">
 </form>
 </div>

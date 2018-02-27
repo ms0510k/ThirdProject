@@ -11,19 +11,19 @@
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
-<h1>${vo.fnqtitle }</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list">자주묻는 질문 목록</a>
-<table border="1" width="600">
+<h1 style="margin-right: 430px;">${vo.fnqtitle }</h1>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list" style="margin-right: 350px;">자주묻는 질문 목록</a><br><br>
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 <tr>
-   <td>글번호</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">글번호</td>
    <td>${vo.fnqnum }</td>
 </tr>
 <tr>
-   <td>질문 내용</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">질문 내용</td>
    <td><textarea rows="5" cols="50" readonly="readonly">${vo.fnqcontent }</textarea></td>
 </tr>
 <tr>
-   <td>질문 답변</td>
+   <td style="background-color:#FF8000 ; font-weight: bold;">질문 답변</td>
    <td><textarea rows="5" cols="50" readonly="readonly">${vo.fnqresult }</textarea></td>
 </tr>
 </table>

@@ -13,10 +13,12 @@
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>승인 대기 목록</h1>
-<table border="1" width="500">
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
+<thead style="background-color:#FF8000 ;">
    <tr>
       <th>승인대기번호</th><th>아이디(이메일)</th><th>출금 금액</th><th>상태</th><th>날짜</th><th>승인</th>
    </tr>
+   </thead>
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.connum }</td>

@@ -19,13 +19,15 @@
 <%
 		if ("admin".equals(email)) {
 %>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=notice_insert&email=<%=email%>">공지 등록</a>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=notice_insert&email=<%=email%>" style="margin-right: 430px;">공지 등록</a><br>
 <%} %>
 <br>
-<table border="1" width="500">
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
+<thead style="background-color:#FF8000 ;">
    <tr>
       <th>글번호</th><th>제목</th><th>조회수</th><th>날짜</th>
    </tr>
+   </thead>
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.notnum }</td>

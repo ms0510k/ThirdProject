@@ -13,10 +13,12 @@
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>답변 대기중인 문의 목록</h1>
-<table border="1" width="500">
+<table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
+<thead style="background-color:#FF8000 ;">
    <tr>
       <th>글번호</th><th>제목</th><th>날짜</th>
    </tr>
+   </thead>
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.comnum }</td>

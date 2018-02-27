@@ -37,20 +37,19 @@ public class MemberDao {
 	}
 	
 	
-	//ex�ŷ����� �⺻�� �߰�
+	//ex 테이블에 초기 거래 내역넣기
 	public int exInsert(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con=DbcpBean.getConn();
-			String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,?,sysdate)";
+			String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);
 			pstmt.setString(2, "개설");
 			pstmt.setString(3, "krw");
 			pstmt.setInt(4, 0);
-			pstmt.setInt(5, 0);
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
@@ -65,7 +64,7 @@ public class MemberDao {
 		}
 	}
 	
-	//trade�ŷ����� �⺻�� �߰�
+	//trade테이블에 초기 거래값 넣기
 	public int tInsert(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

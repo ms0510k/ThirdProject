@@ -20,16 +20,10 @@ public class inoutController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
-		String context=request.getContextPath();//ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String context=request.getContextPath();
 		System.out.println(cmd);
 		if(cmd.equals("out")) {
 			out(request,response);
-		}else if(cmd.equals("chart")) {
-			now(request,response);
-		}else if(cmd.equals("trade")) {
-			trade(request,response);
-		}else if(cmd.equals("inout")) {
-			inout(request,response);
 		}
 	}
 	
@@ -40,7 +34,7 @@ public class inoutController extends HttpServlet{
 			throws ServletException, IOException {
 		int exnum = Integer.parseInt(request.getParameter("exnum"));
 		int memnum = Integer.parseInt(request.getParameter("memnum"));
-		moneyVO vo = new moneyVO(exnum, memnum, "¹Ì½ÂÀÎ");
+		moneyVO vo = new moneyVO(exnum, memnum, "ë¯¸ìŠ¹ì¸");
 		inoutDAO dao = new inoutDAO();
 		
 		int row = dao.out(vo);
@@ -49,19 +43,18 @@ public class inoutController extends HttpServlet{
 		request.setAttribute("page","first.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}else {
-		request.setAttribute("errMsg", "Á¤»óÀûÀ¸·Î ½ÂÀÎÃ³¸®°¡ µÇÁö ¾Ê¾Ò½À´Ï´Ù");
+		request.setAttribute("errMsg", "inoutdao out ë©”ì†Œë“œì—ì„œ ì—ëŸ¬ ë°œìƒ");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 		
 		
 		
-		/*request.setAttribute("page","first.jsp");
-		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);*/
+	
 	}
 	
 	
 	
-	private void now(HttpServletRequest request, HttpServletResponse response)
+	/*private void now(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String coin = request.getParameter("coin");
 		if(coin != null) {
@@ -80,30 +73,9 @@ public class inoutController extends HttpServlet{
 		request.setAttribute("page","pys_current/buysell.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
+	*/
 	
-	//ÀÔ±İ Ãâ±İÇÏ±â
-	private void inout(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		//1.DB¿¡¼­ °Å·¡³»¿ª ¾çÂÊ °¡Á®¿À±â
-		String email = (String)request.getParameter("email");
-		System.out.println("ÀÔÃâ±İ ÀÌ¸ŞÀÏ : "+email);
-		inoutDAO dao = new inoutDAO();
-		//¸ÕÀú ÀÌ¸ŞÀÏ·Î °í°´¹øÈ£ °¡Á®¿À±â
-		int memnum = dao.fintNum(email);
-		
-		//°¡Á®¿Â °í°´¹øÈ£·Î °í°´ °Å·¡³»¿ª °¡Á®¿À±â
-		ArrayList<exVO> eList= dao.exlist(memnum);
-		System.out.println("ex ¸®½ºÆ® Ã¼Å© : "+eList.toString());
-		ArrayList<tradeVO> tList = dao.tradelist(memnum);
-		System.out.println("trade ¸®½ºÆ® Ã¼Å© : "+tList.toString());
-		
-		//2.È¸¿ø¸ñ·ÏÀ» ½ºÄÚÇÁ¿¡ ´ã±â
-		request.setAttribute("eList",eList);
-		request.setAttribute("tList", tList);
-		//3.°á°ú¸¦ º¸¿©ÁÙ ºäÆäÀÌÁö·Î ÀÌµ¿
-		request.setAttribute("page","pys_current/in_out.jsp");
-		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
-	}
+	
 	
 }
 	

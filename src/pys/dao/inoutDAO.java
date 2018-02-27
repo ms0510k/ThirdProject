@@ -48,13 +48,14 @@ public class inoutDAO {
 		
 		//출금신청 관리자 money 테이블에 승인여부 결과 찍어서 보낸다
 		public int out(moneyVO vo) {
-			System.out.println("money에 찍힐 항목 : "+vo.toString());
+			System.out.println("money에 찍힐 항목1 : "+vo.toString());
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
 				con=DbcpBean.getConn();
 				
 				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate,?)";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, vo.getExnum());
 				pstmt.setInt(2, vo.getMemnum());

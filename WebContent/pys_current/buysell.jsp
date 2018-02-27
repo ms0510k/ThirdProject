@@ -114,7 +114,13 @@ default:
 }
 
 int memnum = (Integer)request.getAttribute("memnum");
+int kor = 0;
 ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
+for(int i = 0; i<eList.size(); i++){
+	if(eList.get(i).getExcoin().equals("krw")){
+		kor = eList.get(i).getExmoney();
+	}
+}
 System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 
 %>
@@ -156,30 +162,30 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 						</tr>
 						<tr>
 							<td>주문수량</td>
-							<td><input type="text" placeholder="매수 수량을 입력하세요"> <input
-								type="button" value="최대"></td>
+							<td><input type="text" placeholder="매수 수량을 입력하세요" id="buy_max"> <input
+								type="button" value="최대" onclick="order_buy()"></td>
 						</tr>
 						<tr>
 							<td>주문가격</td>
-							<td><input type="text" name="input_price"></td>
+							<td><input type="text" id="buy_input_price"></td>
 						</tr>
 
 						<tr>
 							<td>주문금액</td>
-							<td><label id="order_price">0</label><small
+							<td><label id="buy_order_price"></label><small
 								style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td>수수료 (약 1%)</td>
 							<!-- 수수료 small 안에 넘길때 받아온 값으로 설정하기 -->
-							<td><label id="order_commission">0</label><small
-								style="color: gray"> 이부분 처리해 주기 </small></td>
+							<td><label id="buy_order_commission"></label><small
+								style="color: gray"><%=coin_name %></small></td>
 						</tr>
 						<tr>
 							<td>총 매수량 (약)</td>
 							<!-- 매수량 small 안에 넘길때 받아온 값으로 설정하기 -->
-							<td><label id="order_amount">0</label><small
-								style="color: gray"> 이부분 처리해 주기 </small></td>
+							<td><label id="buy_order_amount"></label><small
+								style="color: gray"><%=coin_name %></small></td>
 						</tr>
 						<tr>
 							<td colspan="2"><input type="submit" value="지정가 매수"
@@ -338,24 +344,44 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 	/* 금액이 들어있는 라벨이 클릭이 되면 해당 금액을 주문 가격으로 넣는다 */
 	function gogo(id) {
 
-		var textMove = document.getElementsByName("input_price");
-		textMove[0].value = id.outerText;
-		textMove[1].value = id.outerText;
+		var textMove = document.getElementById("buy_input_price");
+		textMove.value = id.outerText;
 
 	}
 
-	window.onload = proc1;
+	window.onload = callFunction(); 
 
+	 function callFunction(){
+		 proc1();//표 전용
+		 proc2();//text전용
+	 
+	 }
+	
+	
+	 //오른쪽 표 전용 함수 1초마다 갱신시켜준다.
 	function proc1() {
 		try {
 			showData(); //표에보이게하기
 		} catch (e) {
 
 		} finally {
-			setTimeout("proc()", 1000); //10초후 재시작
+			setTimeout("proc1()", 1000); //1초후 재시작
 		}
 	}
 
+	 
+	 //왼쪽 텍스트 갱신전용 0.1초마다 텍스트를 보면서 갱신시켜준다.
+	function proc2() {
+		try {
+			showData_left(); //표에보이게하기
+		} catch (e) {
+
+		} finally {
+			setTimeout("proc2()", 100); //0.1초후 재시작
+		}
+	}
+	 
+	 
 	/* api에 있는 금액을 가져온다 */
 	function showData() {
 		/* 세션값으로 무엇으로 넘겨서 들어왔는지 봐서 해당 코인으로 현재창을 띄워준다 */
@@ -399,8 +425,61 @@ System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 
 	}
 
+	
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+	function showData_left(){
+		var buy1 = document.getElementById("buy_max");//수량
+		var buy2 = document.getElementById("buy_input_price");//개당가격
+		if(buy1.value.length != 0 && buy2.value.length != 0){
+			var buysum = buy1.value * removeComma(buy2.value);
+			var buy3 = document.getElementById("buy_order_price");//주문금액
+			var buy4 = document.getElementById("buy_order_commission");//수수료
+			var buy5 = document.getElementById("buy_order_amount");//총매수량
+			buy3.outerText = buysum.toFixed(0);
+			buy4.outerText = (buy1.value*0.01).toFixed(5);
+			buy5.outerText = (buy1.value-(buy1.value*0.01)).toFixed(5);
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	function order_buy() {
+		//채워야 되는위치
+		var order1 = document.getElementById("buy_max");
+		
+		//가격 가져오기
+		var amount = document.getElementById("buy_input_price");
+			if(amount.value.length == 0){
+				alert("먼저 가격을 입력해 주세요");
+				amount.focus();
+			}else{
+				var cal = <%=kor %>/removeComma(amount.value);
+				cal = cal.toFixed(5);
+				alert(cal);
+				order1.value = cal;
+				
+				
+			}
+	}
+	
+	
+	
 	/* 천원단위 콤마 찍어주는 로직 */
 	function numberWithCommas(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	//콤마 지워주는 로직
+	function removeComma(n) {
+		var txtNumber = '' + n;
+	    return txtNumber.replace(/(,)/g, "");
 	}
 </script>

@@ -172,7 +172,6 @@
 			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">정산</a>
 
 			</li>
-
 				<!-- 정산부분 -->
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">관리자님 환영합니다</a>
 

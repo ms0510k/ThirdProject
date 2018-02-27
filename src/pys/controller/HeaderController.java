@@ -24,7 +24,7 @@ public class HeaderController extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
 		String context=request.getContextPath();
-		System.out.println(cmd);
+		System.out.println("커맨드는 : "+cmd);
 		if(cmd.equals("main")) {
 			main(request,response);
 		}else if(cmd.equals("chart")) {

@@ -54,11 +54,12 @@ public class inoutDAO {
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate)";
+				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate,?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, vo.getExnum());
 				pstmt.setInt(2, vo.getMemnum());
 				pstmt.setString(3, vo.getConfirm());
+				pstmt.setInt(4, vo.getOutmoney());
 				return pstmt.executeUpdate();
 			} catch (SQLException se) {
 				System.out.println(se.getMessage());

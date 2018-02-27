@@ -1,3 +1,5 @@
+<%@page import="pys.vo.exVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -80,6 +82,16 @@ ul.tabs li.current {
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>
+
+<%
+String coin = (String)request.getAttribute("coin");
+int memnum = (Integer)request.getAttribute("memnum");
+ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
+
+
+
+%>
+
 
 
 <div id="content1">

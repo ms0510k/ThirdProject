@@ -10,6 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import pys.dao.inoutDAO;
+import pys.vo.exVO;
 
 @WebServlet("/marketprice.do")
 public class MarketPriceController extends HttpServlet{
@@ -19,9 +23,9 @@ public class MarketPriceController extends HttpServlet{
 		String cmd=request.getParameter("cmd");
 		String context=request.getContextPath();
 		//System.out.println("context:" + context);
-		if(cmd.equals("btc")) {
-			btc(request,response);
-		}else if(cmd.equals("eth")) {
+		if(cmd.equals("buy")) {
+			buy(request,response);
+		}else if(cmd.equals("sell")) {
 			insert(request,response);
 		}else if(cmd.equals("xrp")) {
 			list(request,response);
@@ -33,11 +37,25 @@ public class MarketPriceController extends HttpServlet{
 			//updateOk(request,response);
 		}
 	}
-	private void btc(HttpServletRequest request, HttpServletResponse response)
+	private void buy(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//4. ������� ����ϱ� ���� ���������� �̵��ϱ�
-		request.setAttribute("coin","btc");
-		request.getRequestDispatcher("/Main.jsp").forward(request, response);
+		String coin=request.getParameter("coin");
+		String email = (String) request.getSession().getAttribute("email");
+
+		//먼저 이메일주소로 고객번호 찾기
+		inoutDAO dao = new inoutDAO();
+		int memnum = dao.fintNum(email);
+		
+		//해당 고객의 거래내역 같이 뿌려주기
+		ArrayList<exVO> eList = dao.exlist(memnum);
+		
+		
+		//받은 고객번호와 코인정보를 buysell.jsp 로 보내기!
+		request.setAttribute("coin",coin);
+		request.setAttribute("memnum", memnum);
+		request.setAttribute("eList", eList);
+		request.setAttribute("page","pys_current/buysell.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
 	

@@ -336,7 +336,9 @@
 </style>
 
 
-
+<%
+		String email = (String) session.getAttribute("email");
+	%>
 
 
 
@@ -354,6 +356,10 @@
 				<th>구매 / 판매</th>
 			</tr>
 		</thead>
+		
+		
+		<!-- 로그인 했을때랑 안했을때랑 나누어서 처리하기  1.로그인 했을때-->
+		<%if(email != null){ %>
 		<tbody>
 			<tr data-coin="btc" title="비트코인 (BTC) 정보를 확인하시려면 클릭하세요">
 				<td class="click left_l"><img src="img/비트코인.jpg"
@@ -364,8 +370,8 @@
 					data-sorting="0"></strong></td>
 
 
-				<td><a href="javascript:;" class="btn btn_coin_buy"
-					data-type="1" data-coin="BTC"> 구매</a><a href="javascript:;"
+				<td><a href="marketprice.do?cmd=buy&coin=btc" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 구매</a><a href="marketprice.do?cmd=sell&coin=btc"
 					class="btn btn_coin_sell" data-type="2" data-coin="BTC"> 판매</a></td>
 			</tr>
 			<tr data-coin="eth" title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
@@ -454,6 +460,119 @@
 			</tr>
 
 		</tbody>
+		
+		
+		
+		<!-- 분기처리2 로그인 안했을 때 -->
+		<%}else{ %>
+		
+		
+		<tbody>
+			<tr data-coin="btc" title="비트코인 (BTC) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/비트코인.jpg"
+					onclick="gogo1('btc')"><a onclick="gogo1('btc')">비트코인</a></td>
+				<td><strong id="btc_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="btc_change"></strong>
+				<td><strong id="btc_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="BTC"> 판매</a></td>
+			</tr>
+			<tr data-coin="eth" title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
+				<td><img src="img/이더리움.jpg" onclick="gogo1('eth')"><a
+					onclick="gogo1('eth')">이더리움</a></td>
+				<td><strong id="eth_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="eth_change"></strong>
+				<td><strong id="eth_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="ETH"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="ETH"> 판매</a></td>
+			</tr>
+
+			<tr data-coin="xrp" title="리플 (XRP) 정보를 확인하시려면 클릭하세요">
+				<td><img src="img/리플.jpg" onclick="gogo1('xrp')"><a
+					onclick="gogo1('xrp')">리플</a></td>
+				<td><strong id="xrp_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="xrp_change"></strong>
+				<td><strong id="xrp_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="XRP"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="XRP"> 판매</a></td>
+			</tr>
+			<tr data-coin="bch" title="비트코인 골드 (BTG) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/비트코인캐쉬.jpg"
+					onclick="gogo1('bch')"><a onclick="gogo1('bch')">비트코인골드</a></td>
+				<td><strong id="bch_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="bch_change"></strong>
+				<td><strong id="bch_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="BCH"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="BCH"> 판매</a></td>
+			</tr>
+
+			<tr data-coin="qtum" title="퀀텀 (QTUM) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/퀀텀.jpg"
+					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">퀀텀</a></td>
+				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="qtum_change"></strong>
+				<td><strong id="qtum_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
+			</tr>
+
+
+
+
+			<tr data-coin="msc" title="민수코인 (msc) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/민수코인.jpg"
+					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민수코인</a></td>
+				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="qtum_change"></strong>
+				<td><strong id="qtum_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
+			</tr>
+
+
+			<tr data-coin="sunc" title="민승코인 (sunc) 정보를 확인하시려면 클릭하세요">
+				<td class="click left_l"><img src="img/민승코인.jpg"
+					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민승코인</a></td>
+				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
+				<td><strong id="qtum_change"></strong>
+				<td><strong id="qtum_amount" class="sort_change"
+					data-sorting="0"></strong></td>
+
+
+				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:gogo()"
+					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
+			</tr>
+
+		</tbody>
+		
+		
+		
+		
+		
+		<%} %>
 	</table>
 
 </div>
@@ -489,6 +608,13 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="js/billboard.js"></script>
 <script>
+
+//세션에 아이디 값이 존재하지 않는 경우 로그인 페이지로 보낸다
+function gogo() {
+	alert("로그인이 필요합니다.");
+	location.href="/ThirdProject/kms_member/member_login.jsp";
+}
+
 
 
 	var minsu = 100000000000;

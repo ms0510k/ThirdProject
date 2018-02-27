@@ -34,7 +34,9 @@ public class inoutController extends HttpServlet{
 			throws ServletException, IOException {
 		int exnum = Integer.parseInt(request.getParameter("exnum"));
 		int memnum = Integer.parseInt(request.getParameter("memnum"));
-		moneyVO vo = new moneyVO(exnum, memnum, "미승인");
+		int outmoney = Integer.parseInt(request.getParameter("output_price"));
+		
+		moneyVO vo = new moneyVO(exnum, memnum, outmoney,"미승인");
 		inoutDAO dao = new inoutDAO();
 		
 		int row = dao.out(vo);

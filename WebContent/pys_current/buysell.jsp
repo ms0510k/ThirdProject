@@ -89,7 +89,6 @@ int memnum = (Integer)request.getAttribute("memnum");
 ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
 
 
-
 %>
 
 

@@ -119,7 +119,7 @@
 			
 			<!-- 로그인부분 -->
 			<li><a
-				href="<%=request.getContextPath()%>/kms_member/member_login.jsp"
+				href="<%=request.getContextPath()%>/lyj_member/login_member.jsp"
 				style="padding-left: 200px; padding-right: 50px;">로그인</a></li>
 			<!-- 회원가입부분 -->
 			<li><a

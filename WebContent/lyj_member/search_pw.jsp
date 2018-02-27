@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<% request.setCharacterEncoding("euc-kr"); %>
+<% request.setCharacterEncoding("utf-8"); %>
 
 <%
 

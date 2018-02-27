@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>아이디찾기</title>
 </head>
-<% request.setCharacterEncoding("euc-kr"); %>
+<% request.setCharacterEncoding("utf-8"); %>
 
 <%
 	String name = request.getParameter("name");

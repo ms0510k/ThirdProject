@@ -34,8 +34,14 @@ public class inoutController extends HttpServlet{
 		int memnum = Integer.parseInt(request.getParameter("memnum"));
 		int outmoney = Integer.parseInt(request.getParameter("output_price"));
 		
+		System.out.println("추금할떄 다찍힘? exnum:"+exnum + ", memnum :"+memnum+", moneyt: "+outmoney);
+		
 		moneyVO vo = new moneyVO(exnum, memnum, outmoney,"미승인");
 		inoutDAO dao = new inoutDAO();
+		//출금신청을 하는 고객이 이미 출금신청 내역이 있고 미승인상태라면 출금안되게 처리
+		int result = dao.outflag(memnum);
+		
+		System.out.println("결과는 : "+result);
 		
 		int row = dao.out(vo);
 		

@@ -31,11 +31,13 @@
       </td>
 </tr>
 <tr height = "30">
-      <td colspan = "2" align = "middle" >
+      <td colspan = "2" align = "center" >
             <input type = "button" value = "뒤로가기" onclick ="javascript:window.location='login_member.jsp'">
             <input type = "submit" value = "찾기">
       </td>
 </tr>
+</table>
 </form>
+</div>
 </body>
-</html></x>
+</html>

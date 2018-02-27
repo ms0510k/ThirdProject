@@ -54,13 +54,13 @@ public class inoutDAO {
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate,?)";
+				String sql = "insert into money values(money_seq.nextval,?,?,?,?,sysdate)";
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, vo.getExnum());
 				pstmt.setInt(2, vo.getMemnum());
-				pstmt.setString(3, vo.getConfirm());
-				pstmt.setInt(4, vo.getOutmoney());
+				pstmt.setInt(3, vo.getOutmoney());
+				pstmt.setString(4, vo.getConfirm());
 				return pstmt.executeUpdate();
 			} catch (SQLException se) {
 				System.out.println(se.getMessage());
@@ -134,6 +134,32 @@ public class inoutDAO {
 	}
 	
 	
+	
+	//출금이력있나 그리고 상탠튼?
+	public int outflag(int memnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con=DbcpBean.getConn();
+			
+			String sql = "select * from (select * from money where memnum = ?) where confirm = '미승인'";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, memnum);
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	
 	
 	

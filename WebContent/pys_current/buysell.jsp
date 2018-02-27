@@ -87,11 +87,29 @@ ul.tabs li.current {
 String coin = (String)request.getAttribute("coin");
 int coin_amount = 0;
 String type = (String)request.getAttribute("type");
+int kor = 0;
+
+
+ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
+for(int i = 0; i<eList.size(); i++){
+	if(eList.get(i).getExcoin().equals("krw")){
+		kor = eList.get(i).getExmoney();
+	}
+	if(eList.get(i).getExcoin().equals(coin)){
+		coin_amount = eList.get(i).getExmoney();
+	}
+}
+
+
 if(coin == null){
 	coin = "BTC";
 }else{
 	coin = coin.toUpperCase();
 }
+
+
+
+
 
 String coin_name = "";
 switch (coin) {
@@ -115,18 +133,11 @@ default:
 }
 
 int memnum = (Integer)request.getAttribute("memnum");
-int kor = 0;
 
 
-ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
-for(int i = 0; i<eList.size(); i++){
-	if(eList.get(i).getExcoin().equals("krw")){
-		kor = eList.get(i).getExmoney();
-	}
-	if(eList.get(i).getExcoin().equals(coin_name)){
-		coin_amount = eList.get(i).getExmoney();
-	}
-}
+
+
+
 System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+memnum+", 수량 : "+coin_amount);
 
 %>
@@ -178,19 +189,19 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 						<tr>
 							<td>주문금액</td>
-							<td><label id="buy_order_price"></label><small
+							<td><div id="buy_order_price"></div><small
 								style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td>수수료 (약 1%)</td>
 							<!-- 수수료 small 안에 넘길때 받아온 값으로 설정하기 -->
-							<td><label id="buy_order_commission"></label><small
+							<td><div id="buy_order_commission"></div><small
 								style="color: gray"><%=coin_name %></small></td>
 						</tr>
 						<tr>
 							<td>총 매수량 (약)</td>
 							<!-- 매수량 small 안에 넘길때 받아온 값으로 설정하기 -->
-							<td><label id="buy_order_amount"></label><small
+							<td><div id="buy_order_amount"></div><small
 								style="color: gray"><%=coin_name %></small></td>
 						</tr>
 						<tr>
@@ -234,12 +245,12 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 						<tr>
 							<td>수수료 (약 1%)</td>
-							<td><label id="sell_order_commission"></label><small
+							<td><div id="sell_order_commission"></div><small
 								style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td>총 매도금액 (약)</td>
-							<td><label id="sell_order_amount"></label><small
+							<td><div id="sell_order_amount"></div><small
 								style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
@@ -451,16 +462,17 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 			var buy3 = document.getElementById("buy_order_price");//주문금액
 			var buy4 = document.getElementById("buy_order_commission");//수수료
 			var buy5 = document.getElementById("buy_order_amount");//총매수량
-			buy3.outerText = buysum.toFixed(0);
-			buy4.outerText = (buy1.value*0.01).toFixed(5);
-			buy5.outerText = (buy1.value-(buy1.value*0.01)).toFixed(5);
+			buy3.innerHTML = buysum.toFixed(0);
+			buy4.innerHTML = (buy1.value*0.01).toFixed(5);
+			buy5.innerHTML = (buy1.value-(buy1.value*0.01)).toFixed(5);
 		}
 		if(sell1.value.length != 0 && sell2.value.length != 0){
+			
 			var sellsum = sell1.value * removeComma(sell2.value);
-			var buy4 = document.getElementById("buy_order_commission");//수수료
-			var buy5 = document.getElementById("buy_order_amount");//총매도액
-			buy4.outerText = (sellsum*0.01).toFixed(0);
-			buy5.outerText = (sellsum-(sellsum*0.01)).toFixed(0);
+			var sell4 = document.getElementById("sell_order_commission");//수수료
+			var sell5 = document.getElementById("sell_order_amount");//총매도액
+			sell4.innerHTML = (sellsum*0.01).toFixed(0);
+			sell5.innerHTML = (sellsum-(sellsum*0.01)).toFixed(0);
 		}
 		
 		
@@ -499,10 +511,7 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 				alert("먼저 가격을 입력해 주세요");
 				amount.focus();
 			}else{
-				var cal = <%=kor %>/removeComma(amount.value);
-				cal = cal.toFixed(5);
-				alert(cal);
-				order1.value = cal;
+				order1.value = <%=coin_amount %>;
 				
 				
 			}

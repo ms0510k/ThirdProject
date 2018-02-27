@@ -91,6 +91,7 @@ public class inoutDAO {
 				String excoin = rs.getString(3);
 				int exmoney = rs.getInt(4);
 				exVO vo = new exVO(exnum, memnum1, excoin, exmoney);
+				System.out.println(vo.toString());
 				list.add(vo);
 			}
 			return list;

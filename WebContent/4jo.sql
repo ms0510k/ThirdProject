@@ -33,10 +33,8 @@ CREATE TABLE exchange
 (
 	exnum number NOT NULL,
 	memnum number NOT NULL,
-	buysell varchar2(10),
 	excoin varchar2(15),
 	exmoney number,
-	exdate date,
 	PRIMARY KEY (exnum)
 );
 
@@ -79,8 +77,8 @@ CREATE TABLE money
 	connum number NOT NULL,
 	exnum number NOT NULL,
 	memnum number NOT NULL,
-	confirm varchar2(10),
 	outmoney number,
+	confirm varchar2(10),
 	condate date,
 	PRIMARY KEY (connum)
 );

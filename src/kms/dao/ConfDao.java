@@ -37,7 +37,7 @@ public class ConfDao {
 		}
 	}
 	public ArrayList<ConfVo> list(int startRow, int endRow) {
-		String sql = "select * from(select aa.*,rownum rnum from(select c.connum,m.email,c.confirm,c.condate from money c, member m where c.memnum=m.memnum and confirm='미승인' order by connum)aa)where rnum>=? and rnum<=?";
+		String sql = "select * from(select aa.*,rownum rnum from(select c.connum,m.email,c.outmoney,c.confirm,c.condate from money c, member m where c.memnum=m.memnum and confirm='미승인' order by connum)aa)where rnum>=? and rnum<=?";
 		PreparedStatement pstmt = null;
 		Connection con=null;
 		ResultSet rs = null;

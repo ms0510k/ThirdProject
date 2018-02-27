@@ -148,7 +148,7 @@ function fn_press_han(obj)
 <tr>
    <td>은행명</td>
    <td>
-   		<select id="bnak">
+   		<select id="bank" name="bank">
 				  <option value="KB국민은행">KB국민은행</option>
 					<option value="신한은행">신한은행</option>
 					<option value="우리은행">우리은행</option>

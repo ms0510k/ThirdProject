@@ -12,12 +12,14 @@
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>로그인</h1>
-<form method="post" action="<%=request.getContextPath() %>/member.do?cmd=member_login">
+<form method="post" action="<%=request.getContextPath() %>/member.do?cmd=login_member">
 	아이디:<input type="text" name="email" value="${param.email }"><br>
 	비밀번호:<input type="password" name="pwd" value="${param.pwd }"><br>
 	<div>${errMsg }</div>
-	<input type="submit" value="로그인">
-	<input type="button" value="아이디/비밀번호찾기">
+	<input type="submit" value="로그인" >
+	<input type="button" value="회원가입"onclick ="javascript:window.location='insert_member.jsp'">
+	<input type="button" value="ID찾기" onclick ="javascript:window.location='search_idForm.jsp'">
+	<input type="button" value="PW찾기"onclick ="javascript:window.location='search_id.jsp'">
 </form>
 </div>
 </body>

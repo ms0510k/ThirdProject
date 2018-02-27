@@ -12,23 +12,28 @@ function fsubmit() {
     // 문제) 아이디, 패스워드, 이름이 채워지지 않은 경우는 submit 차단
     
     if(!document.getElementById("name").value){
-    	alert("이름을  확인해 주세요")
+    	alert("이름을  입력해주세요")
     	document.getElementById("name").focus();
     	return false; 
-    }
-    if(!checkpasswd()) {
-        alert("패스워드 를 확인해 주세요");
-        document.getElementById("fpwd").focus();
-        return false;   // submit 진행 차단    
     }
     if(!idcheck()) {
         alert("아이디 를 확인해 주세요");
         document.getElementById("idcheck").focus();
         return false;   // submit 진행 차단    
     }
+    if(!checkpasswd()) {
+        alert("패스워드 를 확인해 주세요");
+        document.getElementById("fpwd").focus();
+        return false;   // submit 진행 차단    
+    }
     if(!document.getElementById("phone").value){
-    	alert("휴대전화 번호를  확인해 주세요")
+    	alert("휴대전화 번호를 입력해 주세요")
     	document.getElementById("phone").focus();
+    	return false; 
+    }   
+    if(!document.getElementById("account").value){
+    	alert("계좌번호를 입력해주세요")
+    	document.getElementById("account").focus();
     	return false; 
     }   
 }
@@ -116,7 +121,7 @@ function fn_press_han(obj)
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>회원가입</h1>
-<form method="post" action="<%=request.getContextPath() %>/member.do?cmd=member_insert" onsubmit="return fsubmit();">
+<form method="post" action="<%=request.getContextPath() %>/member.do?cmd=insert_member" onsubmit="return fsubmit();">
 	<table border="1" width="600">
 <tr>
    <td>이름</td>

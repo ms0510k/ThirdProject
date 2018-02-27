@@ -37,7 +37,7 @@ public class MemberDao {
 	}
 	
 	
-	//ex�ŷ����� �⺻�� �߰�
+	//ex 테이블에 초기 거래 내역넣기
 	public int exInsert(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -64,7 +64,7 @@ public class MemberDao {
 		}
 	}
 	
-	//trade�ŷ����� �⺻�� �߰�
+	//trade테이블에 초기 거래값 넣기
 	public int tInsert(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

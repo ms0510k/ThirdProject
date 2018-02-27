@@ -17,7 +17,7 @@ public class MarketPriceController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
-		String context=request.getContextPath();//ÄÁÅØ½ºÆ®¸í ¾ò¾î¿À±â
+		String context=request.getContextPath();
 		//System.out.println("context:" + context);
 		if(cmd.equals("btc")) {
 			btc(request,response);
@@ -35,7 +35,7 @@ public class MarketPriceController extends HttpServlet{
 	}
 	private void btc(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//4. °á°ú°ªÀ» Ãâ·ÂÇÏ±â À§ÇÑ ºäÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â
+		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï±ï¿½
 		request.setAttribute("coin","btc");
 		request.getRequestDispatcher("/Main.jsp").forward(request, response);
 	}
@@ -71,12 +71,12 @@ public class MarketPriceController extends HttpServlet{
 	}
 	private void list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//1.DB¿¡¼­ ÀüÃ¼ È¸¿ø¸ñ·Ï ¾ò¾î¿À±â
+		//1.DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	/*	MyUsersDao dao=new MyUsersDao();
 		ArrayList<test.beans.MyUsers> mlist=dao.listAll();
-		//2.È¸¿ø¸ñ·ÏÀ» ½ºÄÚÇÁ¿¡ ´ã±â
+		//2.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		request.setAttribute("mlist",mlist);
-		//3.°á°ú¸¦ º¸¿©ÁÙ ºäÆäÀÌÁö·Î ÀÌµ¿
+		//3.ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 */		RequestDispatcher rd=request.getRequestDispatcher("/users/list.jsp");
 		rd.forward(request, response);
 	}
@@ -91,13 +91,13 @@ public class MarketPriceController extends HttpServlet{
 		test.beans.MyUsers user=new test.beans.MyUsers(id, pwd, name, email, phone);
 		MyUsersDao dao=new MyUsersDao();
 		int n=dao.insert(user);
-		//3. °á°ú°ª ½ºÄÚÇÁ¿¡ ´ã±â
+		//3. ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(n>0) {
 			request.setAttribute("result","success");
 		}else {
 			request.setAttribute("result","fail");
 		}*/
-		//4. °á°ú°ªÀ» Ãâ·ÂÇÏ±â À§ÇÑ ºäÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â
+		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï±ï¿½
 		RequestDispatcher rd=request.getRequestDispatcher("/users/result.jsp");
 		rd.forward(request, response);
 	}

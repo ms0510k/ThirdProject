@@ -42,37 +42,13 @@ public class inoutDAO {
 	
 	
 	
-	//ex�ŷ����� �⺻�� �߰�
-		public int exInsert(int memnum) {
-			System.out.println(memnum+"�� ex �߰��ϱ�");
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			try {
-				con=DbcpBean.getConn();
-				String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";
-				
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, memnum);
-				pstmt.setString(2, "개설");
-				pstmt.setString(3, "krw");
-				pstmt.setInt(4, 0);
-				return pstmt.executeUpdate();
-			} catch (SQLException se) {
-				System.out.println(se.getMessage());
-				return -1;
-			} finally {
-				try {
-					con.close();
-					pstmt.close();
-					}catch(SQLException se) {
-						System.out.println(se.getMessage());
-					}
-			}
-		}
+
 		
-		//money ���̺� ��� ��û ������
+		
+		
+		//출금신청 관리자 money 테이블에 승인여부 결과 찍어서 보낸다
 		public int out(moneyVO vo) {
-			System.out.println("out���� vo ���� : "+vo.toString());
+			System.out.println("money에 찍힐 항목 : "+vo.toString());
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {

@@ -31,7 +31,7 @@ public class inoutDAO {
 				return -1;
 			}
 		} catch (SQLException se) {
-			System.out.println(se.getMessage());
+			se.printStackTrace();
 			return -1;
 		} finally {
 		DbcpBean.closeconn(con, ps, rs);
@@ -76,8 +76,8 @@ public class inoutDAO {
 		}
 	public ArrayList<exVO> exlist(int memnum) {
 		String sql = "select * from exchange where memnum = ?";
-		PreparedStatement ps = null;
 		Connection con=null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			con=DbcpBean.getConn();
@@ -88,16 +88,14 @@ public class inoutDAO {
 			while (rs.next()) {
 				int exnum = rs.getInt(1);
 				int memnum1 = rs.getInt(2);
-				String buysell = rs.getString(3);
-				String excoin = rs.getString(4);
-				int exmoney = rs.getInt(5);
-				String exdate = rs.getString(6);
-				exVO vo = new exVO(exnum, memnum1, buysell, excoin, exmoney, exdate);
+				String excoin = rs.getString(3);
+				int exmoney = rs.getInt(4);
+				exVO vo = new exVO(exnum, memnum1, excoin, exmoney);
 				list.add(vo);
 			}
 			return list;
 		} catch (SQLException se) {
-			System.out.println(se.getMessage());
+			se.printStackTrace();
 			return null;
 		} finally {
 		DbcpBean.closeconn(con, ps, rs);

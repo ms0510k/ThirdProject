@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pys.dao.inoutDAO;
-import pys.vo.exVO;
 import pys.vo.moneyVO;
-import pys.vo.tradeVO;
 
 @WebServlet("/inout.do")
 public class inoutController extends HttpServlet{

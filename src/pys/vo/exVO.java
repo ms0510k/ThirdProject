@@ -1,18 +1,10 @@
 package pys.vo;
 
 public class exVO {
-	//거래번호
 	private int exnum;
-	//고객번호
 	private int memnum;
-	//거래타입
-	private String buysell;
-	//코인이름
 	private String excoin;
-	//코인 현재 누적금액
 	private int exmoney;
-	//코인 거래일자
-	private String exdate;
 	
 	
 	
@@ -20,13 +12,11 @@ public class exVO {
 	public exVO() {
 	}
 
-	public exVO(int exnum, int memnum, String buysell, String excoin, int exmoney, String exdate) {
+	public exVO(int exnum, int memnum,  String excoin, int exmoney) {
 		this.exnum = exnum;
 		this.memnum = memnum;
-		this.buysell = buysell;
 		this.excoin = excoin;
 		this.exmoney = exmoney;
-		this.exdate = exdate;
 	}
 
 	public int getExnum() {
@@ -45,13 +35,7 @@ public class exVO {
 		this.memnum = memnum;
 	}
 
-	public String getBuysell() {
-		return buysell;
-	}
-
-	public void setBuysell(String buysell) {
-		this.buysell = buysell;
-	}
+	
 
 	public String getExcoin() {
 		return excoin;
@@ -69,18 +53,12 @@ public class exVO {
 		this.exmoney = exmoney;
 	}
 
-	public String getExdate() {
-		return exdate;
-	}
-
-	public void setExdate(String exdate) {
-		this.exdate = exdate;
-	}
+	
 
 	@Override
 	public String toString() {
-		return "exVO [exnum=" + exnum + ", memnum=" + memnum + ", buysell=" + buysell + ", excoin=" + excoin
-				+ ", exmoney=" + exmoney + ", exdate=" + exdate + "]";
+		return "exVO [exnum=" + exnum + ", memnum=" + memnum + ", excoin=" + excoin
+				+ ", exmoney=" + exmoney + ", ]";
 	}
 	
 	

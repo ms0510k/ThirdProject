@@ -101,7 +101,7 @@ exVO vo = null;
 for(int i = 0; i<eList.size(); i++){
 	if(eList.get(i).getExcoin().equals("krw")){
 		kor = eList.get(i).getExmoney();
-		vo = new exVO(eList.get(i).getExnum(),eList.get(i).getMemnum(),eList.get(i).getBuysell(),eList.get(i).getExcoin(),eList.get(i).getExmoney(),eList.get(i).getExdate());
+		vo = new exVO(eList.get(i).getExnum(),eList.get(i).getMemnum(),eList.get(i).getExcoin(),eList.get(i).getExmoney());
 	}
 }
 %>

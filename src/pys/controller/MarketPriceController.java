@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import pys.dao.inoutDAO;
 import pys.vo.exVO;
@@ -42,10 +41,12 @@ public class MarketPriceController extends HttpServlet{
 		String coin=request.getParameter("coin");
 		String email = (String) request.getSession().getAttribute("email");
 
+		System.out.println("차트에서 클릭시 넘어오는 이멜 : "+email);
+		
 		//먼저 이메일주소로 고객번호 찾기
 		inoutDAO dao = new inoutDAO();
 		int memnum = dao.fintNum(email);
-		
+		System.out.println("고객번호는 " +memnum);
 		//해당 고객의 거래내역 같이 뿌려주기
 		ArrayList<exVO> eList = dao.exlist(memnum);
 		

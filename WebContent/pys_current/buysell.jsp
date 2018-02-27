@@ -85,9 +85,14 @@ ul.tabs li.current {
 
 <%
 String coin = (String)request.getAttribute("coin");
+if(coin == null){
+	coin = "BTC";
+}else{
+	coin = coin.toUpperCase();
+}
 int memnum = (Integer)request.getAttribute("memnum");
 ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
-
+System.out.println("넘어오는지체크 코인 : "+coin+", 번호 : "+memnum);
 
 %>
 
@@ -228,8 +233,7 @@ ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
 
 
 			<tr>
-
-				<th>1비트코인 당 가격</th>
+				<th>1<%=coin %> 당 가격</th>
 
 			</tr>
 			<tr>
@@ -326,7 +330,10 @@ ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
 
 		$.get('https://api.bithumb.com/public/ticker/ALL', function(data) {
 			/* 코인 관련 실시간 업데이트 부분 */
-			var btc_now = data['data']['BTC'].closing_price;
+			
+			
+			
+			var btc_now = data['data']['<%=coin%>'].closing_price;
 
 			var now_price = document.getElementById("now_price");
 
@@ -334,11 +341,27 @@ ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
 
 			/* 만약 비트코인이라면 1만 단위로 찍어준다 */
 			var money = 50000;
+			if(btc_now>1000000){
 			for (var i = 0; i < 11; i++) {
 				var labels = document.getElementById("label" + i);
 				labels.innerHTML = numberWithCommas(btc_now - money);
 				money -= 10000;
 			}
+		}else if(btc_now>10000){
+			money = 5000;
+			for (var i = 0; i < 11; i++) {
+				var labels = document.getElementById("label" + i);
+				labels.innerHTML = numberWithCommas(btc_now - money);
+				money -= 1000;
+			}
+		}else{
+			money = 500;
+			for (var i = 0; i < 11; i++) {
+				var labels = document.getElementById("label" + i);
+				labels.innerHTML = numberWithCommas(btc_now - money);
+				money -= 100;
+			}
+		}
 
 		});
 

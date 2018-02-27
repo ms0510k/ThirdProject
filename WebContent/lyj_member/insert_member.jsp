@@ -74,7 +74,7 @@ function Dcheck(value){
 	if(checkEmail ){
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=callback;
-		xhr.open('get','kms_member/member_idcheck.jsp?email='+value,true);
+		xhr.open('get','../kms_member/member_idcheck.jsp?email='+value,true);
 		xhr.send();
 	}
 }
@@ -82,9 +82,13 @@ function callback(){
 	var span=document.getElementById("idcheck");
 	
 	if(xhr.readyState==4 && xhr.status==200){
-		span.innerHTML= "사용 가능 합니다.";
-	}else{
-		span.innerHTML= "중복된 메일 주소 입니다.";
+		var xml=xhr.responseXML;
+		var using=xml.getElementsByTagName("using")[0].firstChild.nodeValue;
+		if(eval(using)==true){
+			span.innerHTML="사용중인 아이디입니다.";
+		}else{
+			span.innerHTML="사용가능한 아이디입니다.";
+		}
 	}
 }
 /* 숫자만 입력받기 */

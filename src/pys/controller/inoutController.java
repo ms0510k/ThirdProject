@@ -40,7 +40,7 @@ public class inoutController extends HttpServlet{
 			throws ServletException, IOException {
 		int exnum = Integer.parseInt(request.getParameter("exnum"));
 		int memnum = Integer.parseInt(request.getParameter("memnum"));
-		moneyVO vo = new moneyVO(exnum, memnum, "¹Ì½ÂÀÎ");
+		moneyVO vo = new moneyVO(exnum, memnum, "ë¯¸ìŠ¹ì¸");
 		inoutDAO dao = new inoutDAO();
 		
 		int row = dao.out(vo);
@@ -49,7 +49,7 @@ public class inoutController extends HttpServlet{
 		request.setAttribute("page","first.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}else {
-		request.setAttribute("errMsg", "Á¤»óÀûÀ¸·Î ½ÂÀÎÃ³¸®°¡ µÇÁö ¾Ê¾Ò½À´Ï´Ù");
+		request.setAttribute("errMsg", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 		
@@ -81,26 +81,26 @@ public class inoutController extends HttpServlet{
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
-	//ÀÔ±İ Ãâ±İÇÏ±â
+	//ï¿½Ô±ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	private void inout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//1.DB¿¡¼­ °Å·¡³»¿ª ¾çÂÊ °¡Á®¿À±â
+		//1.DBï¿½ï¿½ï¿½ï¿½ ï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String email = (String)request.getParameter("email");
-		System.out.println("ÀÔÃâ±İ ÀÌ¸ŞÀÏ : "+email);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ : "+email);
 		inoutDAO dao = new inoutDAO();
-		//¸ÕÀú ÀÌ¸ŞÀÏ·Î °í°´¹øÈ£ °¡Á®¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int memnum = dao.fintNum(email);
 		
-		//°¡Á®¿Â °í°´¹øÈ£·Î °í°´ °Å·¡³»¿ª °¡Á®¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ ï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ArrayList<exVO> eList= dao.exlist(memnum);
-		System.out.println("ex ¸®½ºÆ® Ã¼Å© : "+eList.toString());
+		System.out.println("ex ï¿½ï¿½ï¿½ï¿½Æ® Ã¼Å© : "+eList.toString());
 		ArrayList<tradeVO> tList = dao.tradelist(memnum);
-		System.out.println("trade ¸®½ºÆ® Ã¼Å© : "+tList.toString());
+		System.out.println("trade ï¿½ï¿½ï¿½ï¿½Æ® Ã¼Å© : "+tList.toString());
 		
-		//2.È¸¿ø¸ñ·ÏÀ» ½ºÄÚÇÁ¿¡ ´ã±â
+		//2.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		request.setAttribute("eList",eList);
 		request.setAttribute("tList", tList);
-		//3.°á°ú¸¦ º¸¿©ÁÙ ºäÆäÀÌÁö·Î ÀÌµ¿
+		//3.ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		request.setAttribute("page","pys_current/in_out.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}

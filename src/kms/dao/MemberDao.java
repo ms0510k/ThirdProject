@@ -43,14 +43,13 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		try {
 			con=DbcpBean.getConn();
-			String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,?,sysdate)";
+			String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);
 			pstmt.setString(2, "개설");
 			pstmt.setString(3, "krw");
 			pstmt.setInt(4, 0);
-			pstmt.setInt(5, 0);
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());

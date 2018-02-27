@@ -96,14 +96,6 @@ public class inoutDAO {
 					}
 			}
 		}
-		
-	
-	
-	
-	
-	
-	
-	
 	public ArrayList<exVO> exlist(int memnum) {
 		String sql = "select * from exchange where memnum = ?";
 		PreparedStatement ps = null;

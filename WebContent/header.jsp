@@ -123,7 +123,7 @@
 				style="padding-left: 200px; padding-right: 50px;">로그인</a></li>
 			<!-- 회원가입부분 -->
 			<li><a
-				href="<%=request.getContextPath()%>/kms_member/member_insert.jsp"
+				href="<%=request.getContextPath()%>/lyj_member/insert_member.jsp"
 				style="padding-left: 50px; padding-right: 50px;">회원가입</a></li>
 			<%
 				}

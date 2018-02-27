@@ -69,7 +69,7 @@ function idcheck(){
 		checkEmail = false;
 		return false;
 	}else{
-		span.innerHTML = "" ;
+		span.innerHTML = " " ;
 		checkEmail = true;
 		return true;
 	}	

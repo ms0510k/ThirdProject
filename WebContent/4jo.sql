@@ -80,6 +80,7 @@ CREATE TABLE money
 	exnum number NOT NULL,
 	memnum number NOT NULL,
 	confirm varchar2(10),
+	outmoney number,
 	condate date,
 	PRIMARY KEY (connum)
 );

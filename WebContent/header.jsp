@@ -162,7 +162,7 @@
 
 			</li>
 			<!-- 출금신청대기자부분 -->
-			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">출금
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=conf_list" style="padding-left: 30px; padding-right: 50px;">출금
 					신청 대기자</a></li>
 			<!-- 탈퇴신청대기자부분 -->
 			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">탈퇴신청대기자</a>

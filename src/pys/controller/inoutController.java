@@ -43,7 +43,9 @@ public class inoutController extends HttpServlet{
 		request.setAttribute("page","first.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}else {
+
 		request.setAttribute("errMsg", "inoutdao out 메소드에서 에러 발생");
+
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 		
@@ -75,7 +77,7 @@ public class inoutController extends HttpServlet{
 	}
 	*/
 	
-	
+
 	
 }
 	

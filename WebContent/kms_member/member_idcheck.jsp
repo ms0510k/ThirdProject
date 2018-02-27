@@ -14,7 +14,7 @@
 	boolean using=false;
 	try {
 		con=DbcpBean.getConn();
-		String sql="select * from member where id=?";
+		String sql="select * from member where email=?";
 		pstmt=con.prepareStatement(sql);
 		pstmt.setString(1,email);
 		rs=pstmt.executeQuery();

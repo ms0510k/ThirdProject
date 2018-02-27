@@ -37,19 +37,37 @@ public class MemberDao {
 	}
 	
 	
-	//ex�ŷ����� �⺻�� �߰�
+	//ex 테이블에 초기 거래 내역넣기
 	public int exInsert(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con=DbcpBean.getConn();
-			String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";
+			/*String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";*/
+			
+			String sql = "INSERT ALL "+ 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'krw',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'btc',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'eth',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'xrp',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'btg',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'qtum',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'msc',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'sunc',0)"+
+					"select * from DUAL";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);
-			pstmt.setString(2, "개설");
-			pstmt.setString(3, "krw");
-			pstmt.setInt(4, 0);
+			pstmt.setInt(2, memnum);
+			pstmt.setInt(3, memnum);
+			pstmt.setInt(4, memnum);
+			pstmt.setInt(5, memnum);
+			pstmt.setInt(6, memnum);
+			pstmt.setInt(7, memnum);
+			pstmt.setInt(8, memnum);
+	
+			
+			
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
@@ -64,7 +82,7 @@ public class MemberDao {
 		}
 	}
 	
-	//trade�ŷ����� �⺻�� �߰�
+	//trade테이블에 초기 거래값 넣기
 	public int tInsert(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

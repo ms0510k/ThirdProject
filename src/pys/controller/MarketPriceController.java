@@ -11,18 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pys.dao.inoutDAO;
+import pys.vo.exVO;
+
 @WebServlet("/marketprice.do")
 public class MarketPriceController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
-		String context=request.getContextPath();//ÄÁÅØ½ºÆ®¸í ¾ò¾î¿À±â
+		String context=request.getContextPath();
 		//System.out.println("context:" + context);
-		if(cmd.equals("btc")) {
-			btc(request,response);
-		}else if(cmd.equals("eth")) {
-			insert(request,response);
+		if(cmd.equals("buy")) {
+			buy(request,response);
+		}else if(cmd.equals("sell")) {
+			sell(request,response);
 		}else if(cmd.equals("xrp")) {
 			list(request,response);
 		}else if(cmd.equals("btg")) {
@@ -33,13 +36,56 @@ public class MarketPriceController extends HttpServlet{
 			//updateOk(request,response);
 		}
 	}
-	private void btc(HttpServletRequest request, HttpServletResponse response)
+	private void sell(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//4. °á°ú°ªÀ» Ãâ·ÂÇÏ±â À§ÇÑ ºäÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â
-		request.setAttribute("coin","btc");
-		request.getRequestDispatcher("/Main.jsp").forward(request, response);
+		String coin=request.getParameter("coin");
+		String email = (String) request.getSession().getAttribute("email");
+
+		System.out.println("ì°¨íŠ¸ì—ì„œ í´ë¦­ì‹œ ë„˜ì–´ì˜¤ëŠ” ì´ë©œ : "+email);
+		
+		//ë¨¼ì € ì´ë©”ì¼ì£¼ì†Œë¡œ ê³ ê°ë²ˆí˜¸ ì°¾ê¸°
+		inoutDAO dao = new inoutDAO();
+		int memnum = dao.fintNum(email);
+		System.out.println("ê³ ê°ë²ˆí˜¸ëŠ” " +memnum);
+		//í•´ë‹¹ ê³ ê°ì˜ ê±°ë˜ë‚´ì—­ ê°™ì´ ë¿Œë ¤ì£¼ê¸°
+		ArrayList<exVO> eList = dao.exlist(memnum);
+		
+		
+		
+		//ë°›ì€ ê³ ê°ë²ˆí˜¸ì™€ ì½”ì¸ì •ë³´ë¥¼ buysell.jsp ë¡œ ë³´ë‚´ê¸°!
+		request.setAttribute("type","sell");
+		request.setAttribute("coin",coin);
+		request.setAttribute("memnum", memnum);
+		request.setAttribute("eList", eList);
+		request.setAttribute("page","pys_current/buysell.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
+	
+	
+	private void buy(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String coin=request.getParameter("coin");
+		String email = (String) request.getSession().getAttribute("email");
+
+		System.out.println("ì°¨íŠ¸ì—ì„œ í´ë¦­ì‹œ ë„˜ì–´ì˜¤ëŠ” ì´ë©œ : "+email);
+		
+		//ë¨¼ì € ì´ë©”ì¼ì£¼ì†Œë¡œ ê³ ê°ë²ˆí˜¸ ì°¾ê¸°
+		inoutDAO dao = new inoutDAO();
+		int memnum = dao.fintNum(email);
+		System.out.println("ê³ ê°ë²ˆí˜¸ëŠ” " +memnum);
+		//í•´ë‹¹ ê³ ê°ì˜ ê±°ë˜ë‚´ì—­ ê°™ì´ ë¿Œë ¤ì£¼ê¸°
+		ArrayList<exVO> eList = dao.exlist(memnum);
+		
+		
+		//ë°›ì€ ê³ ê°ë²ˆí˜¸ì™€ ì½”ì¸ì •ë³´ë¥¼ buysell.jsp ë¡œ ë³´ë‚´ê¸°!
+		request.setAttribute("type","buy");
+		request.setAttribute("coin",coin);
+		request.setAttribute("memnum", memnum);
+		request.setAttribute("eList", eList);
+		request.setAttribute("page","pys_current/buysell.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
 	
 	
 	
@@ -71,12 +117,12 @@ public class MarketPriceController extends HttpServlet{
 	}
 	private void list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//1.DB¿¡¼­ ÀüÃ¼ È¸¿ø¸ñ·Ï ¾ò¾î¿À±â
+		//1.DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	/*	MyUsersDao dao=new MyUsersDao();
 		ArrayList<test.beans.MyUsers> mlist=dao.listAll();
-		//2.È¸¿ø¸ñ·ÏÀ» ½ºÄÚÇÁ¿¡ ´ã±â
+		//2.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		request.setAttribute("mlist",mlist);
-		//3.°á°ú¸¦ º¸¿©ÁÙ ºäÆäÀÌÁö·Î ÀÌµ¿
+		//3.ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 */		RequestDispatcher rd=request.getRequestDispatcher("/users/list.jsp");
 		rd.forward(request, response);
 	}
@@ -91,13 +137,13 @@ public class MarketPriceController extends HttpServlet{
 		test.beans.MyUsers user=new test.beans.MyUsers(id, pwd, name, email, phone);
 		MyUsersDao dao=new MyUsersDao();
 		int n=dao.insert(user);
-		//3. °á°ú°ª ½ºÄÚÇÁ¿¡ ´ã±â
+		//3. ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(n>0) {
 			request.setAttribute("result","success");
 		}else {
 			request.setAttribute("result","fail");
 		}*/
-		//4. °á°ú°ªÀ» Ãâ·ÂÇÏ±â À§ÇÑ ºäÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â
+		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï±ï¿½
 		RequestDispatcher rd=request.getRequestDispatcher("/users/result.jsp");
 		rd.forward(request, response);
 	}

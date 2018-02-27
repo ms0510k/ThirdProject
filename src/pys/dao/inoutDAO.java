@@ -31,7 +31,7 @@ public class inoutDAO {
 				return -1;
 			}
 		} catch (SQLException se) {
-			System.out.println(se.getMessage());
+			se.printStackTrace();
 			return -1;
 		} finally {
 		DbcpBean.closeconn(con, ps, rs);
@@ -42,47 +42,25 @@ public class inoutDAO {
 	
 	
 	
-	//ex�ŷ����� �⺻�� �߰�
-		public int exInsert(int memnum) {
-			System.out.println(memnum+"�� ex �߰��ϱ�");
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			try {
-				con=DbcpBean.getConn();
-				String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";
-				
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, memnum);
-				pstmt.setString(2, "개설");
-				pstmt.setString(3, "krw");
-				pstmt.setInt(4, 0);
-				return pstmt.executeUpdate();
-			} catch (SQLException se) {
-				System.out.println(se.getMessage());
-				return -1;
-			} finally {
-				try {
-					con.close();
-					pstmt.close();
-					}catch(SQLException se) {
-						System.out.println(se.getMessage());
-					}
-			}
-		}
+
 		
-		//money ���̺� ��� ��û ������
+		
+		
+		//출금신청 관리자 money 테이블에 승인여부 결과 찍어서 보낸다
 		public int out(moneyVO vo) {
-			System.out.println("out���� vo ���� : "+vo.toString());
+			System.out.println("money에 찍힐 항목1 : "+vo.toString());
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate)";
+				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate,?)";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, vo.getExnum());
 				pstmt.setInt(2, vo.getMemnum());
 				pstmt.setString(3, vo.getConfirm());
+				pstmt.setInt(4, vo.getOutmoney());
 				return pstmt.executeUpdate();
 			} catch (SQLException se) {
 				System.out.println(se.getMessage());
@@ -96,18 +74,10 @@ public class inoutDAO {
 					}
 			}
 		}
-		
-	
-	
-	
-	
-	
-	
-	
 	public ArrayList<exVO> exlist(int memnum) {
 		String sql = "select * from exchange where memnum = ?";
-		PreparedStatement ps = null;
 		Connection con=null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			con=DbcpBean.getConn();
@@ -118,16 +88,14 @@ public class inoutDAO {
 			while (rs.next()) {
 				int exnum = rs.getInt(1);
 				int memnum1 = rs.getInt(2);
-				String buysell = rs.getString(3);
-				String excoin = rs.getString(4);
-				int exmoney = rs.getInt(5);
-				String exdate = rs.getString(6);
-				exVO vo = new exVO(exnum, memnum1, buysell, excoin, exmoney, exdate);
+				String excoin = rs.getString(3);
+				int exmoney = rs.getInt(4);
+				exVO vo = new exVO(exnum, memnum1, excoin, exmoney);
 				list.add(vo);
 			}
 			return list;
 		} catch (SQLException se) {
-			System.out.println(se.getMessage());
+			se.printStackTrace();
 			return null;
 		} finally {
 		DbcpBean.closeconn(con, ps, rs);

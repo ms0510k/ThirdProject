@@ -33,10 +33,8 @@ CREATE TABLE exchange
 (
 	exnum number NOT NULL,
 	memnum number NOT NULL,
-	buysell varchar2(10),
 	excoin varchar2(15),
 	exmoney number,
-	exdate date,
 	PRIMARY KEY (exnum)
 );
 
@@ -79,6 +77,7 @@ CREATE TABLE money
 	connum number NOT NULL,
 	exnum number NOT NULL,
 	memnum number NOT NULL,
+	outmoney number,
 	confirm varchar2(10),
 	condate date,
 	PRIMARY KEY (connum)
@@ -153,4 +152,9 @@ ALTER TABLE fees
 ;
 
 
+CREATE FUNCTION ex_seq RETURN NUMBER IS
+BEGIN
+  RETURN exchange_seq.nextval;
+END;
+/
 

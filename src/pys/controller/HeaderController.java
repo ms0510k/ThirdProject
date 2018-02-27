@@ -23,8 +23,8 @@ public class HeaderController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
-		String context=request.getContextPath();//ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		System.out.println(cmd);
+		String context=request.getContextPath();
+		System.out.println("ì»¤ë§¨ë“œëŠ” : "+cmd);
 		if(cmd.equals("main")) {
 			main(request,response);
 		}else if(cmd.equals("chart")) {
@@ -67,26 +67,17 @@ public class HeaderController extends HttpServlet{
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
-	//ÀÔ±Ý Ãâ±ÝÇÏ±â
 	private void inout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//1.DB¿¡¼­ °Å·¡³»¿ª ¾çÂÊ °¡Á®¿À±â
 		String email = (String)request.getParameter("email");
-		System.out.println("ÀÔÃâ±Ý ÀÌ¸ÞÀÏ : "+email);
 		inoutDAO dao = new inoutDAO();
-		//¸ÕÀú ÀÌ¸ÞÀÏ·Î °í°´¹øÈ£ °¡Á®¿À±â
 		int memnum = dao.fintNum(email);
 		
-		//°¡Á®¿Â °í°´¹øÈ£·Î °í°´ °Å·¡³»¿ª °¡Á®¿À±â
 		ArrayList<exVO> eList= dao.exlist(memnum);
-		System.out.println("ex ¸®½ºÆ® Ã¼Å© : "+eList.toString());
 		ArrayList<tradeVO> tList = dao.tradelist(memnum);
-		System.out.println("trade ¸®½ºÆ® Ã¼Å© : "+tList.toString());
 		
-		//2.È¸¿ø¸ñ·ÏÀ» ½ºÄÚÇÁ¿¡ ´ã±â
 		request.setAttribute("eList",eList);
 		request.setAttribute("tList", tList);
-		//3.°á°ú¸¦ º¸¿©ÁÙ ºäÆäÀÌÁö·Î ÀÌµ¿
 		request.setAttribute("page","pys_current/in_out.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}

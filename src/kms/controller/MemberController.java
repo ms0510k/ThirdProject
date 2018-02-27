@@ -78,12 +78,13 @@ public class MemberController extends HttpServlet {
 		if(n==1) {
 			HttpSession session=request.getSession();
 			session.setAttribute("email", email);
-			response.sendRedirect(request.getContextPath()+"/header.jsp");
+			request.setAttribute("page","first.jsp");
+			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}else if(n==0){
-			request.setAttribute("errMsg", "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� ��由쎈땲�떎.");
+			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
 			request.getRequestDispatcher("/kms_member/member_login.jsp").forward(request, response);
 		}else {
-			request.setAttribute("errMsg", "�삤瑜섎줈 �씤�빐 濡쒓렇�씤�떎�뙣");
+			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
 			request.getRequestDispatcher("/kms_member/member_login.jsp").forward(request, response);
 		}
 	}

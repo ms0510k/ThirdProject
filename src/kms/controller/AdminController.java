@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kms.dao.CompDao;
+import kms.dao.ConfDao;
 import kms.dao.FnqDao;
 import kms.dao.NoticeDao;
 import kms.vo.CompVo;
+import kms.vo.ConfVo;
 import kms.vo.FnqVo;
 import kms.vo.NoticeVo;
 @WebServlet("/admin.do")
@@ -63,8 +65,49 @@ public class AdminController extends HttpServlet{
     	  fnq_insert(request,response);
       }else if(cmd.equals("fnq_search")) {
     	  fnq_search(request,response);
+      }else if(cmd.equals("conf_list")) {
+    	  conf_list(request,response);
+      }else if(cmd.equals("conf_ok")) {
+    	  conf_ok(request,response);
       }
    }
+   private void conf_ok(HttpServletRequest request, HttpServletResponse response)
+   			throws ServletException, IOException {
+	   int connum=Integer.parseInt(request.getParameter("connum"));
+	   int outmoney=Integer.parseInt(request.getParameter("outmoney"));
+	   ConfDao dao=new ConfDao();
+	   int n=dao.confirm(connum, outmoney);
+	   if(n>0) {
+	      RequestDispatcher rd=request.getRequestDispatcher("/admin.do?cmd=conf_list");
+	      rd.forward(request, response);
+	   }else {
+	      request.setAttribute("result","fail");
+	   }
+   }
+   private void conf_list(HttpServletRequest request, HttpServletResponse response)
+	         throws ServletException, IOException {
+	      String spageNum=request.getParameter("pageNum");
+	      int pageNum=1;
+	      if(spageNum!=null) {
+	         pageNum=Integer.parseInt(spageNum);
+	      }
+	      int startRow=(pageNum-1)*5+1;
+	      int endRow=startRow+4;
+	      ConfDao dao=new ConfDao();
+	      ArrayList<ConfVo> list=dao.list(startRow, endRow);
+	      int pageCount=(int)Math.ceil(dao.getCount()/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_admin/conf_list.jsp").forward(request, response);
+	   }
    private void fnq_search(HttpServletRequest request, HttpServletResponse response)
 	         throws ServletException, IOException {
 	   String search=request.getParameter("search");

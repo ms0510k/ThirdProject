@@ -69,7 +69,7 @@
 				if (email != null) {
 			%>
 			<!-- 거래하기부분 -->
-			<li><a href="<%=request.getContextPath()%>/header.do?cmd=trade" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
+			<li><a href="<%=request.getContextPath()%>/marketprice.do?cmd=buy&coin=btc" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
 			<!-- 마이페이지 부분 -->
 			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
@@ -90,7 +90,7 @@
 			<li><a href="javascript:gogo()"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
-					<li><a href="javascript:gogo()">익금/출금</a></li>
+					<li><a href="javascript:gogo()">입금/출금</a></li>
 					<li><a href="javascript:gogo()">문의내역</a></li>
 					<li><a href="javascript:gogo()">회원정보 수정</a></li>
 					<li><a href="javascript:gogo()">회원 탈퇴</a></li>
@@ -111,7 +111,7 @@
 			<li><a
 				href="<%=request.getContextPath()%>/member.do?cmd=member_logout"
 				style="padding-left: 200px; padding-right: 50px;">로그아웃</a></li>
-			<li><a style="padding-left: 50px; padding-right: 50px;"><%=email%>님 환영합니다.</a></li>
+			<li><a style="padding-left: 20px; padding-right: 20px;"><%=email%>님 환영합니다.</a></li>
 			
 			<%
 				} else {
@@ -123,7 +123,7 @@
 				style="padding-left: 200px; padding-right: 50px;">로그인</a></li>
 			<!-- 회원가입부분 -->
 			<li><a
-				href="<%=request.getContextPath()%>/kms_member/member_insert.jsp"
+				href="<%=request.getContextPath()%>/lyj_member/insert_member.jsp"
 				style="padding-left: 50px; padding-right: 50px;">회원가입</a></li>
 			<%
 				}
@@ -138,6 +138,7 @@
 	<%
 		} else {
 	%>
+
 
 	<div class='zeta-menu-bar' style="margin-bottom: 50px;">
 		<ul class="zeta-menu">
@@ -161,7 +162,7 @@
 
 			</li>
 			<!-- 출금신청대기자부분 -->
-			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">출금
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=conf_list" style="padding-left: 30px; padding-right: 50px;">출금
 					신청 대기자</a></li>
 			<!-- 탈퇴신청대기자부분 -->
 			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">탈퇴신청대기자</a>
@@ -171,8 +172,6 @@
 			<li><a href="#" style="padding-left: 30px; padding-right: 50px;">정산</a>
 
 			</li>
-
-
 				<!-- 정산부분 -->
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">관리자님 환영합니다</a>
 

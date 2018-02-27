@@ -98,6 +98,7 @@ ArrayList<exVO>  eList= (ArrayList<exVO>)request.getAttribute("eList");
 ArrayList<tradeVO>  tList= (ArrayList<tradeVO>)request.getAttribute("tList");
 int kor = 0;
 exVO vo = null;
+
 for(int i = 0; i<eList.size(); i++){
 	if(eList.get(i).getExcoin().equals("krw")){
 		kor = eList.get(i).getExmoney();

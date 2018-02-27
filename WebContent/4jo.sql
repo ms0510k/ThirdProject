@@ -152,4 +152,9 @@ ALTER TABLE fees
 ;
 
 
+CREATE FUNCTION ex_seq RETURN NUMBER IS
+BEGIN
+  RETURN exchange_seq.nextval;
+END;
+/
 

@@ -46,14 +46,15 @@ public class MemberDao {
 			/*String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";*/
 			
 			String sql = "INSERT ALL "+ 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'krw',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'btc',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'eth',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'xrp',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'btg',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'qtum',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'msc',0)" + 
-					"      INTO exchange VALUES (exchange_seq.nextval,?,'sunc',0)";
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'krw',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'btc',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'eth',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'xrp',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'btg',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'qtum',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'msc',0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney) VALUES (ex_seq,?,'sunc',0)"+
+					"select * from DUAL";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);

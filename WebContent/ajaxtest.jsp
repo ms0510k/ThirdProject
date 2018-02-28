@@ -16,6 +16,7 @@ function showData() {
 
 
 
+
 function proc() {
 	try {
 		showData(); //표에보이게하기

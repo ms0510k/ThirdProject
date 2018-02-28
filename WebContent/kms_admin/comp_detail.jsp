@@ -12,7 +12,7 @@
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1 style="margin-right: 430px;">${vo.comtitle }</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=notice" style="margin-right: 430px;">공지목록</a>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=comp" style="margin-right: 400px;">문의답변 목록</a>
 <table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 <tr>
    <td style="background-color:#FF8000 ; font-weight: bold;">문의번호</td>

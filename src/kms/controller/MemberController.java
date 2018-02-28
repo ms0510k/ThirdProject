@@ -1,6 +1,5 @@
 package kms.controller;
 
-import java.awt.im.spi.InputMethodDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import kms.dao.CompDao;
 import kms.dao.MemberDao;
-import kms.dao.NoticeDao;
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
-import kms.vo.NoticeVo;
 import pys.dao.inoutDAO;
 
 @WebServlet("/member.do")
@@ -34,7 +31,29 @@ public class MemberController extends HttpServlet {
 	    	  member_logout(request,response);
 	      }else if(cmd.equals("mypage_comp")) {
 	    	  mypage_comp(request,response);
+	      }else if(cmd.equals("comp_insert")){
+	    	  String email=request.getParameter("email");
+	          response.sendRedirect(request.getContextPath()+"/kms_mypage/comp_insert.jsp?email="+email);
+	      }else if(cmd.equals("comp_insertOk")) {
+	    	  comp_insertOk(request,response);
+	      }else if(cmd.equals("comp_list")) {
+	    	  comp_list(request,response);
 	      }
+	}
+	private void comp_list(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		
+	}
+	private void comp_insertOk(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		String email=request.getParameter("email");
+		 String comtitle=request.getParameter("comtitle");
+	      String comcontent=request.getParameter("comcontent");
+	      MemberDao dao=new MemberDao();      
+	      int n=dao.comp_insertOk(email,comtitle,comcontent);
+	      if(n>0) {
+	    	  response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
+	       }else {
+	          request.setAttribute("result","fail");
+	       }
 	}
 	private void mypage_comp(HttpServletRequest request, HttpServletResponse response)
 	         throws ServletException, IOException {

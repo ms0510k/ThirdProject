@@ -6,9 +6,46 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import kms.vo.MemberVo;
+import pys.dao.inoutDAO;
 import test.dbcp.DbcpBean;
 
 public class MemberDao {
+	public int comp_insertOk(String email, String comtitle, String comcontent) {
+		Connection con = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
+		int memnum=0;
+		try {
+			con=DbcpBean.getConn();
+			String sql1 = "select memnum from member where email=?";
+			String sql2 = "insert into complaine values(complaine_seq.nextval,?,?,?,?,'답변대기중',0,sysdate)";
+			pstmt1 = con.prepareStatement(sql1);
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt1.setString(1, email);
+			rs=pstmt1.executeQuery();
+			if(rs.next()) {
+				memnum=rs.getInt("memnum");
+			}
+			pstmt2.setInt(1, memnum);
+			pstmt2.setString(2, comtitle);
+			pstmt2.setString(3, email);
+			pstmt2.setString(4, comcontent);
+			pstmt2.executeQuery();
+			return 1;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt1.close();
+				pstmt2.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public int insert(MemberVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

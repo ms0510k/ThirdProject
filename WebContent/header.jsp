@@ -76,7 +76,7 @@
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
 					<li><a href="<%=request.getContextPath()%>/header.do?cmd=inout&email=<%=email%>">입금/출금</a></li>
-					<li><a href="#">문의내역</a></li>
+					<li><a href="<%=request.getContextPath()%>/member.do?cmd=comp_list&email=<%=email%>">문의내역</a></li>
 					<li><a href="#">회원정보 수정</a></li>
 					<li><a href="#">회원 탈퇴</a></li>
 				</ul></li>
@@ -107,7 +107,7 @@
 			<%
 				if (email != null) {
 			%>
-					<li><a href="<%=request.getContextPath()%>/admin.do?cmd=comp">1:1문의</a></li>
+					<li><a href="<%=request.getContextPath()%>/member.do?cmd=comp_insert&email=<%=email%>">1:1문의</a></li>
 					<%
 				} else {
 			%>

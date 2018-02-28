@@ -12,6 +12,7 @@
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>로그인</h1>
+
 <form method="post" action="<%=request.getContextPath() %>/member.do?cmd=member_login">
 	아 이 디 :  <input type="text" name="email" value="${param.email }"><br><br>
 	비밀번호 : <input type="password" name="pwd" value="${param.pwd }"><br>

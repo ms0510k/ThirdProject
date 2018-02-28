@@ -51,6 +51,12 @@
 	width: 100px;
 }
 
+tbody { 
+    height:80em;  
+    overflow:scroll;
+                }
+
+
 #rTable td {
 	color: #FF8000;
 }
@@ -209,13 +215,7 @@ ul.tabs li.current {
 			<!-- 입출금내역 탭 설정하기 -->
 			<div id="tab-3" class="tab-content">
 
-				<select id="tradeList" style="width: 100px; height: 50px;">
-					<option value="all">전체</option>
-					<option value="input">입금</option>
-					<option value="output">출금</option>
-
-
-				</select> <br>
+				 <br>
 				<table border="1" width="500" class="t"
 					style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 					<thead style="background-color: #FF8000;">
@@ -226,11 +226,13 @@ ul.tabs li.current {
 						</tr>
 					</thead>
 					<c:forEach var="vo" items="${tList }">
+					<tbody>
 						<tr>
 							<td>${vo.tradetype }</td>
 							<td>${vo.tprice }</td>
 							<td>${vo.tdate }</td>
 						</tr>
+						</tbody>
 					</c:forEach>
 				</table>
 
@@ -374,4 +376,10 @@ ul.tabs li.current {
 		}
 
 	}
+	
+	
+	
+	
+	
+	
 </script>

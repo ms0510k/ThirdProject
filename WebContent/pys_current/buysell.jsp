@@ -274,17 +274,12 @@ ul.tabs li.current {
 			<div id="tab-3" class="tab-content"
 				style="background-color: #FFE3EE;">
 
-				<form method="post"action="<%=request.getContextPath()%>/buysell.do?cmd=sell"
-					name="fr" onsubmit="return check1()">
-					<table style="border-spacing: 40px;">
+				
 				
 
 
 
-					</table>
-
-				</form>
-
+					
 
 
 			</div>
@@ -573,6 +568,21 @@ ul.tabs li.current {
 	//////////////////////////////////////////////
 	//매수하기 체크하기 값을 비교하면서 정상이면 ok 비정상적 거래면 no 보내기
 	function check() {
+		
+		var order1 = document.getElementById("buy_max");
+		if (order1.value.length == 0) {
+			alert("먼저 수량을 입력해 주세요");
+			order1.focus();
+			return false;
+		}
+		//가격 가져오기
+		var amount = document.getElementById("buy_input_price");
+		if (amount.value.length == 0) {
+			alert("먼저 가격을 입력해 주세요");
+			amount.focus();
+			return false;
+		}
+		
 			var kor = <%=kor%>;
 			var price = document.getElementById("buy_order_price").innerHTML;
 			
@@ -603,6 +613,22 @@ ul.tabs li.current {
 	
 	//매도 체크부분
 	function check1() {
+		
+		var order1 = document.getElementById("sell_max");
+		if (order1.value.length == 0) {
+			alert("먼저 수량을 입력해 주세요");
+			order1.focus();
+			return false;
+		}
+		//가격 가져오기
+		var amount = document.getElementById("sell_input_price");
+		if (amount.value.length == 0) {
+			alert("먼저 가격을 입력해 주세요");
+			amount.focus();
+			return false;
+		}
+		
+		
 		var coin_amount = <%=coin_amount%>;
 		var price = document.getElementById("sell_max").value;
 		

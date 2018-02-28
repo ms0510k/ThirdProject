@@ -48,6 +48,7 @@ public class MemberDao {
 					System.out.println(se.getMessage());
 				}
 		}
+		
 	}
 	public int getCount(String email) {
 		Connection con = null;

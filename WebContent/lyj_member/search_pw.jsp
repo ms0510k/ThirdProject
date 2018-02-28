@@ -39,7 +39,7 @@
 %>
 			아이디 또는 전화번호가 틀렸습니다.<p>
 			<input type = "button" value = "다시 입력하기" onclick = 
-				"javascript:window.location='searchPwForm.jsp'">
+				"javascript:window.location='search_pwForm.jsp'">
 <%
 		}
 %>

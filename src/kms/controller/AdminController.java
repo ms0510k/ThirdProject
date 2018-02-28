@@ -61,7 +61,8 @@ public class AdminController extends HttpServlet{
       }else if(cmd.equals("fnq_updateOk")) {
     	  fnq_updateOk(request,response);
       }else if(cmd.equals("fnq_insert")) {
-    	  response.sendRedirect(context+"/kms_admin/fnq_insert.jsp");
+    	  String email=request.getParameter("email");
+    	  response.sendRedirect(context+"/kms_admin/fnq_insert.jsp?email="+email);
       }else if(cmd.equals("fnq_insertOk")) {
     	  fnq_insert(request,response);
       }else if(cmd.equals("fnq_search")) {

@@ -21,8 +21,8 @@ CREATE TABLE complaine
 	memnum number NOT NULL,
 	comtitle varchar2(15) NOT NULL,
 	email varchar2(15) NOT NULL,
-	comcontent varchar2(20),
-	comresult varchar2(20),
+	comcontent varchar2(50),
+	comresult varchar2(50),
 	comhit number,
 	comdate date,
 	PRIMARY KEY (comnum)
@@ -38,6 +38,7 @@ CREATE TABLE exchange
 	PRIMARY KEY (exnum)
 );
 
+
 CREATE TABLE fees
 (
 	feenum number NOT NULL,
@@ -52,8 +53,8 @@ CREATE TABLE fnq
 (
 	fnqnum number NOT NULL,
 	fnqtitle varchar2(15),
-	fnqcontent varchar2(15),
-	fnqresult varchar2(20),
+	fnqcontent varchar2(50),
+	fnqresult varchar2(50),
 	PRIMARY KEY (fnqnum)
 );
 
@@ -66,7 +67,7 @@ CREATE TABLE member
 	pwd varchar2(15) NOT NULL,
 	phone varchar2(15) NOT NULL,
 	bank varchar2(15) NOT NULL,
-	account number NOT NULL,
+	account number(15) NOT NULL,
 	memdate date,
 	PRIMARY KEY (memnum)
 );
@@ -88,7 +89,7 @@ CREATE TABLE notice
 (
 	notnum number NOT NULL,
 	nottitle varchar2(15) NOT NULL,
-	notcontent varchar2(20) NOT NULL,
+	notcontent varchar2(50) NOT NULL,
 	nothit number,
 	notdate date,
 	PRIMARY KEY (notnum)
@@ -100,9 +101,10 @@ CREATE TABLE thistory
 	tdate date,
 	coin varchar2(10),
 	coinamount number(7,0),
-	tradetype varchar2(10),
+	tradetype varchar2(20),
 	tprice  number(10,0),
-	memnum number NOT NULL
+	memnum number NOT NULL,
+	fee number
 );
 
 
@@ -127,7 +129,6 @@ ALTER TABLE complaine
 ;
 
 
-
 ALTER TABLE exchange
 	ADD FOREIGN KEY (memnum)
 	REFERENCES member (memnum) on delete cascade
@@ -150,7 +151,6 @@ ALTER TABLE fees
 	ADD FOREIGN KEY (connum)
 	REFERENCES money (connum) on delete cascade
 ;
-
 
 CREATE FUNCTION ex_seq RETURN NUMBER IS
 BEGIN

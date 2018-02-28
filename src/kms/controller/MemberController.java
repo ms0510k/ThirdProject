@@ -40,7 +40,12 @@ public class MemberController extends HttpServlet {
 	    	  comp_list(request,response);
 	      }else if(cmd.equals("comp_detail")) {
 	    	  comp_detail(request,response);
+	      }else if(cmd.equals("member_update")) {
+	    	  member_update(request,response);
 	      }
+	}
+	private void member_update(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		
 	}
 	private void comp_detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		int comnum=Integer.parseInt(request.getParameter("comnum"));

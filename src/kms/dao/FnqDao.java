@@ -52,11 +52,11 @@ public class FnqDao {
 		try {
 			con=DbcpBean.getConn();
 			if(search.equals("fnqtitle")) {
-			sql = "select * from(select aa.*,rownum rnum from(select * from fnq where fnqtitle like '%'||?||'%' order by fnqnum)aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select * from fnq where fnqtitle like '%'||?||'%' order by fnqnum desc)aa)where rnum>=? and rnum<=?";
 			}else if(search.equals("fnqcontent")) {
-			sql = "select * from(select aa.*,rownum rnum from(select * from fnq where fnqcontent like '%'||?||'%' order by fnqnum)aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select * from fnq where fnqcontent like '%'||?||'%' order by fnqnum desc)aa)where rnum>=? and rnum<=?";
 			}else if(search.equals("fnqresult")) {
-			sql = "select * from(select aa.*,rownum rnum from(select * from fnq where fnqresult like '%'||?||'%' order by fnqnum)aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select * from fnq where fnqresult like '%'||?||'%' order by fnqnum desc)aa)where rnum>=? and rnum<=?";
 			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, word);
@@ -212,7 +212,7 @@ public class FnqDao {
 		}
 	}
 	public ArrayList<FnqVo> list(int startRow, int endRow) {
-		String sql = "select * from(select aa.*,rownum rnum from(select * from fnq order by fnqnum)aa)where rnum>=? and rnum<=?";
+		String sql = "select * from(select aa.*,rownum rnum from(select * from fnq order by fnqnum desc)aa)where rnum>=? and rnum<=?";
 		PreparedStatement pstmt = null;
 		Connection con=null;
 		ResultSet rs = null;

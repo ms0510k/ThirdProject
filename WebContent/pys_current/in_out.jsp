@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <style>
@@ -94,17 +95,17 @@ ul.tabs li.current {
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <%
-ArrayList<exVO>  eList= (ArrayList<exVO>)request.getAttribute("eList");
-ArrayList<tradeVO>  tList= (ArrayList<tradeVO>)request.getAttribute("tList");
-int kor = 0;
-exVO vo = null;
+	ArrayList<exVO> eList = (ArrayList<exVO>) request.getAttribute("eList");
+	int kor = 0;
+	exVO vo = null;
 
-for(int i = 0; i<eList.size(); i++){
-	if(eList.get(i).getExcoin().equals("krw")){
-		kor = eList.get(i).getExmoney();
-		vo = new exVO(eList.get(i).getExnum(),eList.get(i).getMemnum(),eList.get(i).getExcoin(),eList.get(i).getExmoney());
+	for (int i = 0; i < eList.size(); i++) {
+		if (eList.get(i).getExcoin().equals("krw")) {
+			kor = eList.get(i).getExmoney();
+			vo = new exVO(eList.get(i).getExnum(), eList.get(i).getMemnum(), eList.get(i).getExcoin(),
+					eList.get(i).getExmoney());
+		}
 	}
-}
 %>
 
 
@@ -126,7 +127,11 @@ for(int i = 0; i<eList.size(); i++){
 
 			<!-- 입금 탭 설정하기 -->
 			<div id="tab-1" class="tab-content current">
-				<form>
+
+				<form method="post"
+					action="<%=request.getContextPath()%>/inout.do?cmd=in" name="fr1"
+					onsubmit="return check1()">
+					<input type="hidden" name="memnum" value="<%=vo.getMemnum()%>">
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>나의 추정자산</td>
@@ -134,11 +139,11 @@ for(int i = 0; i<eList.size(); i++){
 						</tr>
 						<tr>
 							<td>보유금액</td>
-							<td><label id="in_mykrw"><%=kor %></label><small>KRW</small></td>
+							<td><label id="in_mykrw"><%=kor%></label><small>KRW</small></td>
 						</tr>
 						<tr>
 							<td>충전금액</td>
-							<td><input type="text" name="input_price">원</td>
+							<td><input type="text" name="input_price" id="input_price">원</td>
 						</tr>
 
 
@@ -162,10 +167,12 @@ for(int i = 0; i<eList.size(); i++){
 
 			<!-- 출금 탭 설정하기 -->
 			<div id="tab-2" class="tab-content">
-				
-				<form method="post" action="<%=request.getContextPath() %>/inout.do?cmd=out" name="fr" onsubmit="return check()">
-				<input type="hidden" name="exnum" value="<%=vo.getExnum() %>">
-				<input type="hidden" name="memnum" value="<%=vo.getMemnum() %>">
+
+				<form method="post"
+					action="<%=request.getContextPath()%>/inout.do?cmd=out" name="fr"
+					onsubmit="return check()">
+					<input type="hidden" name="exnum" value="<%=vo.getExnum()%>">
+					<input type="hidden" name="memnum" value="<%=vo.getMemnum()%>">
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>나의 추정자산</td>
@@ -173,7 +180,7 @@ for(int i = 0; i<eList.size(); i++){
 						</tr>
 						<tr>
 							<td>보유금액</td>
-							<td><label name="out_mykrw"><%=kor %></label><small>KRW</small></td>
+							<td><label name="out_mykrw"><%=kor%></label><small>KRW</small></td>
 						</tr>
 						<tr>
 							<td>출금하기</td>
@@ -203,12 +210,29 @@ for(int i = 0; i<eList.size(); i++){
 			<div id="tab-3" class="tab-content">
 
 				<select id="tradeList" style="width: 100px; height: 50px;">
-					<option value="all" >전체</option>
+					<option value="all">전체</option>
 					<option value="input">입금</option>
 					<option value="output">출금</option>
 
 
 				</select> <br>
+				<table border="1" width="500" class="t"
+					style="border-collapse: collapse; text-align: center; line-height: 1.5;">
+					<thead style="background-color: #FF8000;">
+						<tr>
+							<th>거래형태</th>
+							<th>금액</th>
+							<th>날짜</th>
+						</tr>
+					</thead>
+					<c:forEach var="vo" items="${tList }">
+						<tr>
+							<td>${vo.tradetype }</td>
+							<td>${vo.tprice }</td>
+							<td>${vo.tdate }</td>
+						</tr>
+					</c:forEach>
+				</table>
 
 
 
@@ -294,39 +318,60 @@ for(int i = 0; i<eList.size(); i++){
 	function numberWithCommas(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	
-	
-	
-	
 
 	function check() {
 
-	  if(fr.output_price.value == "") {
+		if (fr.output_price.value == "") {
 
-	    alert("값을 입력해 주세요.");
+			alert("값을 입력해 주세요.");
 
-	    fr.output_price.focus();
+			fr.output_price.focus();
 
-	    return false;
+			return false;
 
-	  }
+		}
 
-	  else if(fr.output_price.value > <%=kor%>) {
+		else if (fr.output_price.value >
+<%=kor%>
+	) {
 
-	    alert("보유중인 원화를 한도로 입력해 주세요..");
+			alert("보유중인 원화를 한도로 입력해 주세요..");
 
-	    fr.output_price.focus();
+			fr.output_price.focus();
 
-	    return false;
+			return false;
 
-	  }else {
-	  alert("출금신청이 완료되었습니다.");
-	  return true;}
+		} else {
+			alert("출금신청이 완료되었습니다.");
+			return true;
+		}
 
 	}
 
-	
-	
-	
-	
+	function check1() {
+
+		if (fr1.input_price.value == "") {
+
+			alert("입금하실 금액을 입력해 주세요.");
+
+			fr1.input_price.focus();
+
+			return false;
+
+		}
+
+		else if (fr1.input_price.value < 10001) {
+
+			alert("최소 입금 금액은 10,000원 입니다.");
+
+			fr1.input_price.focus();
+
+			return false;
+
+		} else {
+			alert("충전신청이 완료되었습니다.");
+			return true;
+		}
+
+	}
 </script>

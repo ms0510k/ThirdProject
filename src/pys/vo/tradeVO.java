@@ -3,17 +3,11 @@ package pys.vo;
 
 public class tradeVO {
 	
-	//거래일자
 	private String tdate;
-	//코인이름
 	private String coin;
-	//코인수량
 	private int coinamount;
-	//거래타입(입금,출금,구매,판매)
 	private String tradetype;
-	//구입, 판매 가격
 	private int tprice;
-	//고객번호
 	private int memnum;
 	
 	
@@ -28,6 +22,7 @@ public class tradeVO {
 
 
 	public tradeVO(String tdate, String coin, int coinamount, String tradetype, int tprice, int memnum) {
+		this.tdate = tdate;
 		this.coin = coin;
 		this.coinamount = coinamount;
 		this.tradetype = tradetype;

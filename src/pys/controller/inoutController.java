@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pys.dao.inoutDAO;
+import pys.vo.exVO;
 import pys.vo.moneyVO;
+import pys.vo.tradeVO;
 
 @WebServlet("/inout.do")
 public class inoutController extends HttpServlet{
@@ -22,6 +24,8 @@ public class inoutController extends HttpServlet{
 		System.out.println(cmd);
 		if(cmd.equals("out")) {
 			out(request,response);
+		}else if(cmd.equals("in")) {
+			in(request,response);
 		}
 	}
 	
@@ -60,6 +64,34 @@ public class inoutController extends HttpServlet{
 	
 	}
 	
+	
+	private void in(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int memnum = Integer.parseInt(request.getParameter("memnum"));
+		int inmoney = Integer.parseInt(request.getParameter("input_price"));
+		
+		System.out.println("입금할떄 다찍힘?  memnum :"+memnum+", moneyt: "+inmoney);
+		
+		
+		
+		inoutDAO dao = new inoutDAO();
+		
+		
+		exVO exvo = new exVO(0, memnum, "krw", inmoney);
+		tradeVO tvo = new tradeVO(null, "krw", 0, "입금", inmoney, memnum);
+		int row = dao.in(tvo);
+		int row2 = dao.in2(exvo);
+		
+		
+		System.out.println("결과는1  :"+row);
+		System.out.println("결과는2  :"+row2);
+		request.setAttribute("page","first.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	
+		
+		
+	
+	}
 	
 	
 	/*private void now(HttpServletRequest request, HttpServletResponse response)

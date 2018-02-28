@@ -2,11 +2,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <style>
 #content1 {
-	width: 854px;
+	width: 954px;
 	padding: 10px;
 	top: 10px;
 	left: 50%;
@@ -14,7 +15,7 @@
 }
 
 #content_left {
-	width: 500px;
+	width: 600px;
 	float: left;
 	padding: 10px;
 }
@@ -45,7 +46,7 @@
 }
 
 .container {
-	width: 500px;
+	width: 550px;
 	margin: 0 auto;
 }
 
@@ -286,7 +287,29 @@ ul.tabs li.current {
 			<div id="tab-3" class="tab-content"
 				style="background-color: #FFE3EE;">
 
-				
+					<table border="1" width="520" class="t"
+					style="border-collapse: collapse; text-align: center; line-height: 1.5;">
+					<thead style="background-color: #FF8000;">
+						<tr>
+							<th>거래날짜</th>
+							<th>거래형태</th>
+							<th>주문가격</th>
+							<th>주문수량</th>
+							<th>취소</th>
+						</tr>
+					</thead>
+					<c:forEach var="vo" items="${tList }">
+					<tbody>
+						<tr>
+							<td>${vo.tdate }</td>
+							<td>${vo.tradetype }</td>
+							<td>${vo.tprice }</td>
+							<td>${vo.coinamount }</td>
+							<td><input type="button" value="취소하기" onclick=""></td>
+						</tr>
+						</tbody>
+					</c:forEach>
+				</table>
 				
 
 
@@ -608,6 +631,15 @@ ul.tabs li.current {
 		    return false;
 
 		  }
+		  
+		  if(price<10000) {
+
+			    alert("최소 주문금액은 10,000원 입니다.");
+
+
+			    return false;
+
+			  }
 
 		  else if(kor == 0) {
 

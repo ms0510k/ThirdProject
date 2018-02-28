@@ -145,7 +145,8 @@ public class inoutDAO {
 				int memnum1 = rs.getInt(2);
 				String excoin = rs.getString(3);
 				int exmoney = rs.getInt(4);
-				exVO vo = new exVO(exnum, memnum1, excoin, exmoney);
+				double examount = rs.getDouble(5);
+				exVO vo = new exVO(exnum, memnum1, excoin, exmoney,examount);
 				System.out.println(vo.toString());
 				list.add(vo);
 			}
@@ -179,6 +180,7 @@ public class inoutDAO {
 				int memnum1 = rs.getInt(6);
 				int fee = rs.getInt(7);
 				tradeVO vo = new tradeVO(tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
+				System.out.println(vo.toString());
 				list.add(vo);
 			}
 			return list;
@@ -189,6 +191,42 @@ public class inoutDAO {
 		DbcpBean.closeconn(con, ps, rs);
 		}
 	}
+	
+	
+	
+	public ArrayList<tradeVO> tradelistAll(int memnum,String coin1) {
+		String sql = "select * from thistory where memnum = ? and coin = ?";
+		PreparedStatement ps = null;
+		Connection con=null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, memnum);
+			ps.setString(2, coin1);
+			rs = ps.executeQuery();
+			ArrayList<tradeVO> list = new ArrayList<>();
+			while (rs.next()) {
+				String tdate = rs.getString(1);
+				String coin = rs.getString(2);
+				double coinamount  = rs.getDouble(3);
+				String tradetype = rs.getString(4);
+				int tprice = rs.getInt(5);
+				int memnum1 = rs.getInt(6);
+				int fee = rs.getInt(7);
+				tradeVO vo = new tradeVO(tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
+				System.out.println(vo.toString());
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+		DbcpBean.closeconn(con, ps, rs);
+		}
+	}
+	
 	
 	
 	

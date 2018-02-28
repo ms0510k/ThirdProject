@@ -49,11 +49,12 @@ public class buysellDAO {
 				try {
 					con=DbcpBean.getConn();
 					
-					String sql = "update exchange set exmoney = exmoney-? where excoin = 'krw' and memnum = ? ";
+					String sql = "update exchange set exmoney = exmoney-? where excoin = ? and memnum = ? ";
 					
 					pstmt = con.prepareStatement(sql);
 					pstmt.setInt(1, vo.getExmoney());
-					pstmt.setInt(2, vo.getMemnum());
+					pstmt.setString(2, vo.getExcoin());
+					pstmt.setInt(3, vo.getMemnum());
 					return pstmt.executeUpdate();
 				} catch (SQLException se) {
 					System.out.println(se.getMessage());
@@ -70,7 +71,33 @@ public class buysellDAO {
 			
 			
 	
-	
+			//매도 신청한  이후 미체결 코인량 exchange 테이블의 수량 임시 차감해주기
+			public int tradein_coin(exVO vo) {
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				try {
+					con=DbcpBean.getConn();
+					
+					String sql = "update exchange set examount = examount-? where excoin = ? and memnum = ? ";
+					
+					pstmt = con.prepareStatement(sql);
+					pstmt.setDouble(1, vo.getExamount());
+					pstmt.setString(2, vo.getExcoin());
+					pstmt.setInt(3, vo.getMemnum());
+					return pstmt.executeUpdate();
+				} catch (SQLException se) {
+					System.out.println(se.getMessage());
+					return -1;
+				} finally {
+					try {
+						con.close();
+						pstmt.close();
+						}catch(SQLException se) {
+							System.out.println(se.getMessage());
+						}
+				}
+			}
+			
 	
 	
 	

@@ -62,7 +62,25 @@ public class HeaderController extends HttpServlet{
 	
 	private void trade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String email = (String) request.getSession().getAttribute("email");
 	
+		inoutDAO dao = new inoutDAO();
+		int memnum = dao.fintNum(email);
+		
+		
+		//해당 고객의 거래내역 같이 뿌려주기
+				ArrayList<exVO> eList = dao.exlist(memnum);
+				ArrayList<tradeVO> tList = dao.tradelistAll(memnum,"btc");
+				
+				//받은 고객번호와 코인정보를 buysell.jsp 로 보내기!
+				request.setAttribute("type","buy");
+				request.setAttribute("coin","btc");
+				request.setAttribute("memnum", memnum);
+				request.setAttribute("eList", eList);
+				request.setAttribute("tList", tList);
+
+		
+		
 		request.setAttribute("page","pys_current/buysell.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}

@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%String email=request.getParameter("email"); %>
+<div class="header">
+<jsp:include page="../header.jsp"/>
+</div>
+<div id="body1" style="margin-top: 10px;" align="center">
+<form method="post" action="<%=request.getContextPath() %>/member.do?cmd=member_update2&email=<%=email%>">
+비밀번호 : <input type="password" name="pwd"><br><br>
+   <input type="submit" value="확인">
+</form>
+</div>
 </body>
 </html>

@@ -78,7 +78,7 @@
 					<li><a href="#">투자 내역</a></li>
 					<li><a href="<%=request.getContextPath()%>/header.do?cmd=inout&email=<%=email%>">입금/출금</a></li>
 					<li><a href="<%=request.getContextPath()%>/member.do?cmd=comp_list&email=<%=email%>">문의내역</a></li>
-					<li><a href="#">회원정보 수정</a></li>
+					<li><a href="<%=request.getContextPath()%>/member.do?cmd=member_update&email=<%=email%>">회원정보 수정</a></li>
 					<li><a href="#">회원 탈퇴</a></li>
 				</ul></li>
 			<%

@@ -35,6 +35,7 @@ CREATE TABLE exchange
 	memnum number NOT NULL,
 	excoin varchar2(15),
 	exmoney number,
+	examount number,
 	PRIMARY KEY (exnum)
 );
 

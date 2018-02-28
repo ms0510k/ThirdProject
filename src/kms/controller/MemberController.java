@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import kms.dao.CompDao;
 import kms.dao.MemberDao;
+import kms.dao.NoticeDao;
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
+import kms.vo.NoticeVo;
 import pys.dao.inoutDAO;
 
 @WebServlet("/member.do")
@@ -41,11 +44,41 @@ public class MemberController extends HttpServlet {
 	      }else if(cmd.equals("comp_detail")) {
 	    	  comp_detail(request,response);
 	      }else if(cmd.equals("member_update")) {
-	    	  member_update(request,response);
+	    	  String email=request.getParameter("email");
+	    	  response.sendRedirect(request.getContextPath()+"/kms_member/member_update.jsp?email="+email);
+	      }else if(cmd.equals("member_update2")) {
+	    	  member_update2(request,response);
+	      }else if(cmd.equals("member_updateOk")) {
+	    	  member_updateOk(request,response);
 	      }
 	}
-	private void member_update(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		
+	private void member_update2(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+			String pwd=request.getParameter("pwd");
+			String email=request.getParameter("email");
+		   MemberDao dao=new MemberDao();
+		   MemberVo vo=dao.getinfo(email);
+		   request.setAttribute("vo", vo);
+		   if(pwd.equals(vo.getPwd())) {
+		   request.getRequestDispatcher("/kms_member/member_update2.jsp").forward(request, response);
+		   }else {
+			   response.sendRedirect(request.getContextPath()+"/kms_member/member_update.jsp?email="+email);
+		   }
+	}
+	private void member_updateOk(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		   String email=request.getParameter("email");
+		   String pwd=request.getParameter("pwd");
+		   String phone=request.getParameter("phone");
+		   String bank=request.getParameter("bank");
+		   int account=Integer.parseInt(request.getParameter("account"));
+		   MemberVo vo=new MemberVo(0,null,email,pwd,phone,bank,account,null);
+		   MemberDao dao=new MemberDao();
+		   int n=dao.updateOk(vo);
+		   if(n>0) {
+		      RequestDispatcher rd=request.getRequestDispatcher("/header.do?cmd=main");
+		      rd.forward(request, response);
+		   }else {
+		      request.setAttribute("result","fail");
+		   }
 	}
 	private void comp_detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		int comnum=Integer.parseInt(request.getParameter("comnum"));

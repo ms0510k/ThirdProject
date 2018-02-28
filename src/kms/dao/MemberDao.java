@@ -9,10 +9,73 @@ import java.util.Date;
 
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
+import kms.vo.NoticeVo;
 import pys.dao.inoutDAO;
 import test.dbcp.DbcpBean;
 
 public class MemberDao {
+	public int updateOk(MemberVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="update member set pwd=?, phone=?, bank=?, account=? where email=?";
+		try {
+			con=DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getPwd());
+			pstmt.setString(2, vo.getPhone());
+			pstmt.setString(3, vo.getBank());
+			pstmt.setInt(4, vo.getAccount());
+			pstmt.setString(5, vo.getEmail());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+			}
+		}
+	}
+	public MemberVo getinfo(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from member where email=?";
+		try {
+			con=DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int memnum = rs.getInt("memnum");
+				String name = rs.getString("name");
+				String pwd = rs.getString("pwd");
+				String phone = rs.getString("phone");
+				String bank = rs.getString("bank");
+				int account = rs.getInt("account");
+				Date memdate = rs.getDate("memdate");
+				MemberVo vo = new MemberVo(memnum,name,email,pwd,phone,bank,account,memdate);
+				return vo;
+			} else {
+				return null;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+		
+	}
 	public CompVo getinfo(int comnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

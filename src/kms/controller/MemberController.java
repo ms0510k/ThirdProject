@@ -38,10 +38,40 @@ public class MemberController extends HttpServlet {
 	    	  comp_insertOk(request,response);
 	      }else if(cmd.equals("comp_list")) {
 	    	  comp_list(request,response);
+	      }else if(cmd.equals("comp_detail")) {
+	    	  comp_detail(request,response);
 	      }
 	}
+	private void comp_detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		int comnum=Integer.parseInt(request.getParameter("comnum"));
+		   MemberDao dao=new MemberDao();
+		   CompVo vo=dao.getinfo(comnum);
+		   request.setAttribute("vo", vo);
+		   request.getRequestDispatcher("/kms_mypage/comp_detail.jsp").forward(request, response);
+	}
 	private void comp_list(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		
+		String email=request.getParameter("email");
+		String spageNum=request.getParameter("pageNum");
+	      int pageNum=1;
+	      if(spageNum!=null) {
+	         pageNum=Integer.parseInt(spageNum);
+	      }
+	      int startRow=(pageNum-1)*5+1;
+	      int endRow=startRow+4;
+	      MemberDao dao=new MemberDao();
+	      ArrayList<CompVo> list=dao.list(startRow, endRow, email);
+	      int pageCount=(int)Math.ceil(dao.getCount(email)/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_mypage/comp_list.jsp?email="+email).forward(request, response);
 	}
 	private void comp_insertOk(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		String email=request.getParameter("email");
@@ -83,7 +113,7 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		session.invalidate();
-		response.sendRedirect(request.getContextPath()+"/header.jsp");
+		response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
 	}
 	protected void member_login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -109,7 +109,7 @@ ul.tabs li.current {
 		if (eList.get(i).getExcoin().equals("krw")) {
 			kor = eList.get(i).getExmoney();
 			vo = new exVO(eList.get(i).getExnum(), eList.get(i).getMemnum(), eList.get(i).getExcoin(),
-					eList.get(i).getExmoney());
+					eList.get(i).getExmoney(),eList.get(i).getExamount());
 		}
 	}
 %>

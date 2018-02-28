@@ -5,19 +5,22 @@ public class exVO {
 	private int memnum;
 	private String excoin;
 	private int exmoney;
-	
+	private double examount;
 	
 	
 	
 	public exVO() {
 	}
 
-	public exVO(int exnum, int memnum,  String excoin, int exmoney) {
+	public exVO(int exnum, int memnum,  String excoin, int exmoney, double examount) {
 		this.exnum = exnum;
 		this.memnum = memnum;
 		this.excoin = excoin;
 		this.exmoney = exmoney;
+		this.examount =	examount;
 	}
+
+	
 
 	public int getExnum() {
 		return exnum;
@@ -35,8 +38,6 @@ public class exVO {
 		this.memnum = memnum;
 	}
 
-	
-
 	public String getExcoin() {
 		return excoin;
 	}
@@ -53,13 +54,21 @@ public class exVO {
 		this.exmoney = exmoney;
 	}
 
-	
+	public double getExamount() {
+		return examount;
+	}
+
+	public void setExamount(double examount) {
+		this.examount = examount;
+	}
 
 	@Override
 	public String toString() {
-		return "exVO [exnum=" + exnum + ", memnum=" + memnum + ", excoin=" + excoin
-				+ ", exmoney=" + exmoney + ", ]";
+		return "exVO [exnum=" + exnum + ", memnum=" + memnum + ", excoin=" + excoin + ", exmoney=" + exmoney
+				+ ", examount=" + examount + "]";
 	}
+
+	
 	
 	
 	

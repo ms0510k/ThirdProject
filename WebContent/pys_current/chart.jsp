@@ -370,8 +370,8 @@
 					data-sorting="0"></strong></td>
 
 
-				<td><a href="marketprice.do?cmd=buy&coin=btc" class="btn btn_coin_buy"
-					data-type="1" data-coin="BTC"> 구매</a><a href="marketprice.do?cmd=sell&coin=btc"
+				<td><a href="marketprice.do?cmd=buy&coin=BTC" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 구매</a><a href="marketprice.do?cmd=sell&coin=BTC"
 					class="btn btn_coin_sell" data-type="2" data-coin="BTC"> 판매</a></td>
 			</tr>
 			<tr data-coin="eth" title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
@@ -383,8 +383,8 @@
 					data-sorting="0"></strong></td>
 
 
-				<td><a href="marketprice.do?cmd=buy&coin=eth" class="btn btn_coin_buy"
-					data-type="1" data-coin="ETH"> 구매</a><a href="marketprice.do?cmd=sell&coin=eth"
+				<td><a href="marketprice.do?cmd=buy&coin=ETH" class="btn btn_coin_buy"
+					data-type="1" data-coin="ETH"> 구매</a><a href="marketprice.do?cmd=sell&coin=ETH"
 					class="btn btn_coin_sell" data-type="2" data-coin="ETH"> 판매</a></td>
 			</tr>
 
@@ -396,8 +396,8 @@
 				<td><strong id="xrp_amount" class="sort_change"
 					data-sorting="0"></strong></td>
 
-				<td><a href="marketprice.do?cmd=buy&coin=xrp" class="btn btn_coin_buy"
-					data-type="1" data-coin="XRP"> 구매</a><a href="marketprice.do?cmd=sell&coin=xrp"
+				<td><a href="marketprice.do?cmd=buy&coin=XRP" class="btn btn_coin_buy"
+					data-type="1" data-coin="XRP"> 구매</a><a href="marketprice.do?cmd=sell&coin=XRP"
 					class="btn btn_coin_sell" data-type="2" data-coin="XRP"> 판매</a></td>
 			</tr>
 			<tr data-coin="bch" title="비트코인 골드 (BTG) 정보를 확인하시려면 클릭하세요">
@@ -408,8 +408,8 @@
 				<td><strong id="bch_amount" class="sort_change"
 					data-sorting="0"></strong></td>
 
-				<td><a href="marketprice.do?cmd=buy&coin=btg" class="btn btn_coin_buy"
-					data-type="1" data-coin="BCH"> 구매</a><a href="marketprice.do?cmd=sell&coin=btg"
+				<td><a href="marketprice.do?cmd=buy&coin=BTG" class="btn btn_coin_buy"
+					data-type="1" data-coin="BCH"> 구매</a><a href="marketprice.do?cmd=sell&coin=BTG"
 					class="btn btn_coin_sell" data-type="2" data-coin="BCH"> 판매</a></td>
 			</tr>
 
@@ -422,8 +422,8 @@
 					data-sorting="0"></strong></td>
 
 
-				<td><a href="marketprice.do?cmd=buy&coin=qtum" class="btn btn_coin_buy"
-					data-type="1" data-coin="QTUM"> 구매</a><a href="marketprice.do?cmd=sell&coin=qtum"
+				<td><a href="marketprice.do?cmd=buy&coin=QTUM" class="btn btn_coin_buy"
+					data-type="1" data-coin="QTUM"> 구매</a><a href="marketprice.do?cmd=sell&coin=QTUM"
 					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
 			</tr>
 

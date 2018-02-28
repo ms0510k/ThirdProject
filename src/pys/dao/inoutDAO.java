@@ -74,6 +74,63 @@ public class inoutDAO {
 					}
 			}
 		}
+		
+		
+		
+		//입금하기 ex테이블과 t 테이블에 데이터 넣어주기
+		public int in(tradeVO tvo) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con=DbcpBean.getConn();
+				
+				String sql = "INSERT  INTO thistory  VALUES (sysdate,?,0,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, tvo.getCoin());
+				pstmt.setString(2, tvo.getTradetype());
+				pstmt.setInt(3, tvo.getTprice());
+				pstmt.setInt(4, tvo.getMemnum());
+				return pstmt.executeUpdate();
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return -1;
+			} finally {
+				try {
+					con.close();
+					pstmt.close();
+					}catch(SQLException se) {
+						System.out.println(se.getMessage());
+					}
+			}
+		}
+		
+		
+		//입금하기 ex테이블과 t 테이블에 데이터 넣어주기
+				public int in2(exVO exvo) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					try {
+						con=DbcpBean.getConn();
+						
+						String sql = "update exchange set exmoney = exmoney+? where memnum = ? and excoin = ?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, exvo.getExmoney());
+						pstmt.setInt(2, exvo.getMemnum());
+						pstmt.setString(3, exvo.getExcoin());
+						return pstmt.executeUpdate();
+					} catch (SQLException se) {
+						System.out.println(se.getMessage());
+						return -1;
+					} finally {
+						try {
+							con.close();
+							pstmt.close();
+							}catch(SQLException se) {
+								System.out.println(se.getMessage());
+							}
+					}
+				}
+		
 	public ArrayList<exVO> exlist(int memnum) {
 		String sql = "select * from exchange where memnum = ?";
 		Connection con=null;
@@ -105,7 +162,7 @@ public class inoutDAO {
 	
 	
 	public ArrayList<tradeVO> tradelist(int memnum) {
-		String sql = "select * from thistory where memnum = ?";
+		String sql = "select * from thistory where memnum = ? and coin = 'krw'";
 		PreparedStatement ps = null;
 		Connection con=null;
 		ResultSet rs = null;

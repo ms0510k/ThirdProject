@@ -72,9 +72,10 @@
 			<li><a href="<%=request.getContextPath()%>/marketprice.do?cmd=buy&coin=btc" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
 			<!-- 마이페이지 부분 -->
-			<li><a href="<%=request.getContextPath()%>/kms_mypage/mypage_index.jsp"
+			<li><a href="#"
 				style="padding-left: 50px; padding-right: 70px;">마이페이지</a>
 				<ul>
+					<li><a href="#">투자 내역</a></li>
 					<li><a href="<%=request.getContextPath()%>/header.do?cmd=inout&email=<%=email%>">입금/출금</a></li>
 					<li><a href="<%=request.getContextPath()%>/member.do?cmd=comp_list&email=<%=email%>">문의내역</a></li>
 					<li><a href="#">회원정보 수정</a></li>

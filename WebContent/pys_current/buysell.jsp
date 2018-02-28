@@ -74,6 +74,8 @@ ul.tabs li.current {
 	padding: 15px;
 }
 
+
+
 .tab-content.current {
 	display: inherit;
 }
@@ -84,62 +86,51 @@ ul.tabs li.current {
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <%
-String coin = (String)request.getAttribute("coin");
-int coin_amount = 0;
-String type = (String)request.getAttribute("type");
-int kor = 0;
+	String coin = (String) request.getAttribute("coin");
+	int coin_amount = 0;
+	String type = (String) request.getAttribute("type");
+	int kor = 0;
 
-
-ArrayList<exVO> eList = (ArrayList<exVO>)request.getAttribute("eList");
-for(int i = 0; i<eList.size(); i++){
-	if(eList.get(i).getExcoin().equals("krw")){
-		kor = eList.get(i).getExmoney();
+	ArrayList<exVO> eList = (ArrayList<exVO>) request.getAttribute("eList");
+	for (int i = 0; i < eList.size(); i++) {
+		if (eList.get(i).getExcoin().equals("krw")) {
+			kor = eList.get(i).getExmoney();
+		}
+		if (eList.get(i).getExcoin().equals(coin)) {
+			coin_amount = eList.get(i).getExmoney();
+		}
 	}
-	if(eList.get(i).getExcoin().equals(coin)){
-		coin_amount = eList.get(i).getExmoney();
+
+	if (coin == null) {
+		coin = "BTC";
+	} else {
+		coin = coin.toUpperCase();
 	}
-}
 
+	String coin_name = "";
+	switch (coin) {
+		case "BTC" :
+			coin_name = "비트코인";
+			break;
+		case "ETH" :
+			coin_name = "이더리움";
+			break;
+		case "XRP" :
+			coin_name = "리플";
+			break;
+		case "BTG" :
+			coin_name = "비트코인골드";
+			break;
+		case "QTUM" :
+			coin_name = "퀀텀";
+			break;
+		default :
+			break;
+	}
 
-if(coin == null){
-	coin = "BTC";
-}else{
-	coin = coin.toUpperCase();
-}
+	int memnum = (Integer) request.getAttribute("memnum");
 
-
-
-
-
-String coin_name = "";
-switch (coin) {
-case "BTC":
-	coin_name = "비트코인";
-	break;
-case "ETH":
-	coin_name = "이더리움";
-	break;
-case "XRP":
-	coin_name = "리플";
-	break;
-case "BTG":
-	coin_name = "비트코인골드";
-	break;
-case "QTUM":
-	coin_name = "퀀텀";
-	break;
-default:
-	break;
-}
-
-int memnum = (Integer)request.getAttribute("memnum");
-
-
-
-
-
-System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+memnum+", 수량 : "+coin_amount);
-
+	System.out.println("넘어오는지체크 코인 : " + coin_name + ", 번호 : " + memnum + ", 수량 : " + coin_amount);
 %>
 
 
@@ -153,17 +144,22 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 			<!-- 탭나눠주는 부분 -->
 			<ul class="tabs">
-			<%
-			if(type.equals("buy")){
-			%>
+				<%
+					if (type.equals("buy")) {
+				%>
 				<li class="tab-link current" data-tab="tab-1">매수하기</li>
 				<li class="tab-link" data-tab="tab-2">매도하기</li>
-				<% }else{%>
-				
+				<li class="tab-link" data-tab="tab-3">거래내역</li>
+				<%
+					} else {
+				%>
+
 				<li class="tab-link" data-tab="tab-1">매수하기</li>
 				<li class="tab-link current" data-tab="tab-2">매도하기</li>
-				
-				<%} %>
+				<li class="tab-link" data-tab="tab-3">거래내역</li>
+				<%
+					}
+				%>
 			</ul>
 
 
@@ -171,7 +167,7 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 			<!-- 매수하기 탭 설정하기 -->
 			<div id="tab-1" class="tab-content current"
 				style="background-color: #E8F5FF;">
-				<form>
+				<form method="post" action="<%=request.getContextPath() %>/buysell.do?cmd=buy" name="fr" onsubmit="return check()">
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>주문유형</td>
@@ -179,8 +175,9 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 						</tr>
 						<tr>
 							<td>주문수량</td>
-							<td><input type="text" placeholder="매수 수량을 입력하세요" id="buy_max"> <input
-								type="button" value="최대" onclick="order_buy()"></td>
+							<td><input type="text" placeholder="매수 수량을 입력하세요"
+								id="buy_max" > <input type="button" value="최대"
+								onclick="order_buy()"></td>
 						</tr>
 						<tr>
 							<td>주문가격</td>
@@ -189,20 +186,20 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 						<tr>
 							<td>주문금액</td>
-							<td><div id="buy_order_price"></div><small
-								style="color: gray">KRW</small></td>
+							<td><div id="buy_order_price" name="buy_order_price"></div>
+								<small style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td>수수료 (약 1%)</td>
 							<!-- 수수료 small 안에 넘길때 받아온 값으로 설정하기 -->
-							<td><div id="buy_order_commission"></div><small
-								style="color: gray"><%=coin_name %></small></td>
+							<td><div id="buy_order_commission" name="buy_order_commission"></div>
+								<small style="color: gray"><%=coin_name%></small></td>
 						</tr>
 						<tr>
 							<td>총 매수량 (약)</td>
 							<!-- 매수량 small 안에 넘길때 받아온 값으로 설정하기 -->
-							<td><div id="buy_order_amount"></div><small
-								style="color: gray"><%=coin_name %></small></td>
+							<td><div id="buy_order_amount" name="buy_order_amount"></div>
+								<small style="color: gray"><%=coin_name%></small></td>
 						</tr>
 						<tr>
 							<td colspan="2"><input type="submit" value="지정가 매수"
@@ -226,7 +223,7 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 			<div id="tab-2" class="tab-content"
 				style="background-color: #FFE3EE;">
 
-				<form>
+				<form method="post" action="<%=request.getContextPath() %>/buysell.do?cmd=sell" name="fr" onsubmit="return check1()">
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>주문유형</td>
@@ -234,8 +231,9 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 						</tr>
 						<tr>
 							<td>주문수량</td>
-							<td><input type="text" placeholder="매도 수량을 입력하세요" id="sell_max"> <input
-								type="button" value="최대" onclick="order_sell()"></td>
+							<td><input type="text" placeholder="매도 수량을 입력하세요"
+								id="sell_max"> <input type="button" value="최대"
+								onclick="order_sell()"></td>
 						</tr>
 						<tr>
 							<td>주문가격</td>
@@ -245,13 +243,13 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 						<tr>
 							<td>수수료 (약 1%)</td>
-							<td><div id="sell_order_commission"></div><small
-								style="color: gray">KRW</small></td>
+							<td><div id="sell_order_commission"></div>
+								<small style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td>총 매도금액 (약)</td>
-							<td><div id="sell_order_amount"></div><small
-								style="color: gray">KRW</small></td>
+							<td><div id="sell_order_amount"></div>
+								<small style="color: gray">KRW</small></td>
 						</tr>
 						<tr>
 							<td colspan="2"><input type="submit" value="지정가 매도"
@@ -271,6 +269,32 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 			</div>
 
 
+
+		<!-- 거래내역 탭 설정하기 -->
+			<div id="tab-3" class="tab-content"
+				style="background-color: #FFE3EE;">
+
+				<form method="post"action="<%=request.getContextPath()%>/buysell.do?cmd=sell"
+					name="fr" onsubmit="return check1()">
+					<table style="border-spacing: 40px;">
+				
+
+
+
+					</table>
+
+				</form>
+
+
+
+			</div>
+
+
+
+
+
+
+
 		</div>
 	</div>
 	<!--// 시장현황 -->
@@ -280,7 +304,9 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 	<!-- 시장현황 -->
 	<div class="right_content" id="content_right">
-		<h2 style="color: #FF8000;">시장현황(<%=coin_name %>)</h2>
+		<h2 style="color: #FF8000;">
+			시장현황(<%=coin_name%>)
+		</h2>
 		<h3 id="now_price"></h3>
 		<br>
 		<table id="rTable">
@@ -288,7 +314,8 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 
 			<tr>
-				<th>1<%=coin %> 당 가격</th>
+				<th>1<%=coin%> 당 가격
+				</th>
 
 			</tr>
 			<tr>
@@ -393,6 +420,7 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 	function proc2() {
 		try {
 			showData_left(); //표에보이게하기
+			showData_left1(); 
 		} catch (e) {
 
 		} finally {
@@ -409,8 +437,8 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 			/* 코인 관련 실시간 업데이트 부분 */
 			
 			
-			
-			var btc_now = data['data']['<%=coin%>'].closing_price;
+			var coin = '<%=coin%>';	
+			var btc_now = data['data'][coin].closing_price;
 
 			var now_price = document.getElementById("now_price");
 
@@ -418,115 +446,198 @@ System.out.println("넘어오는지체크 코인 : "+coin_name+", 번호 : "+mem
 
 			/* 만약 비트코인이라면 1만 단위로 찍어준다 */
 			var money = 50000;
-			if(btc_now>1000000){
-			for (var i = 0; i < 11; i++) {
-				var labels = document.getElementById("label" + i);
-				labels.innerHTML = numberWithCommas(btc_now - money);
-				money -= 10000;
+			if (btc_now > 1000000) {
+				for (var i = 0; i < 11; i++) {
+					var labels = document.getElementById("label" + i);
+					labels.innerHTML = numberWithCommas(btc_now - money);
+					money -= 10000;
+				}
+			} else if (btc_now > 10000) {
+				money = 5000;
+				for (var i = 0; i < 11; i++) {
+					var labels = document.getElementById("label" + i);
+					labels.innerHTML = numberWithCommas(btc_now - money);
+					money -= 1000;
+				}
+			} else {
+				money = 500;
+				for (var i = 0; i < 11; i++) {
+					var labels = document.getElementById("label" + i);
+					labels.innerHTML = numberWithCommas(btc_now - money);
+					money -= 100;
+				}
 			}
-		}else if(btc_now>10000){
-			money = 5000;
-			for (var i = 0; i < 11; i++) {
-				var labels = document.getElementById("label" + i);
-				labels.innerHTML = numberWithCommas(btc_now - money);
-				money -= 1000;
-			}
-		}else{
-			money = 500;
-			for (var i = 0; i < 11; i++) {
-				var labels = document.getElementById("label" + i);
-				labels.innerHTML = numberWithCommas(btc_now - money);
-				money -= 100;
-			}
-		}
 
 		});
 
 	}
 
-	
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-	function showData_left(){
+	///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
+	function showData_left() {
 		var buy1 = document.getElementById("buy_max");//수량
 		var buy2 = document.getElementById("buy_input_price");//개당가격
-		
-		var sell1 = document.getElementById("sell_max");//수량
-		var sell2 = document.getElementById("sell_input_price");//개당가격
-		
-		
-		if(buy1.value.length != 0 && buy2.value.length != 0){
-			var buysum = buy1.value * removeComma(buy2.value);
 			var buy3 = document.getElementById("buy_order_price");//주문금액
 			var buy4 = document.getElementById("buy_order_commission");//수수료
 			var buy5 = document.getElementById("buy_order_amount");//총매수량
+
+		if (buy1.value.length != 0 && buy2.value.length != 0) {
+			var buysum = buy1.value * removeComma(buy2.value);
 			buy3.innerHTML = buysum.toFixed(0);
-			buy4.innerHTML = (buy1.value*0.01).toFixed(5);
-			buy5.innerHTML = (buy1.value-(buy1.value*0.01)).toFixed(5);
+			buy4.innerHTML = (buy1.value * 0.01).toFixed(5);
+			buy5.innerHTML = (buy1.value - (buy1.value * 0.01)).toFixed(5);
 		}
-		if(sell1.value.length != 0 && sell2.value.length != 0){
-			
-			var sellsum = sell1.value * removeComma(sell2.value);
-			var sell4 = document.getElementById("sell_order_commission");//수수료
-			var sell5 = document.getElementById("sell_order_amount");//총매도액
-			sell4.innerHTML = (sellsum*0.01).toFixed(0);
-			sell5.innerHTML = (sellsum-(sellsum*0.01)).toFixed(0);
+
+		 if(buy1.value.length == 0 || buy2.value.length == 0){
+			buy3.innerHTML = 0;
+			buy4.innerHTML = 0;
+			buy5.innerHTML = 0;
 		}
-		
-		
+		 
 		
 	}
-	
-	
-	
-	
+
+	function showData_left1() {
+		var sell1 = document.getElementById("sell_max");//수량
+		var sell2 = document.getElementById("sell_input_price");//개당가격
+			var sell4 = document.getElementById("sell_order_commission");//수수료
+			var sell5 = document.getElementById("sell_order_amount");//총매도액
+		
+		
+		if (sell1.value.length != 0 && sell2.value.length != 0) {
+
+			var sellsum = sell1.value * removeComma(sell2.value);
+			sell4.innerHTML = (sellsum * 0.01).toFixed(0);
+			sell5.innerHTML = (sellsum - (sellsum * 0.01)).toFixed(0);
+		}
+		
+		 if(sell1.value.length == 0 || sell2.value.length == 0){
+				sell4.innerHTML = 0;
+				sell5.innerHTML = 0;
+			}
+	}
+
 	function order_buy() {
 		//채워야 되는위치
 		var order1 = document.getElementById("buy_max");
-		
+
 		//가격 가져오기
 		var amount = document.getElementById("buy_input_price");
-			if(amount.value.length == 0){
-				alert("먼저 가격을 입력해 주세요");
-				amount.focus();
-			}else{
-				var cal = <%=kor %>/removeComma(amount.value);
-				cal = cal.toFixed(5);
-				alert(cal);
-				order1.value = cal;
-				
-				
-			}
+		if (amount.value.length == 0) {
+			alert("먼저 가격을 입력해 주세요");
+			amount.focus();
+		} else {
+			var cal =
+<%=kor%>
+	/ removeComma(amount.value);
+			cal = cal.toFixed(5);
+			order1.value = cal;
+
+		}
 	}
-	
+
 	function order_sell() {
 		//채워야 되는위치
 		var order1 = document.getElementById("sell_max");
-		
+
 		//가격 가져오기
 		var amount = document.getElementById("sell_input_price");
-			if(amount.value.length == 0){
-				alert("먼저 가격을 입력해 주세요");
-				amount.focus();
-			}else{
-				order1.value = <%=coin_amount %>;
-				
-				
-			}
+		if (amount.value.length == 0) {
+			alert("먼저 가격을 입력해 주세요");
+			amount.focus();
+		} else {
+			order1.value =
+<%=coin_amount%>
+	;
+
+		}
 	}
-	
-	
-	
+
 	/* 천원단위 콤마 찍어주는 로직 */
 	function numberWithCommas(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	
+
 	//콤마 지워주는 로직
 	function removeComma(n) {
 		var txtNumber = '' + n;
-	    return txtNumber.replace(/(,)/g, "");
+		return txtNumber.replace(/(,)/g, "");
 	}
+	
+	
+	
+	
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//매수하기 체크하기 값을 비교하면서 정상이면 ok 비정상적 거래면 no 보내기
+	function check() {
+			var kor = <%=kor%>;
+			var price = document.getElementById("buy_order_price").innerHTML;
+			
+			
+		  if(price>kor) {
+
+		    alert("현재 소지하고 계신 krw를 초과합니다.");
+			alert("현재 소유하고 계신 krw은 "+kor+"원 입니다.");
+
+
+		    return false;
+
+		  }
+
+		  else if(kor == 0) {
+
+		    alert("현재 소유하고 있는 krw 가 없습니다. 충전해 주세요.");
+
+		    return false;
+
+		  }else {
+		  alert("매수예약을 신청하였습니다.");
+		  return true;}
+
+		}
+	
+	
+	
+	//매도 체크부분
+	function check1() {
+		var coin_amount = <%=coin_amount%>;
+		var price = document.getElementById("sell_max").value;
+		
+		
+	  if(price>coin_amount) {
+
+	    alert("현재 소지하고 계신 수량를 초과합니다.");
+		alert("현재 소유하고 계신 수량은 "+coin_amount+"개 입니다.");
+
+
+	    return false;
+
+	  }
+
+	  else if(coin_amount == 0) {
+
+	    alert("현재 소유하고 있는 코인이 없습니다. 먼저 코인을 구매해 주세요.");
+
+	    return false;
+
+	  }else {
+	  alert("매도예약을 신청하였습니다.");
+	  return true;}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>

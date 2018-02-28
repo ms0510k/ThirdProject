@@ -42,8 +42,6 @@ public class inoutDAO {
 	
 	
 	
-
-		
 		
 		
 		//출금신청 관리자 money 테이블에 승인여부 결과 찍어서 보낸다
@@ -84,7 +82,7 @@ public class inoutDAO {
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "INSERT  INTO thistory  VALUES (sysdate,?,0,?,?,?)";
+				String sql = "INSERT  INTO thistory  VALUES (sysdate,?,0,?,?,?,0)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, tvo.getCoin());
 				pstmt.setString(2, tvo.getTradetype());
@@ -175,11 +173,12 @@ public class inoutDAO {
 			while (rs.next()) {
 				String tdate = rs.getString(1);
 				String coin = rs.getString(2);
-				int coinamount  = rs.getInt(3);
+				double coinamount  = rs.getDouble(3);
 				String tradetype = rs.getString(4);
 				int tprice = rs.getInt(5);
 				int memnum1 = rs.getInt(6);
-				tradeVO vo = new tradeVO(tdate, coin, coinamount, tradetype, tprice, memnum1);
+				int fee = rs.getInt(7);
+				tradeVO vo = new tradeVO(tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
 				list.add(vo);
 			}
 			return list;

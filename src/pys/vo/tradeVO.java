@@ -5,11 +5,11 @@ public class tradeVO {
 	
 	private String tdate;
 	private String coin;
-	private int coinamount;
+	private double coinamount;
 	private String tradetype;
 	private int tprice;
 	private int memnum;
-	
+	private int fee;
 	
 	
 	
@@ -21,13 +21,14 @@ public class tradeVO {
 
 
 
-	public tradeVO(String tdate, String coin, int coinamount, String tradetype, int tprice, int memnum) {
+	public tradeVO(String tdate, String coin, double coinamount, String tradetype, int tprice, int memnum,int fee) {
 		this.tdate = tdate;
 		this.coin = coin;
 		this.coinamount = coinamount;
 		this.tradetype = tradetype;
 		this.tprice = tprice;
 		this.memnum = memnum;
+		this.fee = fee;
 	}
 
 
@@ -55,6 +56,22 @@ public class tradeVO {
 	}
 
 
+	
+	
+
+
+	public int getFee() {
+		return fee;
+	}
+
+
+
+
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
+
+
 
 
 
@@ -66,7 +83,12 @@ public class tradeVO {
 
 
 
-	public int getCoinamount() {
+	
+
+
+
+
+	public double getCoinamount() {
 		return coinamount;
 	}
 
@@ -74,7 +96,7 @@ public class tradeVO {
 
 
 
-	public void setCoinamount(int coinamount) {
+	public void setCoinamount(double coinamount) {
 		this.coinamount = coinamount;
 	}
 
@@ -133,8 +155,15 @@ public class tradeVO {
 	@Override
 	public String toString() {
 		return "tradeVO [tdate=" + tdate + ", coin=" + coin + ", coinamount=" + coinamount + ", tradetype=" + tradetype
-				+ ", tprice=" + tprice + ", memnum=" + memnum + "]";
+				+ ", tprice=" + tprice + ", memnum=" + memnum + ", fee=" + fee + "]";
 	}
+
+
+
+
+
+
+
 	
 	
 	

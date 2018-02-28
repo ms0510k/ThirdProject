@@ -20,6 +20,7 @@
 	<div id="header" >
 		<jsp:include page="header.jsp"/>
 	</div>
+	
 	<div id="content">
 		<jsp:include page="<%=spage %>"/>
 	</div>

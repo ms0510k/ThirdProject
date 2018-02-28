@@ -4,11 +4,151 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 
+import kms.vo.CompVo;
 import kms.vo.MemberVo;
+import pys.dao.inoutDAO;
 import test.dbcp.DbcpBean;
 
 public class MemberDao {
+	public CompVo getinfo(int comnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from complaine where comnum=?";
+		try {
+			con=DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, comnum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int memnum = rs.getInt("memnum");
+				String comtitle = rs.getString("comtitle");
+				String email = rs.getString("email");
+				String comcontent = rs.getString("comcontent");
+				String comresult = rs.getString("comresult");
+				int comhit = rs.getInt("comhit");
+				Date comdate = rs.getDate("comdate");
+				CompVo vo = new CompVo(comnum,memnum,comtitle,email,comcontent,comresult,comhit,comdate);
+				return vo;
+			} else {
+				return null;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
+	public int getCount(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "select NVL(count(comnum),0) cnt from complaine where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt("cnt");
+			return cnt;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
+	public ArrayList<CompVo> list(int startRow, int endRow, String email) {
+		String sql = "select * from(select aa.*,rownum rnum from(select * from complaine where email=? order by comnum)aa)where rnum>=? and rnum<=?";
+		PreparedStatement pstmt = null;
+		Connection con=null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			ArrayList<CompVo> list = new ArrayList<>();
+			while (rs.next()) {
+				int comnum = rs.getInt("comnum");
+				int memnum = rs.getInt("memnum");
+				String comtitle = rs.getString("comtitle");
+				String comcontent = rs.getString("comcontent");
+				String comresult = rs.getString("comresult");
+				int comhit = rs.getInt("comhit");
+				Date comdate = rs.getDate("comdate");
+				CompVo vo = new CompVo(comnum,memnum,comtitle,email,comcontent,comresult,comhit,comdate);
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			try {
+			con.close();
+			pstmt.close();
+			rs.close();
+			}catch(SQLException se) {
+				System.out.println(se.getMessage());
+			}
+		}
+	}
+	public int comp_insertOk(String email, String comtitle, String comcontent) {
+		Connection con = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
+		int memnum=0;
+		try {
+			con=DbcpBean.getConn();
+			String sql1 = "select memnum from member where email=?";
+			String sql2 = "insert into complaine values(complaine_seq.nextval,?,?,?,?,'답변대기중',0,sysdate)";
+			pstmt1 = con.prepareStatement(sql1);
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt1.setString(1, email);
+			rs=pstmt1.executeQuery();
+			if(rs.next()) {
+				memnum=rs.getInt("memnum");
+			}
+			pstmt2.setInt(1, memnum);
+			pstmt2.setString(2, comtitle);
+			pstmt2.setString(3, email);
+			pstmt2.setString(4, comcontent);
+			pstmt2.executeQuery();
+			return 1;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt1.close();
+				pstmt2.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public int insert(MemberVo vo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

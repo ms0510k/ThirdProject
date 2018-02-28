@@ -1,6 +1,5 @@
 package kms.controller;
 
-import java.awt.im.spi.InputMethodDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import kms.dao.CompDao;
 import kms.dao.MemberDao;
-import kms.dao.NoticeDao;
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
-import kms.vo.NoticeVo;
 import pys.dao.inoutDAO;
 
 @WebServlet("/member.do")
@@ -34,7 +31,59 @@ public class MemberController extends HttpServlet {
 	    	  member_logout(request,response);
 	      }else if(cmd.equals("mypage_comp")) {
 	    	  mypage_comp(request,response);
+	      }else if(cmd.equals("comp_insert")){
+	    	  String email=request.getParameter("email");
+	          response.sendRedirect(request.getContextPath()+"/kms_mypage/comp_insert.jsp?email="+email);
+	      }else if(cmd.equals("comp_insertOk")) {
+	    	  comp_insertOk(request,response);
+	      }else if(cmd.equals("comp_list")) {
+	    	  comp_list(request,response);
+	      }else if(cmd.equals("comp_detail")) {
+	    	  comp_detail(request,response);
 	      }
+	}
+	private void comp_detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		int comnum=Integer.parseInt(request.getParameter("comnum"));
+		   MemberDao dao=new MemberDao();
+		   CompVo vo=dao.getinfo(comnum);
+		   request.setAttribute("vo", vo);
+		   request.getRequestDispatcher("/kms_mypage/comp_detail.jsp").forward(request, response);
+	}
+	private void comp_list(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		String email=request.getParameter("email");
+		String spageNum=request.getParameter("pageNum");
+	      int pageNum=1;
+	      if(spageNum!=null) {
+	         pageNum=Integer.parseInt(spageNum);
+	      }
+	      int startRow=(pageNum-1)*5+1;
+	      int endRow=startRow+4;
+	      MemberDao dao=new MemberDao();
+	      ArrayList<CompVo> list=dao.list(startRow, endRow, email);
+	      int pageCount=(int)Math.ceil(dao.getCount(email)/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_mypage/comp_list.jsp?email="+email).forward(request, response);
+	}
+	private void comp_insertOk(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		String email=request.getParameter("email");
+		 String comtitle=request.getParameter("comtitle");
+	      String comcontent=request.getParameter("comcontent");
+	      MemberDao dao=new MemberDao();      
+	      int n=dao.comp_insertOk(email,comtitle,comcontent);
+	      if(n>0) {
+	    	  response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
+	       }else {
+	          request.setAttribute("result","fail");
+	       }
 	}
 	private void mypage_comp(HttpServletRequest request, HttpServletResponse response)
 	         throws ServletException, IOException {
@@ -64,7 +113,7 @@ public class MemberController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		session.invalidate();
-		response.sendRedirect(request.getContextPath()+"/header.jsp");
+		response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
 	}
 	protected void member_login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

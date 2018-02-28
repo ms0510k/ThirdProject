@@ -7,12 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+		String email = request.getParameter("email");
+%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 	<h1>자주묻는 질문 등록</h1>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_insertOk">
+<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_insertOk&email=<%=email%>">
 	제목<br>
 	<input type="text" name="fnqtitle"><br><br>
 	질문<br>

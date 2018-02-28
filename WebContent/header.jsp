@@ -104,7 +104,7 @@
 			<li><a href="#" style="padding-left: 50px; padding-right: 70px;">고객센터</a>
 				<ul>
 					<li><a href="<%=request.getContextPath()%>/admin.do?cmd=notice">공지사항</a></li>
-					<li><a href="#">자주묻는질문</a></li>
+					<li><a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list">자주묻는질문</a></li>
 			<%
 				if (email != null) {
 			%>
@@ -170,7 +170,7 @@
 
 			</li>
 			<!-- 자주묻는질문부분 -->
-			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list" style="padding-left: 30px; padding-right: 50px;">자주묻는질문 관리</a>
+			<li><a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list&email=<%=email %>" style="padding-left: 30px; padding-right: 50px;">자주묻는질문 관리</a>
 
 			</li>
 			<!-- 출금신청대기자부분 -->

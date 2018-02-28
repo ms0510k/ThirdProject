@@ -8,12 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+		String email = request.getParameter("email");
+%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>자주 묻는 질문</h1>
-<a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_insert">자주묻는 질문 등록</a><br>
+<%
+		if ("admin".equals(email)) {
+%>
+<a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_insert&email=<%=email%>">자주묻는 질문 등록</a><br>
+<%} %>
 <br>
 <table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 <thead style="background-color:#FF8000 ;">
@@ -24,7 +31,7 @@
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.fnqnum }</td>
-      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=fnq_detail&fnqnum=${vo.fnqnum}">${vo.fnqtitle }</a></td>
+      <td><a href="<%=request.getContextPath() %>/admin.do?cmd=fnq_detail&fnqnum=${vo.fnqnum}&email=<%=email%>">${vo.fnqtitle }</a></td>
    </tr>
    </c:forEach>
 </table>
@@ -32,7 +39,7 @@
 <br>
 <c:choose>
    <c:when test="${startPage>4 }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=fnq_list&pageNum=${startPage-1 }">이전</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=fnq_list&pageNum=${startPage-1 }&email=<%=email%>">이전</a>
    </c:when>
    <c:otherwise>
       이전
@@ -41,12 +48,12 @@
    <c:forEach var="i" begin="${startPage }"  end="${endPage }">
       <c:choose>
          <c:when test="${pageNum==i }">
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list&pageNum=${i}">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list&pageNum=${i}&email=<%=email%>">
             <span style="color:blue">[${i }]</span>
             </a>
          </c:when>
          <c:otherwise>
-            <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list&pageNum=${i}">
+            <a href="<%=request.getContextPath()%>/admin.do?cmd=fnq_list&pageNum=${i}&email=<%=email%>">
             <span style="color:gray">[${i }]</span>
             </a>
          </c:otherwise>
@@ -55,7 +62,7 @@
    
    <c:choose>
    <c:when test="${endPage<pageCount }">
-      <a href="<%=request.getContextPath() %>/admin.do?cmd=fnq_list&pageNum=${endPage+1 }">다음</a>
+      <a href="<%=request.getContextPath() %>/admin.do?cmd=fnq_list&pageNum=${endPage+1 }&email=<%=email%>">다음</a>
    </c:when>
    <c:otherwise>
       다음
@@ -64,7 +71,7 @@
 </div>
 <br>
 <div>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_search">
+<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_search&email=<%=email%>">
    <select name="search" id="search" size="1">
    <option value="fnqtitle">제목</option>
    <option value="fnqcontent">질문</option>

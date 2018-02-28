@@ -184,6 +184,7 @@ ul.tabs li.current {
 								id="buy_max" name="buy_max" > <input type="button" value="최대"
 								onclick="order_buy()"></td>
 						</tr>
+						
 						<tr>
 							<td>주문가격</td>
 							<td><input type="text" id="buy_input_price" name="buy_input_price"></td>

@@ -168,6 +168,11 @@ ul.tabs li.current {
 			<div id="tab-1" class="tab-content current"
 				style="background-color: #E8F5FF;">
 				<form method="post" action="<%=request.getContextPath() %>/buysell.do?cmd=buy" name="fr" onsubmit="return check()">
+						<input type="hidden" name="val1" id="val1">
+						<input type="hidden" name="val2" id="val2">
+						<input type="hidden" name="val3" id="val3">
+						<input type="hidden" name="coin" id="coin" value="<%=coin %>">
+						<input type="hidden" name="memnum" id="memnum" value="<%=memnum %>">
 					<table style="border-spacing: 40px;">
 						<tr>
 							<td>주문유형</td>
@@ -176,12 +181,12 @@ ul.tabs li.current {
 						<tr>
 							<td>주문수량</td>
 							<td><input type="text" placeholder="매수 수량을 입력하세요"
-								id="buy_max" > <input type="button" value="최대"
+								id="buy_max" name="buy_max" > <input type="button" value="최대"
 								onclick="order_buy()"></td>
 						</tr>
 						<tr>
 							<td>주문가격</td>
-							<td><input type="text" id="buy_input_price"></td>
+							<td><input type="text" id="buy_input_price" name="buy_input_price"></td>
 						</tr>
 
 						<tr>
@@ -604,6 +609,11 @@ ul.tabs li.current {
 		    return false;
 
 		  }else {
+			  //div 영영의 값은 httpservlet 으로 못넘기므로 히든태그에 담아서 넘겨준다.
+			  amount.value =  removeComma(amount.value);
+			  document.getElementById("val1").value = document.getElementById("buy_order_price").innerHTML;
+			  document.getElementById("val2").value = document.getElementById("buy_order_commission").innerHTML;
+			  document.getElementById("val3").value = document.getElementById("buy_order_amount").innerHTML;
 		  alert("매수예약을 신청하였습니다.");
 		  return true;}
 

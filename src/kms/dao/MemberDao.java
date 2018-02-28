@@ -229,7 +229,7 @@ public class MemberDao {
 		try {
 			con=DbcpBean.getConn();
 			
-			String sql = "insert into thistory values(sysdate,?,?,?,?,?)";
+			String sql = "insert into thistory values(sysdate,?,?,?,?,?,0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "krw");
 			pstmt.setInt(2, 0);

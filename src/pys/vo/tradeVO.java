@@ -3,6 +3,7 @@ package pys.vo;
 
 public class tradeVO {
 	
+	private int tnum;
 	private String tdate;
 	private String coin;
 	private double coinamount;
@@ -21,7 +22,8 @@ public class tradeVO {
 
 
 
-	public tradeVO(String tdate, String coin, double coinamount, String tradetype, int tprice, int memnum,int fee) {
+	public tradeVO( int tnum,String tdate, String coin, double coinamount, String tradetype, int tprice, int memnum,int fee) {
+		this.tnum = tnum;
 		this.tdate = tdate;
 		this.coin = coin;
 		this.coinamount = coinamount;
@@ -29,6 +31,24 @@ public class tradeVO {
 		this.tprice = tprice;
 		this.memnum = memnum;
 		this.fee = fee;
+	}
+
+
+
+	
+	
+
+
+	public int getTnum() {
+		return tnum;
+	}
+
+
+
+
+
+	public void setTnum(int tnum) {
+		this.tnum = tnum;
 	}
 
 
@@ -154,12 +174,15 @@ public class tradeVO {
 
 	@Override
 	public String toString() {
-		return "tradeVO [tdate=" + tdate + ", coin=" + coin + ", coinamount=" + coinamount + ", tradetype=" + tradetype
-				+ ", tprice=" + tprice + ", memnum=" + memnum + ", fee=" + fee + "]";
+		return "tradeVO [tnum=" + tnum + ", tdate=" + tdate + ", coin=" + coin + ", coinamount=" + coinamount
+				+ ", tradetype=" + tradetype + ", tprice=" + tprice + ", memnum=" + memnum + ", fee=" + fee + "]";
 	}
 
 
 
+
+
+	
 
 
 

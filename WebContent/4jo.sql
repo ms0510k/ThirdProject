@@ -99,6 +99,7 @@ CREATE TABLE notice
 
 CREATE TABLE thistory
 (
+	tnum number primary key,
 	tdate date,
 	coin varchar2(10),
 	coinamount number(7,0),

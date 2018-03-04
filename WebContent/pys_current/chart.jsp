@@ -653,7 +653,7 @@ function gogo() {
 		} catch (e) {
 
 		} finally {
-			setTimeout("proc()", 1000); //10초후 재시작
+			setTimeout("proc()", 2000); //10초후 재시작
 		}
 	}
 

@@ -69,7 +69,7 @@
 				if (email != null) {
 			%>
 			<!-- 거래하기부분 -->
-			<li><a href="<%=request.getContextPath()%>/marketprice.do?cmd=buy&coin=btc" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
+			<li><a href="<%=request.getContextPath()%>/marketprice.do?cmd=buy&coin=BTC" style="padding-left: 50px; padding-right: 70px;">거래하기</a></li>
 
 			<!-- 마이페이지 부분 -->
 			<li><a href="#"

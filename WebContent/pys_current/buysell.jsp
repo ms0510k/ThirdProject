@@ -88,50 +88,27 @@ ul.tabs li.current {
 
 <%
 	String coin = (String) request.getAttribute("coin");
-	int coin_amount = 0;
+	double coin_amount = 0;
 	String type = (String) request.getAttribute("type");
 	int kor = 0;
-
 	ArrayList<exVO> eList = (ArrayList<exVO>) request.getAttribute("eList");
 	for (int i = 0; i < eList.size(); i++) {
 		if (eList.get(i).getExcoin().equals("krw")) {
 			kor = eList.get(i).getExmoney();
 		}
 		if (eList.get(i).getExcoin().equals(coin)) {
-			coin_amount = eList.get(i).getExmoney();
+			coin_amount = eList.get(i).getExamount();
 		}
 	}
 
 	if (coin == null) {
 		coin = "BTC";
-	} else {
-		coin = coin.toUpperCase();
 	}
 
-	String coin_name = "";
-	switch (coin) {
-		case "BTC" :
-			coin_name = "비트코인";
-			break;
-		case "ETH" :
-			coin_name = "이더리움";
-			break;
-		case "XRP" :
-			coin_name = "리플";
-			break;
-		case "BTG" :
-			coin_name = "비트코인골드";
-			break;
-		case "QTUM" :
-			coin_name = "퀀텀";
-			break;
-		default :
-			break;
-	}
-
+	
 	int memnum = (Integer) request.getAttribute("memnum");
 
-	System.out.println("넘어오는지체크 코인 : " + coin_name + ", 번호 : " + memnum + ", 수량 : " + coin_amount);
+	System.out.println(", 번호 : " + memnum + ", 수량 : " + coin_amount);
 %>
 
 
@@ -200,13 +177,13 @@ ul.tabs li.current {
 							<td>수수료 (약 1%)</td>
 							<!-- 수수료 small 안에 넘길때 받아온 값으로 설정하기 -->
 							<td><div id="buy_order_commission" name="buy_order_commission"></div>
-								<small style="color: gray"><%=coin_name%></small></td>
+								<small style="color: gray"><%=coin%></small></td>
 						</tr>
 						<tr>
 							<td>총 매수량 (약)</td>
 							<!-- 매수량 small 안에 넘길때 받아온 값으로 설정하기 -->
 							<td><div id="buy_order_amount" name="buy_order_amount"></div>
-								<small style="color: gray"><%=coin_name%></small></td>
+								<small style="color: gray"><%=coin%></small></td>
 						</tr>
 						<tr>
 							<td colspan="2"><input type="submit" value="지정가 매수"
@@ -305,7 +282,7 @@ ul.tabs li.current {
 							<td>${vo.tradetype }</td>
 							<td>${vo.tprice }</td>
 							<td>${vo.coinamount }</td>
-							<td><input type="button" value="취소하기" onclick=""></td>
+							<td><input type="button" value="취소하기" onclick="<%=request.getContextPath() %>/buysell.do?cmd=cancel&tnum=${vo.tnum }"></td>
 						</tr>
 						</tbody>
 					</c:forEach>
@@ -335,7 +312,7 @@ ul.tabs li.current {
 	<!-- 시장현황 -->
 	<div class="right_content" id="content_right">
 		<h2 style="color: #FF8000;">
-			시장현황(<%=coin_name%>)
+			시장현황(<%=coin%>)
 		</h2>
 		<h3 id="now_price"></h3>
 		<br>
@@ -441,7 +418,7 @@ ul.tabs li.current {
 		} catch (e) {
 
 		} finally {
-			setTimeout("proc1()", 1000); //1초후 재시작
+			setTimeout("proc1()", 2000); //1초후 재시작
 		}
 	}
 
@@ -463,10 +440,9 @@ ul.tabs li.current {
 	function showData() {
 		/* 세션값으로 무엇으로 넘겨서 들어왔는지 봐서 해당 코인으로 현재창을 띄워준다 */
 
+	
 		$.get('https://api.bithumb.com/public/ticker/ALL', function(data) {
 			/* 코인 관련 실시간 업데이트 부분 */
-			
-			
 			var coin = '<%=coin%>';	
 			var btc_now = data['data'][coin].closing_price;
 

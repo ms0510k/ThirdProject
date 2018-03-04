@@ -251,13 +251,13 @@ public class MemberDao {
 			
 			String sql = "INSERT ALL "+ 
 					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'krw',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'btc',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'eth',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'xrp',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'btg',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'qtum',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'msc',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'sunc',0,0)"+
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'BTC',0,0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'ETH',0,0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'XRP',0,0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'BTG',0,0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'QTUM',0,0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'MSC',0,0)" + 
+					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'SUNC',0,0)"+
 					"select * from DUAL";
 			
 			pstmt = con.prepareStatement(sql);
@@ -293,7 +293,7 @@ public class MemberDao {
 		try {
 			con=DbcpBean.getConn();
 			
-			String sql = "insert into thistory values(sysdate,?,?,?,?,?,0)";
+			String sql = "insert into thistory values(t_seq.nextval,sysdate,?,?,?,?,?,0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "krw");
 			pstmt.setInt(2, 0);

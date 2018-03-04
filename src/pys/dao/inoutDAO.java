@@ -82,7 +82,7 @@ public class inoutDAO {
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "INSERT  INTO thistory  VALUES (sysdate,?,0,?,?,?,0)";
+				String sql = "INSERT  INTO thistory  VALUES (t_seq.nextval,sysdate,?,0,?,?,?,0)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, tvo.getCoin());
 				pstmt.setString(2, tvo.getTradetype());
@@ -172,14 +172,15 @@ public class inoutDAO {
 			rs = ps.executeQuery();
 			ArrayList<tradeVO> list = new ArrayList<>();
 			while (rs.next()) {
-				String tdate = rs.getString(1);
-				String coin = rs.getString(2);
-				double coinamount  = rs.getDouble(3);
-				String tradetype = rs.getString(4);
-				int tprice = rs.getInt(5);
-				int memnum1 = rs.getInt(6);
-				int fee = rs.getInt(7);
-				tradeVO vo = new tradeVO(tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
+				int tnum = rs.getInt(1);
+				String tdate = rs.getString(2);
+				String coin = rs.getString(3);
+				double coinamount  = rs.getDouble(4);
+				String tradetype = rs.getString(5);
+				int tprice = rs.getInt(6);
+				int memnum1 = rs.getInt(7);
+				int fee = rs.getInt(8);
+				tradeVO vo = new tradeVO(tnum,tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
 				System.out.println(vo.toString());
 				list.add(vo);
 			}
@@ -207,14 +208,15 @@ public class inoutDAO {
 			rs = ps.executeQuery();
 			ArrayList<tradeVO> list = new ArrayList<>();
 			while (rs.next()) {
-				String tdate = rs.getString(1);
-				String coin = rs.getString(2);
-				double coinamount  = rs.getDouble(3);
-				String tradetype = rs.getString(4);
-				int tprice = rs.getInt(5);
-				int memnum1 = rs.getInt(6);
-				int fee = rs.getInt(7);
-				tradeVO vo = new tradeVO(tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
+				int tnum = rs.getInt(1);
+				String tdate = rs.getString(2);
+				String coin = rs.getString(3);
+				double coinamount  = rs.getDouble(4);
+				String tradetype = rs.getString(5);
+				int tprice = rs.getInt(6);
+				int memnum1 = rs.getInt(7);
+				int fee = rs.getInt(8);
+				tradeVO vo = new tradeVO(tnum,tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
 				System.out.println(vo.toString());
 				list.add(vo);
 			}

@@ -18,7 +18,7 @@ public class buysellDAO {
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "insert into thistory values(sysdate,?,?,?,?,?,?)";
+				String sql = "insert into thistory values(t_seq.nextval,sysdate,?,?,?,?,?,?)";
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, vo.getCoin());

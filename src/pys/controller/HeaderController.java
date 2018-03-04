@@ -70,11 +70,11 @@ public class HeaderController extends HttpServlet{
 		
 		//해당 고객의 거래내역 같이 뿌려주기
 				ArrayList<exVO> eList = dao.exlist(memnum);
-				ArrayList<tradeVO> tList = dao.tradelistAll(memnum,"btc");
+				ArrayList<tradeVO> tList = dao.tradelistAll(memnum,"BTC");
 				
 				//받은 고객번호와 코인정보를 buysell.jsp 로 보내기!
 				request.setAttribute("type","buy");
-				request.setAttribute("coin","btc");
+				request.setAttribute("coin","BTC");
 				request.setAttribute("memnum", memnum);
 				request.setAttribute("eList", eList);
 				request.setAttribute("tList", tList);

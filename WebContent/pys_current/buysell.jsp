@@ -278,11 +278,20 @@ ul.tabs li.current {
 					<c:forEach var="vo" items="${tList }">
 					<tbody>
 						<tr>
+						<form action="<%=request.getContextPath() %>/buysell.do?cmd=cancel&tnum=${vo.tnum }" method="post">
 							<td>${vo.tdate }</td>
 							<td>${vo.tradetype }</td>
 							<td>${vo.tprice }</td>
 							<td>${vo.coinamount }</td>
-							<td><input type="button" value="취소하기" onclick="<%=request.getContextPath() %>/buysell.do?cmd=cancel&tnum=${vo.tnum }"></td>
+							<c:choose>
+    					    <c:when test="${vo.tradetype == '미체결_판매'}">
+							<td><input type="submit" value="취소하기" ></td>
+							</c:when>
+							 <c:when test="${vo.tradetype == '미체결_구매'}">
+							<td><input type="submit" value="취소하기" ></td>
+							</c:when>
+							</c:choose>
+						</form>
 						</tr>
 						</tbody>
 					</c:forEach>

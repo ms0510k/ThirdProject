@@ -430,35 +430,7 @@
 
 
 
-			<tr data-coin="msc" title="민수코인 (msc) 정보를 확인하시려면 클릭하세요">
-				<td class="click left_l"><img src="img/민수코인.jpg"
-					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민수코인</a></td>
-				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-				<td><strong id="qtum_change"></strong>
-				<td><strong id="qtum_amount" class="sort_change"
-					data-sorting="0"></strong></td>
-
-
-				<td><a href="javascript:;" class="btn btn_coin_buy"
-					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
-					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-			</tr>
-
-
-			<tr data-coin="sunc" title="민승코인 (sunc) 정보를 확인하시려면 클릭하세요">
-				<td class="click left_l"><img src="img/민승코인.jpg"
-					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민승코인</a></td>
-				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-				<td><strong id="qtum_change"></strong>
-				<td><strong id="qtum_amount" class="sort_change"
-					data-sorting="0"></strong></td>
-
-
-				<td><a href="javascript:;" class="btn btn_coin_buy"
-					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:;"
-					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-			</tr>
-
+		
 		</tbody>
 		
 		
@@ -537,35 +509,7 @@
 
 
 
-			<tr data-coin="msc" title="민수코인 (msc) 정보를 확인하시려면 클릭하세요">
-				<td class="click left_l"><img src="img/민수코인.jpg"
-					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민수코인</a></td>
-				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-				<td><strong id="qtum_change"></strong>
-				<td><strong id="qtum_amount" class="sort_change"
-					data-sorting="0"></strong></td>
-
-
-				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
-					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:gogo()"
-					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-			</tr>
-
-
-			<tr data-coin="sunc" title="민승코인 (sunc) 정보를 확인하시려면 클릭하세요">
-				<td class="click left_l"><img src="img/민승코인.jpg"
-					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">민승코인</a></td>
-				<td><strong id="qtum_now" class="sort_total" data-sorting="0"></strong></td>
-				<td><strong id="qtum_change"></strong>
-				<td><strong id="qtum_amount" class="sort_change"
-					data-sorting="0"></strong></td>
-
-
-				<td><a href="javascript:gogo()" class="btn btn_coin_buy"
-					data-type="1" data-coin="QTUM"> 구매</a><a href="javascript:gogo()"
-					class="btn btn_coin_sell" data-type="2" data-coin="QTUM"> 판매</a></td>
-			</tr>
-
+	
 		</tbody>
 		
 		

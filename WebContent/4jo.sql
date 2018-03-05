@@ -30,12 +30,11 @@ CREATE TABLE complaine
 
 
 CREATE TABLE exchange
-(
+(	
 	memnum number NOT NULL,
 	excoin varchar2(15),
 	exmoney number(15,5),
 	examount number(15,5),
-	PRIMARY KEY (exnum)
 );
 
 

@@ -1,7 +1,6 @@
 package pys.vo;
 
 public class exVO {
-	private int exnum;
 	private int memnum;
 	private String excoin;
 	private int exmoney;
@@ -12,8 +11,7 @@ public class exVO {
 	public exVO() {
 	}
 
-	public exVO(int exnum, int memnum,  String excoin, int exmoney, double examount) {
-		this.exnum = exnum;
+	public exVO(int memnum,  String excoin, int exmoney, double examount) {
 		this.memnum = memnum;
 		this.excoin = excoin;
 		this.exmoney = exmoney;
@@ -22,13 +20,6 @@ public class exVO {
 
 	
 
-	public int getExnum() {
-		return exnum;
-	}
-
-	public void setExnum(int exnum) {
-		this.exnum = exnum;
-	}
 
 	public int getMemnum() {
 		return memnum;
@@ -64,7 +55,7 @@ public class exVO {
 
 	@Override
 	public String toString() {
-		return "exVO [exnum=" + exnum + ", memnum=" + memnum + ", excoin=" + excoin + ", exmoney=" + exmoney
+		return "exVO [memnum=" + memnum + ", excoin=" + excoin + ", exmoney=" + exmoney
 				+ ", examount=" + examount + "]";
 	}
 

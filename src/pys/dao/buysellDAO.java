@@ -327,7 +327,7 @@ public class buysellDAO {
 			try {
 				con = DbcpBean.getConn();
 
-				String sql = "insert into fees(feenum, feemoney) values(feenum_seq.nextval,?)";
+				String sql = "insert into fees(feenum, feemoney,feedate) values(feenum_seq.nextval,?,sysdate)";
 
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, feemoney);

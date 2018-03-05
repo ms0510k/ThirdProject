@@ -18,18 +18,21 @@ public class ConfDao {
 		PreparedStatement pstmt2=null;
 		PreparedStatement pstmt3=null;
 		PreparedStatement pstmt4=null;
+		PreparedStatement pstmt5=null;
 		ResultSet rs=null;
 		int memnum=0;
 		String sql1="select memnum from money where connum=?";
-		String sql2="insert into thistory values(sysdate,'krw',0,'출금',?,?)";
+		String sql2="insert into thistory values(t_seq.nextval,sysdate,'krw',0,'출금',?,?,?)";
 		String sql3="update exchange set exmoney=(exmoney-?) where memnum=? and excoin='krw'";
 		String sql4="update money set confirm='승인' where connum=?";
+		String sql5="insert into fees values(feenum_seq.nextval,?,?,?,sysdate)";
 		try {
 			con=DbcpBean.getConn();
 			pstmt1=con.prepareStatement(sql1);
 			pstmt2=con.prepareStatement(sql2);
 			pstmt3=con.prepareStatement(sql3);
 			pstmt4=con.prepareStatement(sql4);
+			pstmt5=con.prepareStatement(sql5);
 			pstmt1.setInt(1, connum);
 			rs = pstmt1.executeQuery();
 			if (rs.next()) {
@@ -37,12 +40,17 @@ public class ConfDao {
 			}
 			pstmt2.setInt(1, outmoney);
 			pstmt2.setInt(2, memnum);
+			pstmt2.setDouble(3, outmoney*0.01);
 			pstmt3.setInt(1, outmoney);
 			pstmt3.setInt(2, memnum);
 			pstmt4.setInt(1, connum);
+			pstmt5.setInt(1, connum);
+			pstmt5.setInt(2, memnum);
+			pstmt5.setDouble(3, outmoney*0.01);
 			pstmt2.executeQuery();
 			pstmt3.executeQuery();
 			pstmt4.executeQuery();
+			pstmt5.executeQuery();
 			return 1;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -54,6 +62,7 @@ public class ConfDao {
 				pstmt2.close();
 				pstmt3.close();
 				pstmt4.close();
+				pstmt5.close();
 				}catch(SQLException se) {
 					System.out.println(se.getMessage());
 			}

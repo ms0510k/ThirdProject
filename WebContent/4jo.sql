@@ -35,7 +35,7 @@ CREATE TABLE exchange
 	memnum number NOT NULL,
 	excoin varchar2(15),
 	exmoney number,
-	examount number,
+	examount number(7,5),
 	PRIMARY KEY (exnum)
 );
 
@@ -43,8 +43,7 @@ CREATE TABLE exchange
 CREATE TABLE fees
 (
 	feenum number NOT NULL,
-	exnum number NOT NULL,
-	connum number NOT NULL,
+	connum number,
 	feemoney number,
 	PRIMARY KEY (feenum)
 );
@@ -102,7 +101,7 @@ CREATE TABLE thistory
 	tnum number primary key,
 	tdate date,
 	coin varchar2(10),
-	coinamount number(7,0),
+	coinamount number(7,5),
 	tradetype varchar2(20),
 	tprice  number(10,0),
 	memnum number NOT NULL,
@@ -153,6 +152,14 @@ ALTER TABLE fees
 	ADD FOREIGN KEY (connum)
 	REFERENCES money (connum) on delete cascade
 ;
+
+create sequence memnum_seq;
+create sequence comnum_seq;
+create sequence connum_seq;
+create sequence fnqnum_seq;
+create sequence notnum_seq;
+create sequence feenum_seq;
+create sequence tnum_seq;
 
 CREATE FUNCTION ex_seq RETURN NUMBER IS
 BEGIN

@@ -15,6 +15,21 @@
 		if (spage == null) {
 			spage = "first.jsp";
 		}
+		String msg=request.getParameter("msg");
+		
+		if("delok".equals(msg)){
+			%>
+			<script type="text/javascript">
+			alert("회원 탈퇴가 정상처리 되었습니다.");
+			</script>
+			<%
+		}else if("meminok".equals(msg)){
+	%>
+			<script type="text/javascript">
+			alert("회원 가입이 정상처리 되었습니다.");
+			</script>
+	<%
+		}
 	%>
 
 	<div id="wrap">

@@ -25,6 +25,7 @@
 <center>
 <form method = "post" action = "login_member.jsp">
 <%
+	System.out.println(c);
 		if(c != null)
 		{
 %>

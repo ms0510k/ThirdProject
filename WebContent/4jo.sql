@@ -76,7 +76,6 @@ CREATE TABLE member
 CREATE TABLE money
 (
 	connum number NOT NULL,
-	exnum number NOT NULL,
 	memnum number NOT NULL,
 	outmoney number,
 	confirm varchar2(10),

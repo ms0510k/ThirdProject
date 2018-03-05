@@ -64,9 +64,10 @@ public class MemberController extends HttpServlet {
 		   MemberDao dao=new MemberDao();
 		   int n=dao.deleteOk(email);
 		   if(n>0) {
+			   String msg="delok";
 			   HttpSession session=request.getSession();
 				session.invalidate();
-				response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
+				response.sendRedirect(request.getContextPath()+"/header.do?cmd=main&msg="+msg);
 		   }else {
 		      request.setAttribute("result","fail");
 		   }
@@ -149,6 +150,7 @@ public class MemberController extends HttpServlet {
 	      MemberDao dao=new MemberDao();      
 	      int n=dao.comp_insertOk(email,comtitle,comcontent);
 	      if(n>0) {
+	    	  
 	    	  response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
 	       }else {
 	          request.setAttribute("result","fail");
@@ -221,10 +223,11 @@ public class MemberController extends HttpServlet {
 	      
 	      int n=dao.insert(vo);
 	      if(n>0) {
+	    	  String msg="meminok";
 	    	  int memnum = indao.fintNum(email);
 	    	  dao.exInsert(memnum);
 	    	  dao.tInsert(memnum);
-	    	  response.sendRedirect(request.getContextPath()+"/header.do?cmd=main");
+	    	  response.sendRedirect(request.getContextPath()+"/header.do?cmd=main&msg="+msg);
 	       }else {
 	          request.setAttribute("result","fail");
 	       }

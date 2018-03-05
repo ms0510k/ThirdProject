@@ -43,8 +43,9 @@ public class HeaderController extends HttpServlet{
 	
 	private void main(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String msg=request.getParameter("msg");
 		request.setAttribute("page","first.jsp");
-		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+		request.getRequestDispatcher("/MainContent.jsp?msg="+msg).forward(request, response);
 	}
 	
 	

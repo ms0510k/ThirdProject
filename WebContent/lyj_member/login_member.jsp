@@ -18,9 +18,9 @@
 	비밀번호 : <input type="password" name="pwd" value="${param.pwd }"><br>
 	<div ><small style="color: red;">${errMsg }</small></div><br>
 	<input type="submit" value="로그인" >
-	<input type="button" value="회원가입"onclick ="javascript:window.location='insert_member.jsp'">
-	<input type="button" value="ID찾기" onclick ="javascript:window.location='search_idForm.jsp'">
-	<input type="button" value="PW찾기"onclick ="javascript:window.location='search_pwForm.jsp'">
+	<input type="button" value="회원가입"onclick ="javascript:window.location='<%=request.getContextPath() %>/lyj_member/insert_member.jsp'">
+	<input type="button" value="ID찾기" onclick ="javascript:window.location='<%=request.getContextPath() %>/lyj_member/search_idForm.jsp'">
+	<input type="button" value="PW찾기"onclick ="javascript:window.location='<%=request.getContextPath() %>/lyj_member/search_pwForm.jsp'">
 </form>
 </div>
 </body>

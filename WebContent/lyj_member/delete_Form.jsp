@@ -10,7 +10,7 @@
 <jsp:include page="../header.jsp"/>
 
 <body onload = "begin()">
-<form name = "myform" action = "deletePro.jsp" method = "post"
+<form name = "myform" action = "delete.jsp" method = "post"
 	onSubmit = "return checkIt()">
 <table cellspacing = "1" cellpadding = "1" width = "260"
 	border = "1" align = "center">
@@ -31,7 +31,7 @@
 	<td colspan = "2" align = "middle" >
 		<input type = "submit" value = "회원탈퇴">
 		<input type = "button" value = "취  소"
-			onclick = "javascript:window.location='main.jsp'">
+			onclick = "javascript:window.location='login_member.jsp'">
 	</td>
 </tr>
 </table>

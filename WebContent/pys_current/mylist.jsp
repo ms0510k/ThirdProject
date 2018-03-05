@@ -340,7 +340,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-
+<h3>* 매수평균가, 평가금액, 평가손익, 수익률은 모두 KRW로 환산한 추정값으로 참고용입니다.</h3>
 
 
 <div id="main" style="width: 1000px;">
@@ -368,7 +368,8 @@
 				<td><div id="btc_3"></div></td>
 				<td><div id="btc_4"></div></td>
 				<td><div id="btc_5"></div></td>
-				<td><input type="button" value="주문"></td>
+				<td><a href="marketprice.do?cmd=buy&coin=BTC" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 주문하기</a></td>
 
 			</tr>
 			<tr title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
@@ -379,7 +380,8 @@
 				<td><div id="eth_3"></div></td>
 				<td><div id="eth_4"></div></td>
 				<td><div id="eth_5"></div></td>
-				<td><input type="button" value="주문"></td>
+				<td><a href="marketprice.do?cmd=buy&coin=ETH" class="btn btn_coin_buy"
+					data-type="1" data-coin="ETH"> 주문하기</a></td>
 
 			</tr>
 
@@ -391,7 +393,8 @@
 				<td><div id="xrp_3"></div></td>
 				<td><div id="xrp_4"></div></td>
 				<td><div id="xrp_5"></div></td>
-				<td><input type="button" value="주문"></td>
+				<td><a href="marketprice.do?cmd=buy&coin=XRP" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 주문하기</a></td>
 
 			</tr>
 			<tr title="비트코인 골드 (BTG) 정보를 확인하시려면 클릭하세요">
@@ -402,7 +405,8 @@
 				<td><div id="btg_3"></div></td>
 				<td><div id="btg_4"></div></td>
 				<td><div id="btg_5"></div></td>
-				<td><input type="button" value="주문"></td>
+				<td><a href="marketprice.do?cmd=buy&coin=BTG" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTG"> 주문하기</a></td>
 
 			</tr>
 			<tr title="퀀텀 (QTUM) 정보를 확인하시려면 클릭하세요">
@@ -413,7 +417,8 @@
 				<td><div id="qtum_3"></div></td>
 				<td><div id="qtum_4"></div></td>
 				<td><div id="qtum_5"></div></td>
-				<td><input type="submit" value="주문"></td>
+				<td><a href="marketprice.do?cmd=buy&coin=QTUM" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 주문하기</a></td>
 
 			</tr>
 

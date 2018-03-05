@@ -13,8 +13,7 @@
 <jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
-<h1>정산</h1>
-
+	<h1>정산</h1><br>
 <br>
 <table border="1" width="500" class="t" style="border-collapse: collapse; text-align: center; line-height: 1.5;">
 <thead style="background-color:#FF8000 ;">
@@ -25,10 +24,10 @@
    <c:forEach var="vo" items="${list }">
    <tr>
       <td>${vo.feenum }</td>
-      <td>${vo.connum }></td>
-      <td>${vo.feemoney }></td>
-      <td>${vo.memnum }></td>
-      <td>${vo.feedate }></td>
+      <td>${vo.connum }</td>
+      <td>${vo.feemoney }</td>
+      <td>${vo.memnum }</td>
+      <td>${vo.feedate }</td>
    </tr>
    </c:forEach>
 </table>
@@ -68,14 +67,11 @@
 </div>
 <br>
 <div>
-<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fnq_search">
-   <select name="search" id="search" size="1">
-   <option value="fnqtitle">제목</option>
-   <option value="fnqcontent">질문</option>
-   <option value="fnqresult">답변</option>
+<form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fees_search">
+   <select name="search" id="search" size="1" onchange="location.href='<%=request.getContextPath() %>/admin.do?cmd=fees_search'">
+   <option value="fees_day">일별</option>
+   <option value="fees_month">월별</option>
    </select>
-<input type="text" name="word">
-<input type="submit" value="검색">
 </form>
 </div>
 </div>

@@ -6,14 +6,16 @@
 <h1 align="center">ID 찾기</h1>
 <div class="header">
 
-<form method = "post" action = "search_id.jsp">
+<form method="post"
+					action="<%=request.getContextPath()%>/member.do?cmd=idSearch" name="fr"
+					onsubmit="return check()">
 <table cellspacing = "1" cellpadding = "1" width = "400px" border = "1" align = "center">
 <tr height = "30">
       <td width = "110"  align = "center">
        이름
       </td>
       <td width = "150"  align = "center">
-            <input type = "text" name = "name"  size = "18" >
+            <input type = "text" name = "name1"  size = "18" >
       </td>
 </tr>
 <tr height = "30">
@@ -32,4 +34,34 @@
   </div>
 </form>
 </div>
+
+<script>
+
+function check() {
+	
+	if (fr.name1.value == "") {
+
+		alert("이름을 입력해 주세요.");
+
+		fr.name1.focus();
+
+		return false;
+
+	}else if(fr.phone.value == ""){
+		
+		alert("전화번호를 입력해 주세요.");
+
+		fr.phone.focus();
+
+		return false;
+		
+	}else{
+		return true;
+	}
+	
+	
+}
+
+
+</script>
 

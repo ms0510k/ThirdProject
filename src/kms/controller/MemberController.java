@@ -26,6 +26,7 @@ public class MemberController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 	      String cmd=request.getParameter("cmd");
+	      System.out.println("member.do 커맨드는:" +cmd);
 	      if(cmd.equals("insert_member")) {
 	         member_insert(request,response);
 	      }else if(cmd.equals("member_login")) {
@@ -40,6 +41,10 @@ public class MemberController extends HttpServlet {
 	    	  idForm(request,response);
 	      }else if(cmd.equals("pwForm")) {
 	    	  pwForm(request,response);
+	      }else if(cmd.equals("idSearch")) {
+	    	  idSearch(request,response);
+	      }else if(cmd.equals("pwSearch")) {
+	    	  pwSearch(request,response);
 	      }else if(cmd.equals("mypage_comp")) {
 	    	  mypage_comp(request,response);
 	      }else if(cmd.equals("comp_insert")){
@@ -143,7 +148,35 @@ public class MemberController extends HttpServlet {
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
 	
+	//아이디찾기
+	private void idSearch(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		  String name1=request.getParameter("name1");
+		  String phone=request.getParameter("phone");
+		
+		  MemberDao dao = new MemberDao();
+		  
+		  //이름과 전화번호로 아이디 찾기
+		  String email = dao.searchID(name1, phone);
+		  request.setAttribute("name", name1);
+		  request.setAttribute("email", email);
+		request.setAttribute("page", "lyj_member/search_id.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
 	
+	//비번찾기
+	private void pwSearch(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		  String email=request.getParameter("id");
+		  String phone=request.getParameter("phone");
+		
+		  MemberDao dao = new MemberDao();
+		  
+		  //이름과 전화번호로 아이디 찾기
+		  String pwd = dao.searchPW(email, phone);
+		  request.setAttribute("pwd", pwd);
+		  request.setAttribute("email", email);
+		request.setAttribute("page", "lyj_member/search_pw.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
 	
 	
 	

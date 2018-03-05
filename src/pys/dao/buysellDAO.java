@@ -218,7 +218,6 @@ public class buysellDAO {
 				int memnum1 = rs.getInt(7);
 				int fee = rs.getInt(8);
 				tradeVO vo = new tradeVO(tnum,tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
-				System.out.println(vo.toString());
 				list.add(vo);
 			}
 			return list;
@@ -321,6 +320,30 @@ public class buysellDAO {
 			}
 		}
 		
-	
+		// 거래 체결 후 해당 fee 값 fees 테이블로 넣어주기
+		public int feein(int feemoney) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = DbcpBean.getConn();
+
+				String sql = "insert into fees(feenum, feemoney) values(feenum_seq.nextval,?)";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, feemoney);
+				return pstmt.executeUpdate();
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return -1;
+			} finally {
+				try {
+					con.close();
+					pstmt.close();
+				} catch (SQLException se) {
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+
 	
 }

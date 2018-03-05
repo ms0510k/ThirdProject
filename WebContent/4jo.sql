@@ -34,7 +34,7 @@ CREATE TABLE exchange
 	exnum number NOT NULL,
 	memnum number NOT NULL,
 	excoin varchar2(15),
-	exmoney number,
+	exmoney number(15,5),
 	examount number(7,5),
 	PRIMARY KEY (exnum)
 );
@@ -103,7 +103,7 @@ CREATE TABLE thistory
 	coin varchar2(10),
 	coinamount number(7,5),
 	tradetype varchar2(20),
-	tprice  number(10,0),
+	tprice  number(15,5),
 	memnum number NOT NULL,
 	fee number
 );

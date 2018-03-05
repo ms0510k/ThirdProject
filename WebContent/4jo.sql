@@ -155,6 +155,14 @@ ALTER TABLE fees
 ;
 
 
+drop sequence memnum_seq;
+drop sequence comnum_seq;
+drop sequence connum_seq;
+drop sequence fnqnum_seq;
+drop sequence notnum_seq;
+drop sequence feenum_seq;
+drop sequence tnum_seq;
+
 create sequence memnum_seq;
 create sequence comnum_seq;
 create sequence connum_seq;
@@ -163,9 +171,5 @@ create sequence notnum_seq;
 create sequence feenum_seq;
 create sequence tnum_seq;
 
-CREATE FUNCTION ex_seq RETURN NUMBER IS
-BEGIN
-  RETURN exchange_seq.nextval;
-END;
-/
+
 

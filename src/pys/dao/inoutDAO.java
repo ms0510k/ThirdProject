@@ -46,7 +46,7 @@ public class inoutDAO {
 		
 		//출금신청 관리자 money 테이블에 승인여부 결과 찍어서 보낸다
 		public int out(moneyVO vo) {
-			System.out.println("money에 찍힐 항목1 : "+vo.toString());
+		/*	System.out.println("money에 찍힐 항목1 : "+vo.toString());*/
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
@@ -146,7 +146,7 @@ public class inoutDAO {
 				int exmoney = rs.getInt(3);
 				double examount = rs.getDouble(4);
 				exVO vo = new exVO(memnum1, excoin, exmoney,examount);
-				System.out.println(vo.toString());
+				/*System.out.println(vo.toString());*/
 				list.add(vo);
 			}
 			return list;
@@ -180,7 +180,7 @@ public class inoutDAO {
 				int memnum1 = rs.getInt(7);
 				int fee = rs.getInt(8);
 				tradeVO vo = new tradeVO(tnum,tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
-				System.out.println(vo.toString());
+				/*System.out.println(vo.toString());*/
 				list.add(vo);
 			}
 			return list;
@@ -216,7 +216,7 @@ public class inoutDAO {
 				int memnum1 = rs.getInt(7);
 				int fee = rs.getInt(8);
 				tradeVO vo = new tradeVO(tnum,tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
-				System.out.println(vo.toString());
+			/*	System.out.println(vo.toString());*/
 				list.add(vo);
 			}
 			return list;
@@ -258,6 +258,40 @@ public class inoutDAO {
 	}
 	
 	
+	
+	//체결리스트 뽑아서 뿌려주기
+	public ArrayList<tradeVO> accepttradeList(int memnum) {
+		String sql = "select * from thistory where memnum = ? and tradetype like '체결%'";
+		PreparedStatement ps = null;
+		Connection con=null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, memnum);
+			rs = ps.executeQuery();
+			ArrayList<tradeVO> list = new ArrayList<>();
+			while (rs.next()) {
+				int tnum = rs.getInt(1);
+				String tdate = rs.getString(2);
+				String coin = rs.getString(3);
+				double coinamount  = rs.getDouble(4);
+				String tradetype = rs.getString(5);
+				int tprice = rs.getInt(6);
+				int memnum1 = rs.getInt(7);
+				int fee = rs.getInt(8);
+				tradeVO vo = new tradeVO(tnum,tdate, coin, coinamount, tradetype, tprice, memnum1,fee);
+				/*System.out.println(vo.toString());*/
+				list.add(vo);
+			}
+			return list;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+		DbcpBean.closeconn(con, ps, rs);
+		}
+	}
 	
 	
 	

@@ -37,9 +37,10 @@
 
 <script type="text/javascript">
 
+
+
+
 window.onload = proc1(); 
-
-
 
 
 //오른쪽 표 전용 함수 1초마다 갱신시켜준다.

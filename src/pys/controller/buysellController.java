@@ -104,10 +104,10 @@ public class buysellController extends HttpServlet {
 		int sell_order_amount = Integer.parseInt(request.getParameter("val_2"));
 
 		
-		  System.out.println("추금할떄 다찍힘? coin:" +coin + ", memnum :" + memnum +
+		 /* System.out.println("추금할떄 다찍힘? coin:" +coin + ", memnum :" + memnum +
 		  ", sell_max: " + sell_max+ ", sell_input_price: " + sell_input_price+
 		  ", sell_order_commission: " + sell_order_commission+ ", sell_order_amount: "
-		  +sell_order_amount);
+		  +sell_order_amount);*/
 		 
 
 		tradeVO vo = new tradeVO(0, null, coin, sell_max, "미체결_판매", sell_input_price, memnum, sell_order_commission);
@@ -144,7 +144,7 @@ public class buysellController extends HttpServlet {
 		if(vo.getTradetype().equals("미체결_구매")) {
 			double amount = vo.getCoinamount()+(vo.getFee()/(double)vo.getTprice());
 			vo.setCoinamount(amount);
-			System.out.println("vo 상태는 : "+vo.toString());
+			/*System.out.println("vo 상태는 : "+vo.toString());*/
 			dao.tradein_cancel(vo);
 			int row = dao.exin_cancel(vo);
 			if (row > 0) {

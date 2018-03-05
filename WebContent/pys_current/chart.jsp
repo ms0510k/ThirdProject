@@ -674,10 +674,10 @@ function gogo() {
 			}
 			xrp3.innerHTML = xrp_total + "원";
 
-			/* 비트코인캐시 관련 실시간 업데이트 부분 */
-			var bch_now = data['data']['BCH'].closing_price;
-			var bch_first = data['data']['BCH'].opening_price;
-			var bch_amount = data['data']['BCH'].units_traded;
+			/* 비트코인골드 관련 실시간 업데이트 부분 */
+			var bch_now = data['data']['BTG'].closing_price;
+			var bch_first = data['data']['BTG'].opening_price;
+			var bch_amount = data['data']['BTG'].units_traded;
 			var bch_change = (bch_now / bch_first) - 1;
 			bch_change = bch_change.toFixed(2);
 			var bch_total = numberWithCommas(Math.round(bch_amount * bch_now));

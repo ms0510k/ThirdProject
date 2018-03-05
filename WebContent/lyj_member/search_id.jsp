@@ -13,9 +13,6 @@
 <%
 	String name = request.getParameter("name");
 	String phone = request.getParameter("phone");
-		
-	LogonDBBean manager = LogonDBBean.getInstance();
-	LogonDataBean c = manager.searchId(name,phone); 
 	
 	try
 	{
@@ -25,11 +22,10 @@
 <center>
 <form method = "post" action = "login_member.jsp">
 <%
-	System.out.println(c);
-		if(c != null)
+		if(name != null)
 		{
 %>
-			<%= name %>님에 아이디는 <b><%= c.getId() %></b> 입니다.<p>
+			<%= name %>님에 아이디는 <b><%=  %></b> 입니다.<p>
 			<input type = "submit" value = "메인으로..">
 <%
 		}

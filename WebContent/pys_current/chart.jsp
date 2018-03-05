@@ -556,7 +556,10 @@
 //세션에 아이디 값이 존재하지 않는 경우 로그인 페이지로 보낸다
 function gogo() {
 	alert("로그인이 필요합니다.");
-	location.href="/ThirdProject/kms_member/member_login.jsp";
+	
+	
+	var url = '<%=request.getContextPath()%>';
+	document.location.href = url+'/member.do?cmd=loginForm';
 }
 
 

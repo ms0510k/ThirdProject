@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/header.css">
+	<link rel="stylesheet"	href="<%=request.getContextPath()%>/css/header.css">
+	<link rel="stylesheet"  href="<%=request.getContextPath()%>/css/btn.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <!-- 코드작업부분 -->
@@ -28,7 +28,9 @@
 
 	function gogo() {
 		alert("로그인이 필요합니다.");
-		location.href="/ThirdProject/lyj_member/login_member.jsp";
+		var url = '<%=request.getContextPath()%>';
+		document.location.href = url+'/member.do?cmd=loginForm';
+		
 	}
 </script>
 
@@ -131,11 +133,11 @@
 			
 			<!-- 로그인부분 -->
 			<li><a
-				href="<%=request.getContextPath()%>/lyj_member/login_member.jsp"
+				href="<%=request.getContextPath()%>/member.do?cmd=loginForm"
 				style="padding-left: 200px; padding-right: 50px;">로그인</a></li>
 			<!-- 회원가입부분 -->
 			<li><a
-				href="<%=request.getContextPath()%>/lyj_member/insert_member.jsp"
+				href="<%=request.getContextPath()%>/member.do?cmd=joinForm"
 				style="padding-left: 50px; padding-right: 50px;">회원가입</a></li>
 			<%
 				}

@@ -32,6 +32,14 @@ public class MemberController extends HttpServlet {
 	    	  member_login(request,response);
 	      }else if(cmd.equals("member_logout")) {
 	    	  member_logout(request,response);
+	      }else if(cmd.equals("loginForm")) {
+	    	  loginForm(request,response);
+	      }else if(cmd.equals("joinForm")) {
+	    	  joinForm(request,response);
+	      }else if(cmd.equals("idForm")) {
+	    	  idForm(request,response);
+	      }else if(cmd.equals("pwForm")) {
+	    	  pwForm(request,response);
 	      }else if(cmd.equals("mypage_comp")) {
 	    	  mypage_comp(request,response);
 	      }else if(cmd.equals("comp_insert")){
@@ -112,6 +120,42 @@ public class MemberController extends HttpServlet {
 		      request.setAttribute("result","fail");
 		   }
 	}
+	
+	
+	
+	
+	private void loginForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/login_member.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	private void joinForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/insert_member.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	private void idForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/search_idForm.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	private void pwForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/search_pwForm.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private void comp_detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		int comnum=Integer.parseInt(request.getParameter("comnum"));
 		   MemberDao dao=new MemberDao();
@@ -202,11 +246,14 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("page","first.jsp");
 			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}else if(n==0){
+			
 			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
-			request.getRequestDispatcher("/lyj_member/login_member.jsp").forward(request, response);
+			request.setAttribute("page","lyj_member/login_member.jsp");
+			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}else {
 			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
-			request.getRequestDispatcher("/lyj_member/login_member.jsp").forward(request, response);
+			request.setAttribute("page","lyj_member/login_member.jsp");
+			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}
 	}
 	private void member_insert(HttpServletRequest request, HttpServletResponse response)

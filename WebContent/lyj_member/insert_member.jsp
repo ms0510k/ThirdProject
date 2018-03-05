@@ -2,10 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 <script type="text/javascript">
 var checkEmail = false;
 function fsubmit() {
@@ -113,11 +110,17 @@ function fn_press_han(obj)
     obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 }
 
+
+
+function gogo() {
+	
+	var url = '<%=request.getContextPath()%>';
+	document.location.href = url+'/member.do?cmd=loginForm';
+	
+}
 </script>
-</head>
-<body>
+
 <div class="header">
-<jsp:include page="../header.jsp"/>
 </div>
 <div id="body1" style="margin-top: 10px;" align="center">
 <h1>회원가입</h1>
@@ -170,8 +173,6 @@ function fn_press_han(obj)
 </tr>
 </table><br>
 	<input type="submit" value="가입하기">
-	<input type="button" value="로그인하기"onclick ="javascript:window.location='login_member.jsp'">
+	<a href="<%=request.getContextPath()%>/member.do?cmd=loginForm" class="button purple">로그인하기</a>
 </form>
 </div>
-</body>
-</html>

@@ -52,13 +52,12 @@ public class inoutDAO {
 			try {
 				con=DbcpBean.getConn();
 				
-				String sql = "insert into money values(money_seq.nextval,?,?,?,?,sysdate)";
+				String sql = "insert into money values(money_seq.nextval,?,?,?,sysdate)";
 				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, vo.getExnum());
-				pstmt.setInt(2, vo.getMemnum());
-				pstmt.setInt(3, vo.getOutmoney());
-				pstmt.setString(4, vo.getConfirm());
+				pstmt.setInt(1, vo.getMemnum());
+				pstmt.setInt(2, vo.getOutmoney());
+				pstmt.setString(3, vo.getConfirm());
 				return pstmt.executeUpdate();
 			} catch (SQLException se) {
 				System.out.println(se.getMessage());

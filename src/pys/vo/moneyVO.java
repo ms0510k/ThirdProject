@@ -3,7 +3,6 @@ package pys.vo;
 public class moneyVO {
 	
 	
-	private int exnum;
 	private int memnum;
 	private int outmoney;
 	private String confirm;
@@ -11,22 +10,14 @@ public class moneyVO {
 	public moneyVO() {
 	}
 
-	public moneyVO(int exnum, int memnum,int outmoney, String confirm) {
-		this.exnum = exnum;
+	public moneyVO(int memnum,int outmoney, String confirm) {
 		this.memnum = memnum;
 		this.outmoney = outmoney;
 		this.confirm = confirm;
 
 	}
 
-	public int getExnum() {
-		return exnum;
-	}
-
-	public void setExnum(int exnum) {
-		this.exnum = exnum;
-	}
-
+	
 	public int getMemnum() {
 		return memnum;
 	}
@@ -56,7 +47,7 @@ public class moneyVO {
 
 	@Override
 	public String toString() {
-		return "moneyVO [exnum=" + exnum + ", memnum=" + memnum + ", outmoney=" + outmoney + ", confirm=" + confirm
+		return "moneyVO [memnum=" + memnum + ", outmoney=" + outmoney + ", confirm=" + confirm
 				+ "]";
 	}
 

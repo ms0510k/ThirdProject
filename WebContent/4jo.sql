@@ -169,7 +169,7 @@ create sequence connum_seq;
 create sequence fnqnum_seq;
 create sequence notnum_seq;
 create sequence feenum_seq;
-create sequence tnum_seq;
+create sequence t_seq;
 
 
 

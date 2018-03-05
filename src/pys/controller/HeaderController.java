@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import pys.dao.inoutDAO;
 import pys.vo.exVO;
+import pys.vo.listVO;
 import pys.vo.tradeVO;
 
 @WebServlet("/header.do")
@@ -111,55 +112,52 @@ public class HeaderController extends HttpServlet{
 		inoutDAO dao = new inoutDAO();
 		int memnum = dao.fintNum(email);
 		ArrayList<tradeVO> tList = dao.tradelist(memnum);
+
+		listVO btc = new listVO("BTC", 0, 0, 0, 0, 0, 0);
+		listVO eth = new listVO("ETH", 0, 0, 0, 0, 0, 0);
+		listVO xrp = new listVO("XRP", 0, 0, 0, 0, 0, 0);
+		listVO bch = new listVO("BCH", 0, 0, 0, 0, 0, 0);
+		listVO qtum = new listVO("QTUM", 0, 0, 0, 0, 0, 0);
+		
+		
+		//코인 5개 각각 넣어주어서 처리하기
+		for (int i = 0; i < tList.size(); i++) {
+			double count = 0;
+			int sum = 0;
+			if(tList.get(i).getCoin().equals("BTC")) {
+				
+			}
+		}
 		
 		
 		
-		//보유수량구하기
-		double amount = 0; 
+		//코인종류
+		String coin;
+
+		// 보유수량구하기
+
+		double amount;
+
+		// 매수평균가 구하기
+
+		int avg_price;
+
+		// 매수금액 구하기
+
+		int buy_price;
+
+		// 평가금액 구하기
+
+		int now_price;
+
+		// 평가손익 구하기
+
+		double result_p;
+
+		int result_m;
 		
 		
-		
-		//매수평균가 구하기
-		
-		
-		
-		
-		//매수금액 구하기
-	/*	민수,다영,세용,
-		강희,민아,재희,
-		윤수,정규,혁수,
-		
-		민수,혁수,세용,
-		강희,민아,재희,
-		윤수,정규,다영,
-		
-		
-		세용,민수
-		강희,
-		윤수,
-		
-		
-		민수,세용,민아,지호,형진
-		강희,재희,성준,영진,혁수
-		윤수,정규,다영,민성,송희
-		
-		
-		
-		
-		형진 송희
-		지호 영진
-		민성 성준
-		*/
-		
-		
-		
-		//평가금액 구하기 
-		
-		
-		
-		
-		//평가손익 구하기
-		
+				
 		
 		
 		

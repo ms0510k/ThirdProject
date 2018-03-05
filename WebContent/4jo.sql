@@ -31,11 +31,10 @@ CREATE TABLE complaine
 
 CREATE TABLE exchange
 (
-	exnum number NOT NULL,
 	memnum number NOT NULL,
 	excoin varchar2(15),
 	exmoney number(15,5),
-	examount number(7,5),
+	examount number(15,5),
 	PRIMARY KEY (exnum)
 );
 
@@ -45,6 +44,8 @@ CREATE TABLE fees
 	feenum number NOT NULL,
 	connum number,
 	feemoney number,
+	memnum number,
+	feedate date,
 	PRIMARY KEY (feenum)
 );
 
@@ -101,7 +102,7 @@ CREATE TABLE thistory
 	tnum number primary key,
 	tdate date,
 	coin varchar2(10),
-	coinamount number(7,5),
+	coinamount number(15,5),
 	tradetype varchar2(20),
 	tprice  number(15,5),
 	memnum number NOT NULL,
@@ -112,15 +113,16 @@ CREATE TABLE thistory
 
 /* Create Foreign Keys */
 
+
 ALTER TABLE fees
-	ADD FOREIGN KEY (exnum)
-	REFERENCES exchange (exnum) on delete cascade
+	ADD FOREIGN KEY (memnum)
+	REFERENCES exchange (memnum) on delete cascade
 ;
 
 
 ALTER TABLE money
-	ADD FOREIGN KEY (exnum)
-	REFERENCES exchange (exnum) on delete cascade
+	ADD FOREIGN KEY (memnum)
+	REFERENCES exchange (memnum) on delete cascade
 ;
 
 
@@ -152,6 +154,7 @@ ALTER TABLE fees
 	ADD FOREIGN KEY (connum)
 	REFERENCES money (connum) on delete cascade
 ;
+
 
 create sequence memnum_seq;
 create sequence comnum_seq;

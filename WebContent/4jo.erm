@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path>C:\Users\MinSung\Desktop\4jo.sql</output_path>
+				<output_path>C:\Users\MinSung\Desktop\sss.sql</output_path>
 				<encoding>UTF-8</encoding>
 				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2018-02-07 19:58:54</creation_date>
-			<updated_date>2018-03-05 10:03:49</updated_date>
+			<updated_date>2018-03-05 10:28:57</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -218,7 +218,7 @@
 		</word>
 		<word>
 			<id>3</id>
-			<length>7</length>
+			<length>15</length>
 			<decimal>5</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -410,7 +410,7 @@
 		</word>
 		<word>
 			<id>15</id>
-			<length>7</length>
+			<length>15</length>
 			<decimal>5</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -2289,7 +2289,7 @@
 							<b>0</b>
 						</color>
 					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
+					<parent_cardinality>0..1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
 					<name></name>
 					<on_delete_action>RESTRICT</on_delete_action>
@@ -2440,7 +2440,7 @@
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>

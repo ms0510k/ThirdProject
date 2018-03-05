@@ -50,8 +50,25 @@ public class MemberController extends HttpServlet {
 	    	  member_update2(request,response);
 	      }else if(cmd.equals("member_updateOk")) {
 	    	  member_updateOk(request,response);
+	      }else if(cmd.equals("member_delete")) {
+	    	  String email=request.getParameter("email");
+	    	  response.sendRedirect(request.getContextPath()+"/kms_member/member_update.jsp?email="+email);
+	      }else if(cmd.equals("member_delete2")) {
+	    	  member_delete2(request,response);
 	      }
 	}
+	private void member_delete2(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		String pwd=request.getParameter("pwd");
+		String email=request.getParameter("email");
+	   MemberDao dao=new MemberDao();
+	   MemberVo vo=dao.getinfo(email);
+	   request.setAttribute("vo", vo);
+	   if(pwd.equals(vo.getPwd())) {
+	   request.getRequestDispatcher("/kms_member/member_delete2.jsp").forward(request, response);
+	   }else {
+		   response.sendRedirect(request.getContextPath()+"/kms_member/member_delete.jsp?email="+email);
+	   }
+}
 	private void member_update2(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 			String pwd=request.getParameter("pwd");
 			String email=request.getParameter("email");

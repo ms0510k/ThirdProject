@@ -71,7 +71,7 @@ public class buysellController extends HttpServlet {
 		// 미체결 신청함
 		int row = dao.tradein(vo);
 
-		exVO vo2 = new exVO(0, memnum, "krw", buy_order_price, 0);
+		exVO vo2 = new exVO(memnum, "krw", buy_order_price, 0);
 		// 일단 누적테이블에 현금 해당 금액만큼 - 해놓음
 		dao.tradein_cash(vo2);
 		if (row > 0) {
@@ -117,7 +117,7 @@ public class buysellController extends HttpServlet {
 		// 미체결 신청함
 		int row = dao.tradein(vo);
 
-		exVO vo2 = new exVO(0, memnum, coin, 0, sell_max);
+		exVO vo2 = new exVO(memnum, coin, 0, sell_max);
 		// 일단 누적테이블에 현금 해당 금액만큼 - 해놓음
 		dao.tradein_coin(vo2);
 		if (row > 0) {

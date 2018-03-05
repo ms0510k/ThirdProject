@@ -30,13 +30,11 @@ CREATE TABLE complaine
 
 
 CREATE TABLE exchange
-(
-	exnum number NOT NULL,
+(	
 	memnum number NOT NULL,
 	excoin varchar2(15),
-	exmoney number,
-	examount number(7,5),
-	PRIMARY KEY (exnum)
+	exmoney number(15,5),
+	examount number(15,5)
 );
 
 
@@ -45,6 +43,8 @@ CREATE TABLE fees
 	feenum number NOT NULL,
 	connum number,
 	feemoney number,
+	memnum number,
+	feedate date,
 	PRIMARY KEY (feenum)
 );
 
@@ -101,9 +101,9 @@ CREATE TABLE thistory
 	tnum number primary key,
 	tdate date,
 	coin varchar2(10),
-	coinamount number(7,5),
+	coinamount number(15,5),
 	tradetype varchar2(20),
-	tprice  number(10,0),
+	tprice  number(15,5),
 	memnum number NOT NULL,
 	fee number
 );
@@ -112,15 +112,16 @@ CREATE TABLE thistory
 
 /* Create Foreign Keys */
 
+
 ALTER TABLE fees
-	ADD FOREIGN KEY (exnum)
-	REFERENCES exchange (exnum) on delete cascade
+	ADD FOREIGN KEY (memnum)
+	REFERENCES exchange (memnum) on delete cascade
 ;
 
 
 ALTER TABLE money
-	ADD FOREIGN KEY (exnum)
-	REFERENCES exchange (exnum) on delete cascade
+	ADD FOREIGN KEY (memnum)
+	REFERENCES exchange (memnum) on delete cascade
 ;
 
 
@@ -153,6 +154,15 @@ ALTER TABLE fees
 	REFERENCES money (connum) on delete cascade
 ;
 
+
+drop sequence memnum_seq;
+drop sequence comnum_seq;
+drop sequence connum_seq;
+drop sequence fnqnum_seq;
+drop sequence notnum_seq;
+drop sequence feenum_seq;
+drop sequence tnum_seq;
+
 create sequence memnum_seq;
 create sequence comnum_seq;
 create sequence connum_seq;
@@ -161,9 +171,5 @@ create sequence notnum_seq;
 create sequence feenum_seq;
 create sequence tnum_seq;
 
-CREATE FUNCTION ex_seq RETURN NUMBER IS
-BEGIN
-  RETURN exchange_seq.nextval;
-END;
-/
+
 

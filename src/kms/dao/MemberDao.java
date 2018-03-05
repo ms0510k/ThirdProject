@@ -9,11 +9,30 @@ import java.util.Date;
 
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
-import kms.vo.NoticeVo;
-import pys.dao.inoutDAO;
 import test.dbcp.DbcpBean;
 
 public class MemberDao {
+	public int deleteOk(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "delete member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public int updateOk(MemberVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -250,15 +269,16 @@ public class MemberDao {
 			/*String sql = "insert into exchange values(exchange_seq.nextval,?,?,?,?,sysdate)";*/
 			
 			String sql = "INSERT ALL "+ 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'krw',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'BTC',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'ETH',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'XRP',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'BTG',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'QTUM',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'MSC',0,0)" + 
-					"      INTO exchange (exnum,memnum,excoin,exmoney,examount) VALUES (ex_seq,?,'SUNC',0,0)"+
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'krw',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'BTC',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'ETH',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'XRP',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'BTG',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'QTUM',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'MSC',0,0)" + 
+					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'SUNC',0,0)"+
 					"select * from DUAL";
+			
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);

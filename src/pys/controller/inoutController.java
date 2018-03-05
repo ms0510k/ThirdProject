@@ -77,7 +77,7 @@ public class inoutController extends HttpServlet{
 		inoutDAO dao = new inoutDAO();
 		
 		
-		exVO exvo = new exVO(0, memnum, "krw", inmoney,0);
+		exVO exvo = new exVO(memnum, "krw", inmoney,0);
 		tradeVO tvo = new tradeVO(0,null, "krw", 0, "입금", inmoney, memnum,0);
 		int row = dao.in(tvo);
 		int row2 = dao.in2(exvo);

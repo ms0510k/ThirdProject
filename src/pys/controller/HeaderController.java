@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import pys.dao.inoutDAO;
 import pys.vo.exVO;
+import pys.vo.listVO;
 import pys.vo.tradeVO;
 
 @WebServlet("/header.do")
@@ -33,6 +34,8 @@ public class HeaderController extends HttpServlet{
 			trade(request,response);
 		}else if(cmd.equals("inout")) {
 			inout(request,response);
+		}else if(cmd.equals("mylist")) {
+			mylist(request,response);
 		}
 	}
 	
@@ -99,6 +102,71 @@ public class HeaderController extends HttpServlet{
 		request.setAttribute("page","pys_current/in_out.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}
+	
+	
+	
+	
+	private void mylist(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String email = (String)request.getParameter("email");
+		inoutDAO dao = new inoutDAO();
+		int memnum = dao.fintNum(email);
+		ArrayList<tradeVO> tList = dao.tradelist(memnum);
+
+		listVO btc = new listVO("BTC", 0, 0, 0, 0, 0, 0);
+		listVO eth = new listVO("ETH", 0, 0, 0, 0, 0, 0);
+		listVO xrp = new listVO("XRP", 0, 0, 0, 0, 0, 0);
+		listVO bch = new listVO("BCH", 0, 0, 0, 0, 0, 0);
+		listVO qtum = new listVO("QTUM", 0, 0, 0, 0, 0, 0);
+		
+		
+		//코인 5개 각각 넣어주어서 처리하기
+		for (int i = 0; i < tList.size(); i++) {
+			double count = 0;
+			int sum = 0;
+			if(tList.get(i).getCoin().equals("BTC")) {
+				
+			}
+		}
+		
+		
+		
+		//코인종류
+		String coin;
+
+		// 보유수량구하기
+
+		double amount;
+
+		// 매수평균가 구하기
+
+		int avg_price;
+
+		// 매수금액 구하기
+
+		int buy_price;
+
+		// 평가금액 구하기
+
+		int now_price;
+
+		// 평가손익 구하기
+
+		double result_p;
+
+		int result_m;
+		
+		
+				
+		
+		
+		
+		
+		request.setAttribute("page","pys_current/mylist.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	
 	
 }
 	

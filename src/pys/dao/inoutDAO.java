@@ -141,12 +141,11 @@ public class inoutDAO {
 			rs = ps.executeQuery();
 			ArrayList<exVO> list = new ArrayList<>();
 			while (rs.next()) {
-				int exnum = rs.getInt(1);
-				int memnum1 = rs.getInt(2);
-				String excoin = rs.getString(3);
-				int exmoney = rs.getInt(4);
-				double examount = rs.getDouble(5);
-				exVO vo = new exVO(exnum, memnum1, excoin, exmoney,examount);
+				int memnum1 = rs.getInt(1);
+				String excoin = rs.getString(2);
+				int exmoney = rs.getInt(3);
+				double examount = rs.getDouble(4);
+				exVO vo = new exVO(memnum1, excoin, exmoney,examount);
 				System.out.println(vo.toString());
 				list.add(vo);
 			}

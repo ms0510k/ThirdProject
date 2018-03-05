@@ -43,8 +43,7 @@ CREATE TABLE exchange
 CREATE TABLE fees
 (
 	feenum number NOT NULL,
-	exnum number NOT NULL,
-	connum number NOT NULL,
+	connum number,
 	feemoney number,
 	PRIMARY KEY (feenum)
 );

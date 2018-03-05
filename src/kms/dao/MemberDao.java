@@ -9,11 +9,30 @@ import java.util.Date;
 
 import kms.vo.CompVo;
 import kms.vo.MemberVo;
-import kms.vo.NoticeVo;
-import pys.dao.inoutDAO;
 import test.dbcp.DbcpBean;
 
 public class MemberDao {
+	public int deleteOk(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "delete member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public int updateOk(MemberVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

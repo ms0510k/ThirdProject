@@ -458,6 +458,7 @@
 				document.getElementById("btc_4").style.fontWeight = 'bold';
 				document.getElementById("btc_4").innerHTML = numberWithCommas(Math.round((btc_now*<%=btcList.getAmount()%>)))+"KRW";
 				
+				
 				if(((btc_now*<%=btcList.getAmount()%>)-<%=btcList.getTotal()%>)>0){
 				
 				document.getElementById("btc_5").style.color = 'red';

@@ -340,7 +340,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-
+<h3>* 매수평균가, 평가금액, 평가손익, 수익률은 모두 KRW로 환산한 추정값으로 참고용입니다.</h3>
 
 
 <div id="main" style="width: 1000px;">
@@ -361,6 +361,7 @@
 		<!-- 로그인 했을때랑 안했을때랑 나누어서 처리하기  1.로그인 했을때-->
 		<tbody>
 			<tr title="비트코인 (BTC) 정보를 확인하시려면 클릭하세요">
+			<div id="my1">
 				<td class="click left_l"><img src="img/비트코인.jpg"
 					onclick="gogo1('btc')"><a onclick="gogo1('btc')">비트코인</a></td>
 				<td><div id="btc_1"></div></td>
@@ -368,10 +369,12 @@
 				<td><div id="btc_3"></div></td>
 				<td><div id="btc_4"></div></td>
 				<td><div id="btc_5"></div></td>
-				<td><input type="button" value="주문"></td>
-
+				<td><a href="marketprice.do?cmd=buy&coin=BTC" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 주문하기</a></td>
+				</div>
 			</tr>
 			<tr title="이더리움 (ETH) 정보를 확인하시려면 클릭하세요">
+			<div id="my2">
 				<td><img src="img/이더리움.jpg" onclick="gogo1('eth')"><a
 					onclick="gogo1('eth')">이더리움</a></td>
 				<td><div id="eth_1"></div></td>
@@ -379,11 +382,13 @@
 				<td><div id="eth_3"></div></td>
 				<td><div id="eth_4"></div></td>
 				<td><div id="eth_5"></div></td>
-				<td><input type="button" value="주문"></td>
-
+				<td><a href="marketprice.do?cmd=buy&coin=ETH" class="btn btn_coin_buy"
+					data-type="1" data-coin="ETH"> 주문하기</a></td>
+			</div>
 			</tr>
 
 			<tr title="리플 (XRP) 정보를 확인하시려면 클릭하세요">
+			<div id="my3">
 				<td><img src="img/리플.jpg" onclick="gogo1('xrp')"><a
 					onclick="gogo1('xrp')">리플</a></td>
 				<td><div id="xrp_1"></div></td>
@@ -391,10 +396,13 @@
 				<td><div id="xrp_3"></div></td>
 				<td><div id="xrp_4"></div></td>
 				<td><div id="xrp_5"></div></td>
-				<td><input type="button" value="주문"></td>
-
+				<td><a href="marketprice.do?cmd=buy&coin=XRP" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 주문하기</a></td>
+</div>
 			</tr>
 			<tr title="비트코인 골드 (BTG) 정보를 확인하시려면 클릭하세요">
+			
+			<div id="my4">
 				<td class="click left_l"><img src="img/비트코인캐쉬.jpg"
 					onclick="gogo1('btg')"><a onclick="gogo1('btg')">비트코인골드</a></td>
 				<td><div id="btg_1"></div></td>
@@ -402,10 +410,14 @@
 				<td><div id="btg_3"></div></td>
 				<td><div id="btg_4"></div></td>
 				<td><div id="btg_5"></div></td>
-				<td><input type="button" value="주문"></td>
-
+				<td><a href="marketprice.do?cmd=buy&coin=BTG" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTG"> 주문하기</a></td>
+</div>
 			</tr>
 			<tr title="퀀텀 (QTUM) 정보를 확인하시려면 클릭하세요">
+			
+				<div id="my5">
+			
 				<td class="click left_l"><img src="img/퀀텀.jpg"
 					onclick="gogo1('qtum')"><a onclick="gogo1('qtum')">퀀텀</a></td>
 				<td><div id="qtum_1"></div></td>
@@ -413,8 +425,9 @@
 				<td><div id="qtum_3"></div></td>
 				<td><div id="qtum_4"></div></td>
 				<td><div id="qtum_5"></div></td>
-				<td><input type="submit" value="주문"></td>
-
+				<td><a href="marketprice.do?cmd=buy&coin=QTUM" class="btn btn_coin_buy"
+					data-type="1" data-coin="BTC"> 주문하기</a></td>
+			</div>
 			</tr>
 
 
@@ -452,6 +465,11 @@
 			
 				
 				//비트코인부분
+				
+				if(<%=btcList.getAmount()%> == 0){
+					
+					document.getElementById("my1").style.visibility = "hidden";
+				}else{
 				document.getElementById("btc_1").innerHTML = <%=btcList.getAmount()%>+"BTC";
 				document.getElementById("btc_2").innerHTML = numberWithCommas(Math.round((<%=btcList.getTotal()%>/<%=btcList.getAmount()%>)))+"KRW";
 				document.getElementById("btc_3").innerHTML = numberWithCommas(Math.round(<%=btcList.getTotal()%>))+"KRW";
@@ -467,9 +485,14 @@
 				document.getElementById("btc_5").style.color = 'blue';
 				document.getElementById("btc_5").innerHTML = (((btc_now*<%=btcList.getAmount()%>)/<%=btcList.getTotal()%>-1)*100).toFixed(5)+"%";
 			}
-				
+				}
 				
 				//이더리움부분
+				
+				if(<%=eList.getAmount()%> == 0){
+					
+					document.getElementById("my2").style.visibility = "hidden";
+				}else{
 				document.getElementById("eth_1").innerHTML = <%=eList.getAmount()%>+"ETH";
 				document.getElementById("eth_2").innerHTML = numberWithCommas(Math.round((<%=eList.getTotal()%>/<%=eList.getAmount()%>)))+"KRW";
 				document.getElementById("eth_3").innerHTML = numberWithCommas(Math.round(<%=eList.getTotal()%>))+"KRW";
@@ -484,8 +507,14 @@
 				document.getElementById("eth_5").style.color = 'blue';
 				document.getElementById("eth_5").innerHTML = (((eth_now*<%=eList.getAmount()%>)/<%=eList.getTotal()%>-1)*100).toFixed(5)+"%";
 			}
+				}
 				
 				//리플부분
+				if(<%=xList.getAmount()%> == 0){
+					
+					document.getElementById("my3").style.visibility = "hidden";
+				}else{
+				
 				document.getElementById("xrp_1").innerHTML = <%=xList.getAmount()%>+"XRP";
 				document.getElementById("xrp_2").innerHTML = numberWithCommas(Math.round((<%=xList.getTotal()%>/<%=xList.getAmount()%>)))+"KRW";
 				document.getElementById("xrp_3").innerHTML = numberWithCommas(Math.round(<%=xList.getTotal()%>))+"KRW";
@@ -500,8 +529,16 @@
 				document.getElementById("xrp_5").style.color = 'blue';
 				document.getElementById("xrp_5").innerHTML = (((xrp_now*<%=xList.getAmount()%>)/<%=xList.getTotal()%>-1)*100).toFixed(5)+"%";
 			}
+				}
+				
+				
 				
 				//비트코인골드부분
+				
+if(<%=btgList.getAmount()%> == 0){
+					
+					document.getElementById("my4").style.visibility = "hidden";
+				}else{
 				document.getElementById("btg_1").innerHTML = <%=btgList.getAmount()%>+"BTG";
 				document.getElementById("btg_2").innerHTML = numberWithCommas(Math.round((<%=btgList.getTotal()%>/<%=btgList.getAmount()%>)))+"KRW";
 				document.getElementById("btg_3").innerHTML = numberWithCommas(Math.round(<%=btgList.getTotal()%>))+"KRW";
@@ -516,8 +553,13 @@
 				document.getElementById("btg_5").style.color = 'blue';
 				document.getElementById("btg_5").innerHTML = (((btg_now*<%=btgList.getAmount()%>)/<%=btgList.getTotal()%>-1)*100).toFixed(5)+"%";
 			}
-				
+				}
 				//퀀텀부분
+				
+				if(<%=qtumList.getAmount()%> == 0){
+					
+					document.getElementById("my5").style.visibility = "hidden";
+				}else{
 				document.getElementById("qtum_1").innerHTML = <%=qtumList.getAmount()%>+"QTUM";
 				document.getElementById("qtum_2").innerHTML = numberWithCommas(Math.round((<%=qtumList.getTotal()%>/<%=qtumList.getAmount()%>)))+"KRW";
 				document.getElementById("qtum_3").innerHTML = numberWithCommas(Math.round(<%=qtumList.getTotal()%>))+"KRW";
@@ -532,7 +574,7 @@
 				document.getElementById("qtum_5").style.color = 'blue';
 				document.getElementById("qtum_5").innerHTML = (((qtum_now*<%=qtumList.getAmount()%>)/<%=qtumList.getTotal()%>-1)*100).toFixed(5)+"%";
 			}
-				
+				}				
 
 			});
 		

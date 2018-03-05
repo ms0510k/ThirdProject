@@ -26,12 +26,25 @@ public class MemberController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 	      String cmd=request.getParameter("cmd");
+	      System.out.println("member.do 커맨드는:" +cmd);
 	      if(cmd.equals("insert_member")) {
 	         member_insert(request,response);
 	      }else if(cmd.equals("member_login")) {
 	    	  member_login(request,response);
 	      }else if(cmd.equals("member_logout")) {
 	    	  member_logout(request,response);
+	      }else if(cmd.equals("loginForm")) {
+	    	  loginForm(request,response);
+	      }else if(cmd.equals("joinForm")) {
+	    	  joinForm(request,response);
+	      }else if(cmd.equals("idForm")) {
+	    	  idForm(request,response);
+	      }else if(cmd.equals("pwForm")) {
+	    	  pwForm(request,response);
+	      }else if(cmd.equals("idSearch")) {
+	    	  idSearch(request,response);
+	      }else if(cmd.equals("pwSearch")) {
+	    	  pwSearch(request,response);
 	      }else if(cmd.equals("mypage_comp")) {
 	    	  mypage_comp(request,response);
 	      }else if(cmd.equals("comp_insert")){
@@ -112,6 +125,70 @@ public class MemberController extends HttpServlet {
 		      request.setAttribute("result","fail");
 		   }
 	}
+	
+	
+	
+	
+	private void loginForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/login_member.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	private void joinForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/insert_member.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	private void idForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/search_idForm.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	private void pwForm(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		request.setAttribute("page", "lyj_member/search_pwForm.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	//아이디찾기
+	private void idSearch(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		  String name1=request.getParameter("name1");
+		  String phone=request.getParameter("phone");
+		
+		  MemberDao dao = new MemberDao();
+		  
+		  //이름과 전화번호로 아이디 찾기
+		  String email = dao.searchID(name1, phone);
+		  request.setAttribute("name", name1);
+		  request.setAttribute("email", email);
+		request.setAttribute("page", "lyj_member/search_id.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	//비번찾기
+	private void pwSearch(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		  String email=request.getParameter("id");
+		  String phone=request.getParameter("phone");
+		
+		  MemberDao dao = new MemberDao();
+		  
+		  //이름과 전화번호로 아이디 찾기
+		  String pwd = dao.searchPW(email, phone);
+		  request.setAttribute("pwd", pwd);
+		  request.setAttribute("email", email);
+		request.setAttribute("page", "lyj_member/search_pw.jsp");
+		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private void comp_detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		int comnum=Integer.parseInt(request.getParameter("comnum"));
 		   MemberDao dao=new MemberDao();
@@ -202,11 +279,14 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("page","first.jsp");
 			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}else if(n==0){
+			
 			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
-			request.getRequestDispatcher("/lyj_member/login_member.jsp").forward(request, response);
+			request.setAttribute("page","lyj_member/login_member.jsp");
+			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}else {
 			request.setAttribute("errMsg", "아이디 또는 비밀번호를 확인해 주세요.");
-			request.getRequestDispatcher("/lyj_member/login_member.jsp").forward(request, response);
+			request.setAttribute("page","lyj_member/login_member.jsp");
+			request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 		}
 	}
 	private void member_insert(HttpServletRequest request, HttpServletResponse response)

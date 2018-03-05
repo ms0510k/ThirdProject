@@ -166,6 +166,8 @@ public class buysellController extends HttpServlet {
 	
 	
 	
+	
+	
 	//메인이 실행되면 1초마다 실행되는 문장으로 
 		private void tcheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -185,6 +187,8 @@ public class buysellController extends HttpServlet {
 			
 			//구매관련 처리해주기
 			if(tList.get(i).getTradetype().equals("미체결_구매")) {
+				
+				
 				
 				if(tList.get(i).getCoin().equals("BTC") && tList.get(i).getTprice() == BTC) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");

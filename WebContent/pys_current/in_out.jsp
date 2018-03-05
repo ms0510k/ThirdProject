@@ -320,6 +320,9 @@ ul.tabs li.current {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
+	
+	
+	
 	function check() {
 
 		if (fr.output_price.value == "") {
@@ -360,7 +363,18 @@ ul.tabs li.current {
 			return false;
 
 		}
+		else if (fr1.input_price.value.length > 10) {
 
+			alert("입금 단위를 11자리 이하로 해주세요");
+
+			fr1.input_price.focus();
+
+			return false;
+
+		}
+		
+		
+		
 		else if (fr1.input_price.value < 10001) {
 
 			alert("최소 입금 금액은 10,000원 입니다.");

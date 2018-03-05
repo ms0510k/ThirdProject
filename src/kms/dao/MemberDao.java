@@ -337,4 +337,82 @@ public class MemberDao {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	//아이디찾기
+	public String searchID(String name, String phone) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con=DbcpBean.getConn();
+			String sql = "select email from member where name = ? and phone = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}else {
+				return null;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
+	
+	
+	
+	//비번찾기
+		public String searchPW(String email, String phone) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con=DbcpBean.getConn();
+				String sql = "select pwd from member where email = ? and phone = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, email);
+				pstmt.setString(2, phone);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					return rs.getString(1);
+				}else {
+					return null;
+				}
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return null;
+			} finally {
+				try {
+					con.close();
+					pstmt.close();
+					rs.close();
+					}catch(SQLException se) {
+						System.out.println(se.getMessage());
+					}
+			}
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
 }

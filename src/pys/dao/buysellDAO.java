@@ -14,7 +14,7 @@ public class buysellDAO {
 
 	// 매수 신청한 이후 미체결로 thistory에 넣어준다.
 	public int tradein(tradeVO vo) {
-		System.out.println("미체결 신청후 thistory 결과 ㅣ " + vo.toString());
+		/*System.out.println("미체결 신청후 thistory 결과 ㅣ " + vo.toString());*/
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {

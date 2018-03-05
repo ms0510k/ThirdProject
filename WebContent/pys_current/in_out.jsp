@@ -108,7 +108,7 @@ ul.tabs li.current {
 	for (int i = 0; i < eList.size(); i++) {
 		if (eList.get(i).getExcoin().equals("krw")) {
 			kor = eList.get(i).getExmoney();
-			vo = new exVO(eList.get(i).getExnum(), eList.get(i).getMemnum(), eList.get(i).getExcoin(),
+			vo = new exVO(eList.get(i).getMemnum(), eList.get(i).getExcoin(),
 					eList.get(i).getExmoney(),eList.get(i).getExamount());
 		}
 	}
@@ -177,7 +177,6 @@ ul.tabs li.current {
 				<form method="post"
 					action="<%=request.getContextPath()%>/inout.do?cmd=out" name="fr"
 					onsubmit="return check()">
-					<input type="hidden" name="exnum" value="<%=vo.getExnum()%>">
 					<input type="hidden" name="memnum" value="<%=vo.getMemnum()%>">
 					<table style="border-spacing: 40px;">
 						<tr>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import pys.dao.inoutDAO;
 import pys.vo.exVO;
+import pys.vo.listVO;
 import pys.vo.tradeVO;
 
 @WebServlet("/header.do")
@@ -111,60 +112,72 @@ public class HeaderController extends HttpServlet{
 		String email = (String)request.getParameter("email");
 		inoutDAO dao = new inoutDAO();
 		int memnum = dao.fintNum(email);
-		ArrayList<tradeVO> tList = dao.tradelist(memnum);
+		ArrayList<tradeVO> tList = dao.accepttradeList(memnum);
+
+		listVO btc = new listVO("BTC", 0, 0);
+		listVO eth = new listVO("ETH", 0, 0);
+		listVO xrp = new listVO("XRP", 0, 0);
+		listVO bch = new listVO("BCH", 0, 0);
+		listVO qtum = new listVO("QTUM", 0, 0);
+		
+		
+		//코인 5개 각각 넣어주어서 처리하기
+		for (int i = 0; i < tList.size(); i++) {
+			if(tList.get(i).getCoin().equals("BTC")) {
+				if(tList.get(i).getTradetype().equals("체결_구매")) {
+				btc.setAmount(btc.getAmount()+tList.get(i).getCoinamount());
+				btc.setTotal(btc.getTotal()+(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+				}else if(tList.get(i).getTradetype().equals("체결_판매")) {
+					btc.setAmount(btc.getAmount()-tList.get(i).getCoinamount());
+					btc.setTotal(btc.getTotal()-(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+				}
+			
+			}else if(tList.get(i).getCoin().equals("ETH")) {
+				if(tList.get(i).getTradetype().equals("체결_구매")) {
+				eth.setAmount(eth.getAmount()+tList.get(i).getCoinamount());
+				eth.setTotal(eth.getTotal()+(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+				}else if(tList.get(i).getTradetype().equals("체결_판매")) {
+					eth.setAmount(eth.getAmount()-tList.get(i).getCoinamount());
+					eth.setTotal(eth.getTotal()-(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+				}
+			
+			}else if(tList.get(i).getCoin().equals("XRP")) {
+				if(tList.get(i).getTradetype().equals("체결_구매")) {
+					xrp.setAmount(xrp.getAmount()+tList.get(i).getCoinamount());
+					xrp.setTotal(xrp.getTotal()+(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+					}else if(tList.get(i).getTradetype().equals("체결_판매")) {
+					xrp.setAmount(xrp.getAmount()-tList.get(i).getCoinamount());
+					xrp.setTotal(xrp.getTotal()-(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+					}
+			
+			}else if(tList.get(i).getCoin().equals("BCH")) {
+				if(tList.get(i).getTradetype().equals("체결_구매")) {
+					bch.setAmount(bch.getAmount()+tList.get(i).getCoinamount());
+					bch.setTotal(bch.getTotal()+(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+					}else if(tList.get(i).getTradetype().equals("체결_판매")) {
+						bch.setAmount(bch.getAmount()-tList.get(i).getCoinamount());
+						bch.setTotal(bch.getTotal()-(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+					}
+			
+			}else if(tList.get(i).getCoin().equals("QTUM")) {
+				if(tList.get(i).getTradetype().equals("체결_구매")) {
+					qtum.setAmount(qtum.getAmount()+tList.get(i).getCoinamount());
+					qtum.setTotal(qtum.getTotal()+(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+					}else if(tList.get(i).getTradetype().equals("체결_판매")) {
+						qtum.setAmount(qtum.getAmount()-tList.get(i).getCoinamount());
+						qtum.setTotal(qtum.getTotal()-(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
+					}
+			}
+		}
 		
 		
 		
-		//보유수량구하기
-		double amount = 0; 
 		
-		
-		
-		//매수평균가 구하기
-		
-		
-		
-		
-		//매수금액 구하기
-	/*	민수,다영,세용,
-		강희,민아,재희,
-		윤수,정규,혁수,
-		
-		민수,혁수,세용,
-		강희,민아,재희,
-		윤수,정규,다영,
-		
-		
-		세용,민수
-		강희,
-		윤수,
-		
-		
-		민수,세용,민아,지호,형진
-		강희,재희,성준,영진,혁수
-		윤수,정규,다영,민성,송희
-		
-		
-		
-		
-		형진 송희
-		지호 영진
-		민성 성준
-		*/
-		
-		
-		
-		//평가금액 구하기 
-		
-		
-		
-		
-		//평가손익 구하기
-		
-		
-		
-		
-		
+		request.setAttribute("BTC", btc);
+		request.setAttribute("ETH", eth);
+		request.setAttribute("XRP", xrp);
+		request.setAttribute("BTG", bch);
+		request.setAttribute("QTUM", qtum);
 		request.setAttribute("page","pys_current/mylist.jsp");
 		request.getRequestDispatcher("/MainContent.jsp").forward(request, response);
 	}

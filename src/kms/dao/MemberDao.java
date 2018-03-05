@@ -279,6 +279,7 @@ public class MemberDao {
 					"      INTO exchange (memnum,excoin,exmoney,examount) VALUES (?,'SUNC',0,0)"+
 					"select * from DUAL";
 			
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memnum);
 			pstmt.setInt(2, memnum);

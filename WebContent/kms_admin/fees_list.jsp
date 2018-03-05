@@ -68,10 +68,11 @@
 <br>
 <div>
 <form method="post" action="<%=request.getContextPath() %>/admin.do?cmd=fees_search">
-   <select name="search" id="search" size="1" onchange="location.href='<%=request.getContextPath() %>/admin.do?cmd=fees_search'">
+   <select name="search" size="1">
    <option value="fees_day">일별</option>
    <option value="fees_month">월별</option>
    </select>
+   <input type="submit" value="조회">
 </form>
 </div>
 </div>

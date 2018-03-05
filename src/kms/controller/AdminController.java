@@ -79,8 +79,28 @@ public class AdminController extends HttpServlet{
    }
    private void fees_search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	   String search=request.getParameter("search");
-	   System.out.println(search);
-   }
+	   String spageNum=request.getParameter("pageNum");
+	   int pageNum=1;
+	   if(spageNum!=null) {
+	      pageNum=Integer.parseInt(spageNum);
+	   }
+	   int startRow=(pageNum-1)*5+1;
+	   int endRow=startRow+4;
+	   FeesDao dao=new FeesDao();
+	      ArrayList<FeesVo> list=dao.feessearch(search,startRow,endRow);
+	      int pageCount=(int)Math.ceil(dao.getCounts(search)/5.0);
+	      int startPage=((pageNum-1)/4*4)+1;
+	      int endPage=startPage+3;
+	      if(pageCount<endPage) {
+	         endPage=pageCount;
+	      }
+	      request.setAttribute("list", list);
+	      request.setAttribute("pageCount", pageCount);
+	      request.setAttribute("startPage", startPage);
+	      request.setAttribute("endPage", endPage);
+	      request.setAttribute("pageNum", pageNum);
+	      request.getRequestDispatcher("/kms_admin/fees_searchlist.jsp?search="+search).forward(request, response);
+	   }
    private void fees_list(HttpServletRequest request, HttpServletResponse response)
 	         throws ServletException, IOException {
 	      String spageNum=request.getParameter("pageNum");

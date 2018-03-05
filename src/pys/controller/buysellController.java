@@ -179,7 +179,6 @@ public class buysellController extends HttpServlet {
 		//일단 미체결 리스트 받아옴
 		buysellDAO dao = new buysellDAO();
 		ArrayList<tradeVO> tList = dao.reserveList();
-		System.out.println("미체결리스트");
 		for (int i = 0; i < tList.size(); i++) {
 			
 			//수수료 처리해주기
@@ -190,18 +189,23 @@ public class buysellController extends HttpServlet {
 				if(tList.get(i).getCoin().equals("BTC") && tList.get(i).getTprice() == BTC) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "BTC",tList.get(i).getCoinamount());
+					dao.feein(tList.get(i).getFee());
 				}else if(tList.get(i).getCoin().equals("ETH") && tList.get(i).getTprice() == ETH) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "ETH",tList.get(i).getCoinamount());
+					dao.feein(tList.get(i).getFee());
 				}else if(tList.get(i).getCoin().equals("XRP") && tList.get(i).getTprice() == XRP) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "XRP",tList.get(i).getCoinamount());
+					dao.feein(tList.get(i).getFee());
 				}else if(tList.get(i).getCoin().equals("BCH") && tList.get(i).getTprice() == BCH) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "BCH",tList.get(i).getCoinamount());
+					dao.feein(tList.get(i).getFee());
 				}else if (tList.get(i).getCoin().equals("QTUM") && tList.get(i).getTprice() == QTUM) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "QTUM",tList.get(i).getCoinamount());
+					dao.feein(tList.get(i).getFee());
 				}
 				
 			}else if(tList.get(i).getTradetype().equals("미체결_판매")) {
@@ -210,22 +214,23 @@ public class buysellController extends HttpServlet {
 				if(tList.get(i).getCoin().equals("BTC") && tList.get(i).getTprice() == BTC) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
-					
+					dao.feein(tList.get(i).getFee());
 				}else if(tList.get(i).getCoin().equals("ETH") && tList.get(i).getTprice() == ETH) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
-					
+					dao.feein(tList.get(i).getFee());
 				}else if(tList.get(i).getCoin().equals("XRP") && tList.get(i).getTprice() == XRP) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
-					
+					dao.feein(tList.get(i).getFee());
 				}else if(tList.get(i).getCoin().equals("BCH") && tList.get(i).getTprice() == BCH) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
-					
+					dao.feein(tList.get(i).getFee());
 				}else if (tList.get(i).getCoin().equals("QTUM") && tList.get(i).getTprice() == QTUM) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
+					dao.feein(tList.get(i).getFee());
 				}
 				
 			}
@@ -234,5 +239,7 @@ public class buysellController extends HttpServlet {
 		}
 
 	
+		
+		
 	
 }

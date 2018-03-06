@@ -8,10 +8,39 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import kms.vo.FeesVo;
-import kms.vo.NoticeVo;
 import test.dbcp.DbcpBean;
 
 public class FeesDao {
+	public int getCounts(String search) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql=null;
+		try {
+			con=DbcpBean.getConn();
+			if(search.equals("fees_day")) {
+				sql = "select NVL(count(feenum),0) cnt from fees group by to_char(feedate,'yyyy/mm/dd')";
+			}else if(search.equals("fees_month")) {
+				sql = "select NVL(count(feenum),0) cnt from fees group by to_char(feedate,'yyyy/mm')";
+			}
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int cnt = rs.getInt("cnt");
+			return cnt;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				}catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+		}
+	}
 	public ArrayList<FeesVo> feessearch(String search, int startRow, int endRow ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -20,23 +49,19 @@ public class FeesDao {
 		try {
 			con=DbcpBean.getConn();
 			if(search.equals("fees_day")) {
-			sql = "select * from(select aa.*,rownum rnum from(select * from notice where nottitle like '%'||?||'%' order by notnum)aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney),to_char(feedate,'yyyy/mm/dd') feedate from fees group by to_char(feedate,'yyyy/mm/dd'))aa)where rnum>=? and rnum<=?";
 			}else if(search.equals("fees_month")) {
-			sql = "select * from(select aa.*,rownum rnum from(select * from notice where notcontent like '%'||?||'%' order by notnum)aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney),to_char(feedate,'yyyy/mm') feedate from fees group by to_char(feedate,'yyyy/mm'))aa)where rnum>=? and rnum<=?";
 			}
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, word);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
-			ArrayList<NoticeVo> list = new ArrayList<>();
+			ArrayList<FeesVo> list = new ArrayList<>();
 			while (rs.next()) {
-				int notnum = rs.getInt("notnum");
-				String nottitle = rs.getString("nottitle");
-				String notcontent = rs.getString("notcontent");
-				int nothit = rs.getInt("nothit");
-				Date notdate = rs.getDate("notdate");
-				NoticeVo vo = new NoticeVo(notnum,nottitle,notcontent,nothit,notdate);
+				int feemoney = rs.getInt("feemoney");
+				Date feedate = rs.getDate("feedate");
+				FeesVo vo = new FeesVo(0,0,feemoney,0,feedate);
 				list.add(vo);
 			}
 			return list;

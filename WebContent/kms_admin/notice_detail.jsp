@@ -23,7 +23,7 @@
 </tr>
 <tr>
    <td style="background-color:#FF8000 ; font-weight: bold;">공지내용</td>
-   <td><textarea rows="5" cols="50" readonly="readonly">${vo.notcontent }</textarea></td>
+   <td><textarea rows="30" cols="50" readonly="readonly">${vo.notcontent }</textarea></td>
 </tr>
 <tr>
    <td style="background-color:#FF8000 ; font-weight: bold;">조회수</td>

@@ -23,11 +23,11 @@
 </tr>
 <tr>
    <td style="background-color:#FF8000 ; font-weight: bold;">질문 내용</td>
-   <td><textarea rows="5" cols="50" readonly="readonly">${vo.fnqcontent }</textarea></td>
+   <td><textarea rows="15" cols="50" readonly="readonly">${vo.fnqcontent }</textarea></td>
 </tr>
 <tr>
    <td style="background-color:#FF8000 ; font-weight: bold;">질문 답변</td>
-   <td><textarea rows="5" cols="50" readonly="readonly">${vo.fnqresult }</textarea></td>
+   <td><textarea rows="15" cols="50" readonly="readonly">${vo.fnqresult }</textarea></td>
 </tr>
 </table>
 <%

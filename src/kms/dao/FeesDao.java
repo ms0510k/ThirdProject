@@ -104,7 +104,7 @@ public class FeesDao {
 		}
 	}
 	public ArrayList<FeesVo> list(int startRow, int endRow) {
-		String sql = "select * from(select aa.*,rownum rnum from(select * from fees order by feenum)aa)where rnum>=? and rnum<=?";
+		String sql = "select * from(select aa.*,rownum rnum from(select * from fees order by feenum desc)aa)where rnum>=? and rnum<=?";
 		PreparedStatement pstmt = null;
 		Connection con=null;
 		ResultSet rs = null;

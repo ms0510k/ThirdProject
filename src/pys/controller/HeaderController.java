@@ -150,7 +150,7 @@ public class HeaderController extends HttpServlet{
 					xrp.setTotal(xrp.getTotal()-(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));
 					}
 			
-			}else if(tList.get(i).getCoin().equals("BCH")) {
+			}else if(tList.get(i).getCoin().equals("BTG")) {
 				if(tList.get(i).getTradetype().equals("체결_구매")) {
 					bch.setAmount(bch.getAmount()+tList.get(i).getCoinamount());
 					bch.setTotal(bch.getTotal()+(tList.get(i).getCoinamount()*tList.get(i).getTprice()-tList.get(i).getFee()));

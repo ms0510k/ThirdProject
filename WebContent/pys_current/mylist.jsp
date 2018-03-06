@@ -14,6 +14,9 @@
 	listVO xList = (listVO) request.getAttribute("XRP");
 	listVO btgList = (listVO) request.getAttribute("BTG");
 	listVO qtumList = (listVO) request.getAttribute("QTUM");
+	
+	
+	System.out.println(btgList.toString());
 %>
 
 
@@ -343,7 +346,7 @@
 <h3>* 매수평균가, 평가금액, 평가손익, 수익률은 모두 KRW로 환산한 추정값으로 참고용입니다.</h3>
 
 
-<div id="main" style="width: 1000px;" align="center">
+<div id="main" style="width: 1200px;" align="center">
 	<h3 id="lastupdate"></h3>
 	<table class="g_table" id="tableAsset">
 
@@ -539,7 +542,7 @@ if(<%=btgList.getAmount()%> == 0){
 					
 					document.getElementById("my4").style.visibility = "hidden";
 				}else{
-				document.getElementById("btg_1").innerHTML = <%=btgList.getAmount()%>+"BTG";
+				document.getElementById("btg_1").innerHTML = (<%=btgList.getAmount()%>).toFixed(5)+"BTG";
 				document.getElementById("btg_2").innerHTML = numberWithCommas(Math.round((<%=btgList.getTotal()%>/<%=btgList.getAmount()%>)))+"KRW";
 				document.getElementById("btg_3").innerHTML = numberWithCommas(Math.round(<%=btgList.getTotal()%>))+"KRW";
 				document.getElementById("btg_4").style.fontWeight = 'bold';

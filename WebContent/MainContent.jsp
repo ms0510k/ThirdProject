@@ -76,12 +76,13 @@ function showData(){
 		var btc_now = data['data']['BTC'].closing_price;
 		var eth_now = data['data']['ETH'].closing_price;
 		var xrp_now = data['data']['XRP'].closing_price;
-		var bch_now = data['data']['BCH'].closing_price;
+		var bch_now = data['data']['BTG'].closing_price;
 		var qtum_now = data['data']['QTUM'].closing_price;
 	 	var xhr=new XMLHttpRequest();
 	 	//일단 임시로 이렇게 가긴함
-		xhr.open('get','http://192.168.0.31:8081/ThirdProject/buysell.do?cmd=tcheck&BTC='+btc_now+'&ETH='+eth_now+'&XRP='+xrp_now+'&BCH='+bch_now+'&QTUM='+qtum_now,true);
-		xhr.send(null);
+		xhr.open('get',"http://192.168.0.31:8081/ThirdProject/buysell.do?cmd=tcheck&BTC="+btc_now+"&ETH="+eth_now+"&XRP="+xrp_now+"&BCH="+bch_now+"&QTUM="+qtum_now,true);
+	
+	 	xhr.send(null);
 
 	});
 	

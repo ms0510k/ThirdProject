@@ -174,9 +174,9 @@ public class buysellController extends HttpServlet {
 		int BTC = Integer.parseInt(request.getParameter("BTC"));
 		int ETH = Integer.parseInt(request.getParameter("ETH"));
 		int XRP = Integer.parseInt(request.getParameter("XRP"));
-		int BCH = Integer.parseInt(request.getParameter("BCH"));
+		int BTG = Integer.parseInt(request.getParameter("BCH"));
 		int QTUM = Integer.parseInt(request.getParameter("QTUM"));
-		//System.out.println("비트코인:"+btc+", 이더 : "+eth+", 리플:"+xrp+", 캐시:"+bch+", 퀀텀:"+qtum);
+		//System.out.println("비트코인:"+BTC+", 이더 : "+ETH+", 리플:"+XRP+", 캐시:"+BTG+", 퀀텀:"+QTUM);
 			
 		//일단 미체결 리스트 받아옴
 		buysellDAO dao = new buysellDAO();
@@ -202,11 +202,14 @@ public class buysellController extends HttpServlet {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "XRP",tList.get(i).getCoinamount());
 					dao.feein(tList.get(i).getFee());
-				}else if(tList.get(i).getCoin().equals("BCH") && tList.get(i).getTprice() <= BCH) {
+				}
+				else if(tList.get(i).getCoin().equals("BTG") && tList.get(i).getTprice() <= BTG) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
-					dao.buyok_ex(tList.get(i).getMemnum(), "BCH",tList.get(i).getCoinamount());
+					dao.buyok_ex(tList.get(i).getMemnum(), "BTG",tList.get(i).getCoinamount());
 					dao.feein(tList.get(i).getFee());
-				}else if (tList.get(i).getCoin().equals("QTUM") && tList.get(i).getTprice() <= QTUM) {
+				}
+				
+				else if (tList.get(i).getCoin().equals("QTUM") && tList.get(i).getTprice() <= QTUM) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_구매");
 					dao.buyok_ex(tList.get(i).getMemnum(), "QTUM",tList.get(i).getCoinamount());
 					dao.feein(tList.get(i).getFee());
@@ -215,23 +218,26 @@ public class buysellController extends HttpServlet {
 			}else if(tList.get(i).getTradetype().equals("미체결_판매")) {
 				
 				int money = (int)(tList.get(i).getCoinamount()*tList.get(i).getTprice() -tList.get(i).getFee());
-				if(tList.get(i).getCoin().equals("BTC") && tList.get(i).getTprice() >= BTC) {
+				if(tList.get(i).getCoin().equals("BTC") && tList.get(i).getTprice() <= BTC) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
 					dao.feein(tList.get(i).getFee());
-				}else if(tList.get(i).getCoin().equals("ETH") && tList.get(i).getTprice() >= ETH) {
+				}else if(tList.get(i).getCoin().equals("ETH") && tList.get(i).getTprice() <= ETH) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
 					dao.feein(tList.get(i).getFee());
-				}else if(tList.get(i).getCoin().equals("XRP") && tList.get(i).getTprice() >= XRP) {
+				}else if(tList.get(i).getCoin().equals("XRP") && tList.get(i).getTprice() <= XRP) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
 					dao.feein(tList.get(i).getFee());
-				}else if(tList.get(i).getCoin().equals("BCH") && tList.get(i).getTprice() >= BCH) {
+				}
+				else if(tList.get(i).getCoin().equals("BTG") && tList.get(i).getTprice() <= BTG) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
 					dao.feein(tList.get(i).getFee());
-				}else if (tList.get(i).getCoin().equals("QTUM") && tList.get(i).getTprice() >= QTUM) {
+				}
+				
+				else if (tList.get(i).getCoin().equals("QTUM") && tList.get(i).getTprice() <= QTUM) {
 					dao.tradeok_t(tList.get(i).getTnum(), "체결_판매");
 					dao.sellok_ex(tList.get(i).getMemnum(), money);
 					dao.feein(tList.get(i).getFee());

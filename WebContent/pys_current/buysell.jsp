@@ -113,7 +113,7 @@ ul.tabs li.current {
 
 
 
-<div id="content1">
+<div id="content1" align="center">
 
 	<!-- 시장현황 -->
 	<div class="left_content" id="content_left">

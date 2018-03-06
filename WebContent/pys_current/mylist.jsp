@@ -343,7 +343,7 @@
 <h3>* 매수평균가, 평가금액, 평가손익, 수익률은 모두 KRW로 환산한 추정값으로 참고용입니다.</h3>
 
 
-<div id="main" style="width: 1000px;">
+<div id="main" style="width: 1000px;" align="center">
 	<h3 id="lastupdate"></h3>
 	<table class="g_table" id="tableAsset">
 

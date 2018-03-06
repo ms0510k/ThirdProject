@@ -21,8 +21,10 @@
 			<br>
 			 <input type="submit" value="로그인" class="button grey"> 
 			<a href="<%=request.getContextPath()%>/member.do?cmd=joinForm"	class="button black">회원가입</a> 
-			<a href="<%=request.getContextPath()%>/member.do?cmd=idForm" class="button purple">ID찾기</a>
-			<a href="<%=request.getContextPath()%>/member.do?cmd=pwForm" class="button blue_alt">PW찾기</a>
+			
+			<!-- 임시제거 -->
+			<%-- <a href="<%=request.getContextPath()%>/member.do?cmd=idForm" class="button purple">ID찾기</a>
+			<a href="<%=request.getContextPath()%>/member.do?cmd=pwForm" class="button blue_alt">PW찾기</a> --%>
 		</form>
 	</div>
 

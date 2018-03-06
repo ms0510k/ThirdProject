@@ -80,7 +80,7 @@ function showData(){
 		var qtum_now = data['data']['QTUM'].closing_price;
 	 	var xhr=new XMLHttpRequest();
 	 	//일단 임시로 이렇게 가긴함
-		xhr.open('get','http://localhost:8081/ThirdProject/buysell.do?cmd=tcheck&BTC='+btc_now+'&ETH='+eth_now+'&XRP='+xrp_now+'&BCH='+bch_now+'&QTUM='+qtum_now,true);
+		xhr.open('get','http://192.168.0.31:8081/ThirdProject/buysell.do?cmd=tcheck&BTC='+btc_now+'&ETH='+eth_now+'&XRP='+xrp_now+'&BCH='+bch_now+'&QTUM='+qtum_now,true);
 		xhr.send(null);
 
 	});

@@ -343,7 +343,7 @@
 
 
 <input type="hidden" id="coin_kind">
-<div id="main" style="width: 1000px;">
+<div id="main" style="width: 1000px;" align="center">
 	<h3 id="lastupdate"></h3>
 	<table class="g_table" id="tableAsset">
 

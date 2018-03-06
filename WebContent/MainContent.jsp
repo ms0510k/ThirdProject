@@ -37,7 +37,7 @@
 			<jsp:include page="header.jsp" />
 		</div>
 
-		<div id="content">
+		<div id="content" align="center">
 			<jsp:include page="<%=spage%>" />
 		</div>
 		<div id="footer">

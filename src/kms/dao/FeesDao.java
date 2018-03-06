@@ -19,9 +19,9 @@ public class FeesDao {
 		try {
 			con=DbcpBean.getConn();
 			if(search.equals("fees_day")) {
-				sql = "select NVL(count(feenum),0) cnt from fees group by to_char(feedate,'yyyy/mm/dd')";
+				sql = "select count(cnt) from (select NVL(count(feenum),0) cnt from fees group by to_char(feedate,'yyyy/mm/dd'))";
 			}else if(search.equals("fees_month")) {
-				sql = "select NVL(count(feenum),0) cnt from fees group by to_char(feedate,'yyyy/mm')";
+				sql = "select count(cnt) from (select NVL(count(feenum),0) cnt from fees group by to_char(feedate,'yyyy/mm'))";
 			}
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();

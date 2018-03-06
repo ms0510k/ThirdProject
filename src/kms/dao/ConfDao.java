@@ -45,8 +45,8 @@ public class ConfDao {
 			pstmt3.setInt(2, memnum);
 			pstmt4.setInt(1, connum);
 			pstmt5.setInt(1, connum);
-			pstmt5.setInt(2, memnum);
-			pstmt5.setDouble(3, outmoney*0.01);
+			pstmt5.setDouble(2, outmoney*0.01);
+			pstmt5.setInt(3, memnum);
 			pstmt2.executeQuery();
 			pstmt3.executeQuery();
 			pstmt4.executeQuery();

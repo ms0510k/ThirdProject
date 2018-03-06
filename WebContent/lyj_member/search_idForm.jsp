@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
-<h1 align="center">ID 찾기</h1>
+<title>아이디 찾기</title>
+</head>
+<body >
 <div class="header">
+<jsp:include page="../header.jsp"/>
 
-<form method="post"
-					action="<%=request.getContextPath()%>/member.do?cmd=idSearch" name="fr"
-					onsubmit="return check()">
-<table cellspacing = "1" cellpadding = "1" width = "400px" border = "1" align = "center">
+<form method = "post" action = "<%=request.getContextPath()%>/asdf.do">
+<table cellspacing = "1" cellpadding = "1" width = "260" border = "1" align = "center">
 <tr height = "30">
       <td width = "110"  align = "center">
        이름
       </td>
       <td width = "150"  align = "center">
-            <input type = "text" name = "name1"  size = "18" >
+            <input type = "text" name = "name"  size = "18" >
       </td>
 </tr>
 <tr height = "30">
@@ -23,45 +26,17 @@
             전화 번호
       </td>
       <td width = "150"  align = "center">
-            <input type = "text" name = "phone" size = "18" >
-            
+            <input type = "text" name = "phone" size = "18" >            
+      </td>
+</tr>
+<tr height = "30">
+      <td colspan = "2" align = "center" >
+            <input type = "button" value = "뒤로가기" onclick ="javascript:window.location='login_member.jsp'">
+            <input type = "submit" value = "찾기">
       </td>
 </tr>
 </table>
-<div align="center" style="margin-top: 10px;">
-<a href="<%=request.getContextPath()%>/member.do?cmd=loginForm"	class="button black">뒤로가기</a> 
-            <input type="submit" value="찾기" class="button grey"> 
-  </div>
 </form>
 </div>
-
-<script>
-
-function check() {
-	
-	if (fr.name1.value == "") {
-
-		alert("이름을 입력해 주세요.");
-
-		fr.name1.focus();
-
-		return false;
-
-	}else if(fr.phone.value == ""){
-		
-		alert("전화번호를 입력해 주세요.");
-
-		fr.phone.focus();
-
-		return false;
-		
-	}else{
-		return true;
-	}
-	
-	
-}
-
-
-</script>
-
+</body>
+</html>

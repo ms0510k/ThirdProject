@@ -212,6 +212,7 @@ public class FnqDao {
 		}
 	}
 	public ArrayList<FnqVo> list(int startRow, int endRow) {
+		System.out.println("testttt");
 		String sql = "select * from(select aa.*,rownum rnum from(select * from fnq order by fnqnum desc)aa)where rnum>=? and rnum<=?";
 		PreparedStatement pstmt = null;
 		Connection con=null;

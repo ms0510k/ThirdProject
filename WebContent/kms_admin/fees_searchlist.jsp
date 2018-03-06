@@ -8,9 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-		String email = request.getParameter("email");
-%>
 <div class="header">
 <jsp:include page="../header.jsp"/>
 </div>

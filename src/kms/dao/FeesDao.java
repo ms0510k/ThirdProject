@@ -49,9 +49,9 @@ public class FeesDao {
 		try {
 			con=DbcpBean.getConn();
 			if(search.equals("fees_day")) {
-			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney),to_char(feedate,'yyyy/mm/dd') feedate from fees group by to_char(feedate,'yyyy/mm/dd'))aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney)bb,to_char(feedate,'yyyy/mm/dd') feedate from fees group by to_char(feedate,'yyyy/mm/dd'))aa)where rnum>=? and rnum<=?";
 			}else if(search.equals("fees_month")) {
-			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney),to_char(feedate,'yyyy/mm') feedate from fees group by to_char(feedate,'yyyy/mm'))aa)where rnum>=? and rnum<=?";
+			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney)bb,to_char(feedate,'yyyy/mm') feedate from fees group by to_char(feedate,'yyyy/mm'))aa)where rnum>=? and rnum<=?";
 			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -59,10 +59,12 @@ public class FeesDao {
 			rs = pstmt.executeQuery();
 			ArrayList<FeesVo> list = new ArrayList<>();
 			while (rs.next()) {
-				int feemoney = rs.getInt("feemoney");
+				int feemoney = rs.getInt("bb");
 				Date feedate = rs.getDate("feedate");
 				FeesVo vo = new FeesVo(0,0,feemoney,0,feedate);
 				list.add(vo);
+				System.out.println("test");
+				System.out.println(feemoney);
 			}
 			return list;
 		} catch (SQLException se) {

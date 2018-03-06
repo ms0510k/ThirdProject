@@ -1,11 +1,11 @@
 package kms.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import kms.vo.FeesVo;
 import test.dbcp.DbcpBean;
@@ -49,9 +49,9 @@ public class FeesDao {
 		try {
 			con=DbcpBean.getConn();
 			if(search.equals("fees_day")) {
-			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney)bb,to_char(feedate,'yyyy/mm/dd') feedate from fees group by to_char(feedate,'yyyy/mm/dd'))aa)where rnum>=? and rnum<=?";
+			sql = "select bb,to_date(feedate,'yyyy/mm/dd')feedate from(select aa.*,rownum rnum from(select sum(feemoney)bb,to_char(feedate,'yyyy/mm/dd') feedate from fees group by to_char(feedate,'yyyy/mm/dd'))aa)where rnum>=? and rnum<=?";
 			}else if(search.equals("fees_month")) {
-			sql = "select * from(select aa.*,rownum rnum from(select sum(feemoney)bb,to_char(feedate,'yyyy/mm') feedate from fees group by to_char(feedate,'yyyy/mm'))aa)where rnum>=? and rnum<=?";
+			sql = "select bb,to_date(feedate,'yyyy/mm')feedate from(select aa.*,rownum rnum from(select sum(feemoney)bb,to_char(feedate,'yyyy/mm') feedate from fees group by to_char(feedate,'yyyy/mm'))aa)where rnum>=? and rnum<=?";
 			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -63,8 +63,6 @@ public class FeesDao {
 				Date feedate = rs.getDate("feedate");
 				FeesVo vo = new FeesVo(0,0,feemoney,0,feedate);
 				list.add(vo);
-				System.out.println("test");
-				System.out.println(feemoney);
 			}
 			return list;
 		} catch (SQLException se) {

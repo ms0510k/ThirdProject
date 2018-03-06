@@ -1,6 +1,6 @@
 package kms.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class FeesVo {
 	private int feenum;
